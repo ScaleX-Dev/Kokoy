@@ -4,7 +4,7 @@
 const u = (id: string) => `https://images.unsplash.com/photo-${id}`;
 
 export const IMG = {
-  hero: u("1507525428034-b723cf961d3e"),
+  hero: u("1563911302283-d2bc129e7570"),
   infinity: u("1584132967334-10e028bd69f7"),
   deck: u("1582719508461-905c673771fd"),
   balcony: u("1615880484746-a134be9a6ecf"),

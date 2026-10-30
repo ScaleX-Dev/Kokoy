@@ -45,16 +45,16 @@ export default function Hero() {
         <div data-hero-zoom className="absolute inset-0">
           <Image
             src={IMG.hero}
-            alt="Soft morning light over a calm, shallow sea"
+            alt="A courtyard pool among palms, under straw-thatched roofs"
             fill
             preload
             quality={80}
             sizes="100vw"
-            className="object-cover object-[50%_70%]"
+            className="object-cover object-[50%_65%]"
           />
         </div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-night/40 via-transparent to-night/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-night/60 via-night/20 to-night/50" />
       <div data-hero-shade className="absolute inset-0 bg-night opacity-0" />
 
       <div className="absolute inset-x-0 bottom-0 px-3 md:px-6">
