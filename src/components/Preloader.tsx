@@ -37,7 +37,7 @@ export default function Preloader() {
       style={{ clipPath: "inset(0 0 0% 0)" }}
       aria-hidden="true"
     >
-      <div className="display flex overflow-hidden pb-[0.08em] text-[26vw] md:text-[15vw]">
+      <div className="display flex overflow-hidden pb-[0.16em] text-[26vw] md:text-[15vw]">
         {WORD.split("").map((c, i) => (
           <span key={i} data-char className="inline-block">
             {c}

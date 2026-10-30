@@ -64,7 +64,7 @@ export default function MenuOverlay() {
                       transition={{ duration: 1.1, ease: soft, delay: 0.35 + i * 0.06 }}
                     >
                       <span
-                        className="display inline-block text-[13vw] transition-[transform,color,font-style] duration-700 ease-soft group-hover:italic md:text-[5.6vw]"
+                        className="display inline-block pb-[0.12em] text-[13vw] transition-[transform,color,font-style] duration-700 ease-soft group-hover:italic md:text-[5.6vw]"
                         style={{ color: hover === i ? "var(--color-ink)" : "var(--color-mute)" }}
                       >
                         {l.label}

@@ -49,7 +49,7 @@ export default function Footer() {
         </button>
       </div>
 
-      <div className="display mt-16 flex justify-between overflow-hidden pb-[0.14em] text-[34vw] leading-[0.8] md:mt-10" aria-hidden="true">
+      <div className="display mt-16 flex justify-between overflow-hidden pb-[0.2em] text-[34vw] leading-[0.8] md:mt-10" aria-hidden="true">
         {"kokoy".split("").map((c, i) => (
           <span key={i} data-foot-char className="inline-block">
             {c}

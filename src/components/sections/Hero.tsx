@@ -64,7 +64,7 @@ export default function Hero() {
           </p>
           <p data-hero-in className="label hidden md:block">{SITE.place}</p>
         </div>
-        <h1 data-hero-word className="display -mb-[0.06em] flex justify-between overflow-hidden pb-[0.16em] text-[min(33vw,64svh)] leading-[0.78]">
+        <h1 data-hero-word className="display flex justify-between overflow-hidden pb-[0.2em] text-[min(33vw,62svh)] leading-[0.78]">
           {"kokoy".split("").map((c, i) => (
             <span key={i} data-hero-char className="inline-block">
               {c}

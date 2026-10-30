@@ -52,10 +52,10 @@ export default function Visit() {
         <div className="md:col-span-7">
           <span className="label text-mute">Getting here</span>
           <h2 className="display mt-6 text-[19vw] leading-[0.85] md:text-[10vw]">
-            <span className="block overflow-hidden pb-[0.05em]">
+            <span className="-mb-[0.09em] block overflow-hidden pb-[0.14em]">
               <span data-visit-line className="block">Come as</span>
             </span>
-            <span className="block overflow-hidden pb-[0.05em]">
+            <span className="-mb-[0.09em] block overflow-hidden pb-[0.14em]">
               <span data-visit-line className="block italic">you are.</span>
             </span>
           </h2>
