@@ -8,8 +8,6 @@ export const IMG = {
   infinity: u("1584132967334-10e028bd69f7"),
   deck: u("1582719508461-905c673771fd"),
   balcony: u("1615880484746-a134be9a6ecf"),
-  interior: u("1540541338287-41700207dee6"),
-  gates: u("1537953773345-d172ccf13cf1"),
   resortPool: u("1520250497591-112f2f40a3f4"),
   palmPool: u("1600011689032-8b628b8a8747"),
   cabana: u("1571003123894-1f0594d2b5d9"),
@@ -56,22 +54,10 @@ export const NAV = [
 export const STORY_TEXT =
   "It began with an empty plot, a stair that went nowhere, and the idea of a pool you could hear before you could see it.";
 
-export const FIGURES = [
-  {
-    cap: "The old stair wall. We kept it, softened its edges and painted it the colour of milk.",
-    src: IMG.interior,
-    alt: "A pool above the sea, wrapped in palms",
-  },
-  {
-    cap: "Terracotta breeze blocks, laid one by one to let the air through.",
-    src: IMG.balcony,
-    alt: "Timber balcony over a misty jungle",
-  },
-  {
-    cap: "A ceiling of dried straw, tied by hand in small bundles.",
-    src: IMG.gates,
-    alt: "Stone temple gates reflected in still water",
-  },
+export const DETAILS = [
+  { title: "The stair wall", body: "The old stair wall. We kept it, softened its edges and painted it the colour of milk." },
+  { title: "Breeze blocks", body: "Terracotta breeze blocks, laid one by one to let the air through." },
+  { title: "The straw ceiling", body: "A ceiling of dried straw, tied by hand in small bundles." },
 ];
 
 export const SPACES = [
