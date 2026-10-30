@@ -7,36 +7,10 @@ import { useUI } from "./Providers";
 export default function Header() {
   const { ready, setMenuOpen, openBooking, scrollTo } = useUI();
   const [solid, setSolid] = useState(false);
-  const [hidden, setHidden] = useState(false);
 
-  // Transparent over the hero; a soft paper bar afterwards that tucks away on scroll-down.
-  // Direction only flips after travelling THRESHOLD px from the last turn, so Lenis's
-  // sub-pixel easing at the end of a scroll can't toggle the bar back and forth.
+  // Always visible: transparent over the hero, a soft paper bar everywhere else.
   useEffect(() => {
-    const THRESHOLD = 12;
-    let anchor = window.scrollY;
-    let down = false;
-    const onScroll = () => {
-      const y = window.scrollY;
-      setSolid(y > window.innerHeight * 0.85);
-      if (y <= window.innerHeight) {
-        down = false;
-        anchor = y;
-        setHidden(false);
-        return;
-      }
-      // The anchor follows the furthest point in the current direction.
-      if (down ? y > anchor : y < anchor) anchor = y;
-      if (!down && y - anchor > THRESHOLD) {
-        down = true;
-        anchor = y;
-        setHidden(true);
-      } else if (down && anchor - y > THRESHOLD) {
-        down = false;
-        anchor = y;
-        setHidden(false);
-      }
-    };
+    const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.85);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -45,9 +19,8 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,color,opacity] duration-700 ease-soft",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,color,opacity] duration-700 ease-soft",
         solid ? "bg-paper/85 text-ink backdrop-blur-md" : "text-paper",
-        hidden ? "-translate-y-full" : "translate-y-0",
         ready ? "opacity-100" : "opacity-0",
       )}
     >
