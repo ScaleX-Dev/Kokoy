@@ -38,7 +38,7 @@ export default function Menu() {
     <section ref={root} id="menu" className="relative px-4 py-28 md:px-10 md:py-40">
       <div className="grid gap-14 md:grid-cols-12 md:gap-6">
         <div className="md:col-span-6 md:pr-10">
-          <span data-menu-in className="label block text-mute">( 04 ) &nbsp;Café &amp; bar</span>
+          <span data-menu-in className="label block text-mute">Café &amp; bar</span>
           <h2 data-menu-in className="display mt-4 text-6xl md:text-8xl">
             Small menu, <span className="italic">made with care</span>
           </h2>

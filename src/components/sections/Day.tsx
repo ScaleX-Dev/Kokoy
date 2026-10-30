@@ -44,7 +44,7 @@ export default function Day() {
     <section ref={root} id="day" className="relative overflow-hidden bg-paper motion-safe:md:h-[100svh]">
       <div className="grid h-full gap-10 px-4 py-24 md:grid-cols-12 md:items-center md:gap-6 md:px-10 md:py-0">
         <div className="md:col-span-5">
-          <span className="label opacity-70">( 03 ) &nbsp;A day here</span>
+          <span className="label opacity-70">A day here</span>
           <div className="relative mt-8 motion-safe:md:h-[52vh]">
             {MOMENTS.map((m) => (
               <div

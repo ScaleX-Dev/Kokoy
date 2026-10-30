@@ -70,7 +70,7 @@ export default function Gallery() {
         </div>
         <div className="absolute inset-0 bg-night/25" />
         <div className="absolute inset-x-4 bottom-10 text-paper md:inset-x-10 md:bottom-16">
-          <span className="label">( 05 ) &nbsp;Gallery</span>
+          <span className="label">Gallery</span>
           <h2 className="display mt-4 text-[18vw] md:text-[11vw]">
             Look <span className="italic">closer</span>
           </h2>
@@ -78,9 +78,6 @@ export default function Gallery() {
       </div>
 
       <div className="px-4 pt-20 pb-32 md:px-10 md:pb-56">
-        <p className="mb-12 max-w-[36ch] text-mute md:mb-0 md:ml-auto md:text-right">
-          Tap any photo to open it. Daytime pool shots, coffee close-ups and people swimming are coming soon.
-        </p>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8">
           {COLS.map((c, ci) => (
             <div key={ci} data-col className={clsx("flex flex-col gap-4 md:gap-8", c.pad, ci === 2 && "col-span-2 grid grid-cols-2 md:col-span-1 md:flex")}>

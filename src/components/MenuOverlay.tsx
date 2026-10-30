@@ -58,14 +58,13 @@ export default function MenuOverlay() {
                         setMenuOpen(false);
                         setTimeout(() => scrollTo(l.href), 650);
                       }}
-                      className="group flex items-baseline gap-5 py-2 md:py-3"
+                      className="group block py-2 md:py-3"
                       initial={{ y: "110%" }}
                       animate={{ y: 0 }}
                       transition={{ duration: 1.1, ease: soft, delay: 0.35 + i * 0.06 }}
                     >
-                      <span className="label w-6 text-mute">0{i + 1}</span>
                       <span
-                        className="display text-[13vw] transition-[transform,color,font-style] duration-700 ease-soft group-hover:translate-x-4 group-hover:italic md:text-[5.6vw]"
+                        className="display inline-block text-[13vw] transition-[transform,color,font-style] duration-700 ease-soft group-hover:italic md:text-[5.6vw]"
                         style={{ color: hover === i ? "var(--color-ink)" : "var(--color-mute)" }}
                       >
                         {l.label}

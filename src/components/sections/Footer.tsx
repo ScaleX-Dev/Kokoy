@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 
 const SOCIAL = ["Instagram", "TripAdvisor", "WhatsApp", "Email"];
@@ -29,9 +30,11 @@ export default function Footer() {
   return (
     <footer ref={root} className="relative overflow-hidden bg-night px-4 pt-20 text-paper md:px-10 md:pt-28">
       <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-        <p className="max-w-[24ch] font-serif text-3xl leading-tight md:text-4xl">
-          Slow mornings, long swims and lanterns at night.
-        </p>
+        <address className="text-sm not-italic leading-relaxed text-paper/75">
+          {SITE.address.join(", ")}
+          <br />
+          WhatsApp {SITE.whatsapp} · {SITE.email}
+        </address>
         <ul className="flex flex-wrap gap-x-8 gap-y-3">
           {SOCIAL.map((s) => (
             <li key={s}>

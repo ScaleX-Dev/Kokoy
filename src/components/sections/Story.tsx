@@ -57,16 +57,13 @@ export default function Story() {
     <section ref={root} className="relative px-4 pb-32 md:px-10 md:pb-48">
       <div className="grid gap-16 md:grid-cols-12 md:gap-x-6 md:gap-y-0">
         {FIGURES.map((f, i) => (
-          <figure key={f.n} data-fig className={LAYOUT[i].box}>
+          <figure key={f.src} data-fig className={LAYOUT[i].box}>
             <div data-frame className={`relative overflow-hidden ${LAYOUT[i].frame}`}>
               <div data-img className="absolute inset-0">
                 <Image src={f.src} alt={f.alt} fill sizes="(min-width: 768px) 40vw, 92vw" className="object-cover" />
               </div>
             </div>
-            <figcaption className="mt-4 flex max-w-[44ch] gap-4 text-sm text-mute">
-              <span className="label shrink-0 pt-[3px] text-ink">{f.n}</span>
-              {f.cap}
-            </figcaption>
+            <figcaption className="mt-4 max-w-[44ch] text-sm text-mute">{f.cap}</figcaption>
           </figure>
         ))}
       </div>

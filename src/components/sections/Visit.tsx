@@ -50,7 +50,7 @@ export default function Visit() {
     <section ref={root} id="visit" className="relative px-4 py-28 md:px-10 md:py-40">
       <div className="grid gap-14 md:grid-cols-12 md:items-end md:gap-6">
         <div className="md:col-span-7">
-          <span className="label text-mute">( 06 ) &nbsp;Getting here</span>
+          <span className="label text-mute">Getting here</span>
           <h2 className="display mt-6 text-[19vw] leading-[0.85] md:text-[10vw]">
             <span className="block overflow-hidden pb-[0.05em]">
               <span data-visit-line className="block">Come as</span>

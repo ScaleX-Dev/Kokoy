@@ -58,19 +58,16 @@ export const STORY_TEXT =
 
 export const FIGURES = [
   {
-    n: "fig. 01",
     cap: "The old stair wall. We kept it, softened its edges and painted it the colour of milk.",
     src: IMG.interior,
     alt: "A pool above the sea, wrapped in palms",
   },
   {
-    n: "fig. 02",
     cap: "Terracotta breeze blocks, laid one by one to let the air through.",
     src: IMG.balcony,
     alt: "Timber balcony over a misty jungle",
   },
   {
-    n: "fig. 03",
     cap: "A ceiling of dried straw, tied by hand in small bundles.",
     src: IMG.gates,
     alt: "Stone temple gates reflected in still water",

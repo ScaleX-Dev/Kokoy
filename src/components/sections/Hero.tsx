@@ -57,23 +57,12 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-night/40 via-transparent to-night/55" />
       <div data-hero-shade className="absolute inset-0 bg-night opacity-0" />
 
-      <div data-hero-fade className="absolute inset-x-4 top-[18%] flex justify-between md:inset-x-10 md:top-[20%]">
-        <p data-hero-in className="label">{SITE.place}</p>
-        <p data-hero-in className="label hidden md:block">Pool · Café · Courtyard</p>
-        <p data-hero-in className="label">Est. 2026</p>
-      </div>
-
       <div className="absolute inset-x-0 bottom-0 px-3 md:px-6">
         <div data-hero-fade className="mb-4 flex items-end justify-between gap-6 px-1 md:mb-0 md:px-4">
           <p data-hero-in className="max-w-[26ch] font-serif text-2xl italic leading-tight md:text-[34px]">
             {SITE.tagline}
           </p>
-          <div data-hero-in className="hidden items-center gap-4 md:flex">
-            <span className="label">Scroll</span>
-            <span className="relative block h-14 w-px overflow-hidden bg-paper/25">
-              <span className="breathe absolute inset-0 bg-paper" />
-            </span>
-          </div>
+          <p data-hero-in className="label hidden md:block">{SITE.place}</p>
         </div>
         <h1 data-hero-word className="display -mb-[0.06em] flex justify-between overflow-hidden pb-[0.16em] text-[min(33vw,64svh)] leading-[0.78]">
           {"kokoy".split("").map((c, i) => (

@@ -32,7 +32,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body>
         <Providers>{children}</Providers>
-        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );

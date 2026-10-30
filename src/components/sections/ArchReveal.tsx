@@ -65,7 +65,6 @@ export default function ArchReveal() {
 
       <div data-arch-cap className="absolute inset-x-4 bottom-10 flex flex-col gap-4 text-paper md:inset-x-10 md:bottom-14 md:flex-row md:items-end md:justify-between">
         <p className="display max-w-[16ch] text-5xl md:text-7xl">Twelve lanterns, one long pool, and nowhere you need to be.</p>
-        <p className="label">fig. 00 — the lantern walk</p>
       </div>
     </section>
   );
