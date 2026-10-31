@@ -28,12 +28,12 @@ export default function Intro() {
             scrollTrigger: { trigger: "[data-sentence]", start: "top 80%", end: "bottom 45%", scrub: true },
           },
         );
-        // The arch opens upward, the photo settles, then drifts slowly with the page.
+        // The photo wipes upward like a curtain, settles, then drifts slowly with the page.
         gsap.fromTo(
           "[data-intro-frame]",
-          { clipPath: "inset(100% 0% 0% 0% round 999px 999px 0px 0px)" },
+          { clipPath: "inset(100% 0% 0% 0%)" },
           {
-            clipPath: "inset(0% 0% 0% 0% round 999px 999px 0px 0px)",
+            clipPath: "inset(0% 0% 0% 0%)",
             duration: 1.8,
             ease: "expo.inOut",
             scrollTrigger: { trigger: "[data-intro-frame]", start: "top 85%" },
@@ -67,17 +67,27 @@ export default function Intro() {
     <section ref={root} id="story" className="relative px-4 py-28 md:px-10 md:py-40">
       <div className="grid gap-14 md:grid-cols-12 md:items-center md:gap-6">
         <figure className="order-2 md:order-1 md:col-span-5">
-          <div data-intro-frame className="shape-arch relative aspect-[4/5] overflow-hidden bg-stone">
-            <div data-intro-img className="absolute inset-0 scale-[1.08]">
-              <Image
-                src={IMG.hero}
-                alt="A thatched cabana with linen curtains beside the pool"
-                fill
-                sizes="(min-width: 768px) 40vw, 92vw"
-                className="object-cover object-[88%_60%]"
-              />
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-4 -right-4 top-4 left-4 rounded-[2px] border border-ink/25 md:-bottom-6 md:-right-6 md:top-6 md:left-6"
+            />
+            <div data-intro-frame className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-stone">
+              <div data-intro-img className="absolute inset-0 scale-[1.08]">
+                <Image
+                  src={IMG.hero}
+                  alt="A thatched cabana with linen curtains beside the pool"
+                  fill
+                  sizes="(min-width: 768px) 40vw, 92vw"
+                  className="object-cover object-[88%_60%]"
+                />
+              </div>
             </div>
           </div>
+          <figcaption data-intro-in className="label mt-8 flex justify-between text-mute md:mt-10">
+            <span>The courtyard</span>
+            <span>Open daily</span>
+          </figcaption>
         </figure>
 
         <div className="order-1 md:order-2 md:col-span-6 md:col-start-7">
