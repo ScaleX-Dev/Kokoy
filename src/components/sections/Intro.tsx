@@ -3,60 +3,61 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { IMG, SITE, STORY_TEXT } from "@/lib/content";
+import { IMG, type ImgKey } from "@/lib/content";
 import { useUI } from "../Providers";
 
-const ITALIC = new Set(["pool", "hear", "see", "nowhere"]);
+type Token = { kind: "word"; text: string } | { kind: "hl"; words: string[] } | { kind: "img"; key: ImgKey };
+
+// "{key}" becomes a photo pill, "*a few words*" one coral-marked phrase.
+function tokenize(src: string): Token[] {
+  const out: Token[] = [];
+  let group: string[] | null = null;
+  for (const raw of src.split(/\s+/)) {
+    const img = raw.match(/^\{(\w+)\}$/);
+    if (img && img[1] in IMG) {
+      out.push({ kind: "img", key: img[1] as ImgKey });
+      continue;
+    }
+    if (raw.startsWith("*")) group = [];
+    const word = raw.replace(/\*/g, "");
+    if (group) {
+      group.push(word);
+      if (/\*[.,!?]?$/.test(raw)) {
+        out.push({ kind: "hl", words: group });
+        group = null;
+      }
+    } else out.push({ kind: "word", text: word });
+  }
+  if (group) out.push({ kind: "hl", words: group });
+  return out;
+}
 
 export default function Intro() {
-  const { openBooking } = useUI();
+  const { t } = useUI();
   const root = useRef<HTMLElement>(null);
-  const words = STORY_TEXT.split(" ");
+  const tokens = tokenize(t.intro.statement);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // Words light up one by one as you read down the page.
-        gsap.fromTo(
-          "[data-w]",
-          { opacity: 0.16 },
-          {
-            opacity: 1,
-            ease: "none",
-            stagger: 0.08,
-            scrollTrigger: { trigger: "[data-sentence]", start: "top 80%", end: "bottom 45%", scrub: true },
-          },
-        );
-        // The photo wipes upward like a curtain, settles, then drifts slowly with the page.
-        gsap.fromTo(
-          "[data-intro-frame]",
-          { clipPath: "inset(100% 0% 0% 0%)" },
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.8,
-            ease: "expo.inOut",
-            scrollTrigger: { trigger: "[data-intro-frame]", start: "top 85%" },
-          },
-        );
-        gsap.fromTo("[data-intro-img]", { scale: 1.3 }, {
-          scale: 1.08,
-          duration: 2.4,
-          ease: "expo.out",
-          scrollTrigger: { trigger: "[data-intro-frame]", start: "top 85%" },
-        });
-        gsap.fromTo("[data-intro-img]", { yPercent: -4 }, {
-          yPercent: 4,
+        const st = { trigger: "[data-statement]", start: "top 82%", end: "bottom 50%", scrub: true };
+        gsap.fromTo("[data-w]", { opacity: 0.14 }, { opacity: 1, ease: "none", stagger: 0.1, scrollTrigger: st });
+        gsap.fromTo("[data-pill]", { width: 0 }, { width: "1.9em", ease: "none", stagger: 0.4, scrollTrigger: st });
+        gsap.fromTo("[data-hl]", { backgroundSize: "0% 100%" }, { backgroundSize: "100% 100%", ease: "none", scrollTrigger: st });
+        gsap.to("[data-intro-sun]", {
+          yPercent: -30,
+          rotate: 40,
           ease: "none",
           scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true },
         });
         gsap.from("[data-intro-in]", {
           y: 30,
           opacity: 0,
-          duration: 1.2,
+          duration: 1.1,
           stagger: 0.1,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-intro-facts]", start: "top 88%" },
+          scrollTrigger: { trigger: "[data-intro-foot]", start: "top 88%" },
         });
       });
     },
@@ -64,67 +65,59 @@ export default function Intro() {
   );
 
   return (
-    <section ref={root} id="story" className="relative px-4 py-28 md:px-10 md:py-40">
-      <div className="grid gap-14 md:grid-cols-12 md:items-center md:gap-6">
-        <figure className="order-2 md:order-1 md:col-span-5">
-          <div className="relative">
-            <div
+    <section ref={root} id="about" className="pad relative overflow-hidden bg-cream pt-16 pb-24 md:pt-24 md:pb-36">
+      {/* An oversized half sun peeking in from the edge. */}
+      <div
+        data-intro-sun
+        aria-hidden="true"
+        className="sun pointer-events-none absolute -right-[22vw] bottom-[-18vw] size-[52vw] rounded-full opacity-90 md:-right-[12vw] md:bottom-[-14vw] md:size-[34vw]"
+      />
+
+      <p className="eyebrow relative flex items-center gap-2 text-charcoal/70">
+        <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
+        {t.intro.label}
+      </p>
+
+      <h2
+        data-statement
+        className="relative mt-8 max-w-[22ch] hyphens-manual font-display text-[clamp(1.85rem,4.9vw,5rem)] leading-[1.12] font-semibold tracking-[-0.03em] md:mt-10"
+      >
+        {tokens.map((tok, i) =>
+          tok.kind === "img" ? (
+            <span
+              key={i}
+              data-pill
               aria-hidden="true"
-              className="absolute -bottom-4 -right-4 top-4 left-4 rounded-[2px] border border-ink/25 md:-bottom-6 md:-right-6 md:top-6 md:left-6"
-            />
-            <div data-intro-frame className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-stone">
-              <div data-intro-img className="absolute inset-0 scale-[1.08]">
-                <Image
-                  src={IMG.hero}
-                  alt="A thatched cabana with linen curtains beside the pool"
-                  fill
-                  sizes="(min-width: 768px) 40vw, 92vw"
-                  className="object-cover object-[88%_60%]"
-                />
-              </div>
-            </div>
-          </div>
-          <figcaption data-intro-in className="label mt-8 flex justify-between text-mute md:mt-10">
-            <span>The courtyard</span>
-            <span>Open daily</span>
-          </figcaption>
-        </figure>
-
-        <div className="order-1 md:order-2 md:col-span-6 md:col-start-7">
-          <span className="label text-mute">Our story</span>
-          <p data-sentence className="display mt-8 text-[10vw] leading-[1.02] md:mt-10 md:text-[4.2vw]">
-            {words.map((w, i) => (
-              <span key={i}>
-                <span data-w className={ITALIC.has(w.replace(/[.,]/g, "")) ? "italic" : undefined}>
-                  {w}
-                </span>{" "}
-              </span>
-            ))}
-          </p>
-
-          <div data-intro-facts className="mt-12 border-t border-ink/15 pt-8 md:mt-16">
-            <p data-intro-in className="max-w-[46ch] text-lg leading-relaxed text-mute">
-              A pool, a small café and a quiet courtyard in {SITE.place}. Open every day, from first light until the
-              lanterns go out.
-            </p>
-            <dl className="mt-8 grid grid-cols-2 gap-6">
-              {SITE.hours.map(([k, v]) => (
-                <div key={k} data-intro-in>
-                  <dt className="label text-mute">{k}</dt>
-                  <dd className="mt-2 font-serif text-2xl">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <button
-              data-intro-in
-              type="button"
-              onClick={() => openBooking("pool")}
-              className="label mt-10 min-h-12 rounded-full border border-ink px-7 transition-colors duration-500 hover:bg-ink hover:text-paper"
+              className="relative mx-[0.12em] inline-block h-[0.78em] w-[1.9em] -translate-y-[0.04em] overflow-hidden rounded-full align-middle"
             >
-              Book a day by the water
-            </button>
-          </div>
-        </div>
+              <Image src={IMG[tok.key]} alt="" fill sizes="160px" className="object-cover" />
+            </span>
+          ) : tok.kind === "hl" ? (
+            <span key={i}>
+              <span
+                data-hl
+                className="rounded-[0.2em] bg-[linear-gradient(var(--color-coral),var(--color-coral))] box-decoration-clone bg-[length:100%_100%] bg-left bg-no-repeat px-[0.12em]"
+              >
+                {tok.words.map((w, j) => (
+                  <span key={j}>
+                    <span data-w>{w}</span>
+                    {j < tok.words.length - 1 ? " " : ""}
+                  </span>
+                ))}
+              </span>{" "}
+            </span>
+          ) : (
+            <span key={i}>
+              <span data-w>{tok.text}</span>{" "}
+            </span>
+          ),
+        )}
+      </h2>
+
+      <div data-intro-foot className="relative mt-14 grid gap-8 md:mt-20 md:grid-cols-12">
+        <p data-intro-in className="max-w-[48ch] text-lg leading-relaxed text-charcoal/75 md:col-span-6 md:col-start-6 md:text-xl">
+          {t.intro.body}
+        </p>
       </div>
     </section>
   );
