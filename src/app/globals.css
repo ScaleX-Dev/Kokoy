@@ -1,63 +1,170 @@
 @import "tailwindcss";
 
+/* KOKOY · Sunset Club
+   Palette from the brand foundation (§04). Contrast rules:
+   - Text on coral, pink or orange is always charcoal (cream on coral is only ~2.9:1).
+   - Coral works as text only on charcoal (~5.4:1).
+   - Muted text on cream is charcoal at 70% (~5.5:1). */
 @theme {
-  --color-paper: #f3eee4;
-  --color-stone: #e7e0d2;
-  --color-sand: #d9cbb3;
-  --color-ink: #23241f;
-  --color-mute: #5b594f;
-  --color-clay: #9c6444;
-  --color-night: #1b1c17;
+  --color-coral: #ff654f;
+  --color-pink: #ff4f91;
+  --color-orange: #ff9d38;
+  --color-cream: #fff1d9;
+  --color-charcoal: #25232b;
+  --color-sand: #ffe4b8; /* cream, one step warmer, for cards on cream */
 
-  --font-serif: var(--font-instrument), "Times New Roman", Georgia, serif;
-  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-unbounded), "Arial Black", system-ui, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 
   --ease-soft: cubic-bezier(0.2, 0.7, 0.1, 1);
-  --ease-curtain: cubic-bezier(0.7, 0, 0.2, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @layer base {
   html {
     scrollbar-gutter: stable;
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--color-charcoal);
+    color: var(--color-charcoal);
     -webkit-text-size-adjust: 100%;
+    interpolate-size: allow-keywords;
   }
   body {
     font-family: var(--font-sans);
-    background: var(--color-paper);
+    background: var(--color-cream);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  :lang(ru) h1,
+  :lang(ru) h2,
+  :lang(ru) h3 {
+    /* Only long words may break, and never into stubs. */
+    hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
   }
   ::selection {
-    background: var(--color-ink);
-    color: var(--color-paper);
+    background: var(--color-coral);
+    color: var(--color-charcoal);
   }
   :focus-visible {
-    outline: 1px solid currentColor;
-    outline-offset: 4px;
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
   }
 }
 
-@utility label {
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
+/* Large expressive type. Unbounded carries the personality. */
 @utility display {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 0.88;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
-@utility link-line {
-  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
-  transition: background-size 0.6s var(--ease-soft);
-  &:hover {
-    background-size: 100% 1px;
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@utility sun {
+  background: radial-gradient(circle at 32% 28%, var(--color-orange) 0%, var(--color-coral) 48%, var(--color-pink) 100%);
+}
+
+:root {
+  --pad: 16px;
+}
+@media (min-width: 48rem) {
+  :root {
+    --pad: 32px;
+  }
+}
+@media (min-width: 80rem) {
+  :root {
+    --pad: 48px;
   }
 }
 
+@utility pad {
+  padding-inline: var(--pad);
+}
+
+/* The full-bleed KOKOY wordmark: "KOKOY" in Unbounded Black is ~4.3em wide,
+   so size it from the padded container width and it always fits edge to edge. */
+@utility wordmark-fit {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  font-size: calc((100vw - var(--pad) * 2) / 4.42);
+  line-height: 0.8;
+}
+
+/* Hero content waits for GSAP when JS and motion are on; the fallback keeps it from staying hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-await] {
+    visibility: hidden;
+    animation: kk-show 0s linear 2.5s forwards;
+  }
+}
+@keyframes kk-show {
+  to {
+    visibility: visible;
+  }
+}
+
+@keyframes kk-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes kk-eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes kk-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* Accordion that animates where the browser supports it. */
+details.faq::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.5s var(--ease-soft),
+    content-visibility 0.5s allow-discrete;
+}
+details.faq[open]::details-content {
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

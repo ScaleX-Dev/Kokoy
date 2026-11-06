@@ -1,130 +1,113 @@
-// All copy and imagery lives here so real details can be dropped in later.
-// Square-bracketed values are placeholders waiting for real info.
+// Language-neutral content: imagery, contact details and links.
+// Anything marked TODO(confirm) is a placeholder listed under "Items to confirm"
+// in the brand foundation, and must be replaced before launch.
 
 const u = (id: string) => `https://images.unsplash.com/photo-${id}`;
 
+// Placeholder photography until the KOKOY shoot is delivered.
 export const IMG = {
+  // Pool & property
   hero: u("1563911302283-d2bc129e7570"),
-  infinity: u("1584132967334-10e028bd69f7"),
-  deck: u("1582719508461-905c673771fd"),
-  balcony: u("1615880484746-a134be9a6ecf"),
-  resortPool: u("1520250497591-112f2f40a3f4"),
-  palmPool: u("1600011689032-8b628b8a8747"),
-  cabana: u("1571003123894-1f0594d2b5d9"),
-  courtyard: u("1535827841776-24afc1e255ac"),
-  lagoon: u("1552733407-5d5c46c3bb3b"),
-  edgePool: u("1571896349842-33c89424de2d"),
-  woodPool: u("1566073771259-6a8506099945"),
-  terraces: u("1559628233-100c798642d4"),
-  jungle: u("1555400038-63f5ba517a47"),
-  temple: u("1537996194471-e657df975ab4"),
-  palms: u("1506953823976-52e1fdc0149a"),
-  beach: u("1519046904884-53103b34b206"),
-  aerial: u("1578922746465-3a80a228f223"),
+  poolSunset: u("1600011689032-8b628b8a8747"),
+  poolLounger: u("1586611292717-f828b167408c"),
+  poolTropic: u("1617859047452-8510bcf207fd"),
+  poolVilla: u("1582610116397-edb318620f90"),
+  poolDeck: u("1572331165267-854da2b10ccc"),
+  poolInfinity: u("1584132967334-10e028bd69f7"),
+  underwater: u("1528495612343-9ca9f4a4de28"),
+  sandLegs: u("1591017403286-fd8493524e1e"),
+  // Food & brunch
+  brunchSpread: u("1504754524776-8f4f37790ca0"),
+  pancakes: u("1567620905732-2d1ec7ab7445"),
+  eggsToast: u("1525351484163-7529414344d8"),
+  brunchPlate: u("1495214783159-3503fd1b572d"),
+  fruitBowl: u("1490474418585-ba9bad8fd0ea"),
+  frenchToast: u("1484723091739-30a097e8f929"),
+  longTable: u("1528605248644-14dd04022da1"),
   coffee: u("1509042239860-f550ce710b93"),
-  coffeeCheers: u("1495474472287-4d71bcdd2085"),
-  bowl: u("1546069901-ba9599a7e63c"),
-  cocktail: u("1514362545857-3bc16c4c7d1b"),
-  cocktails: u("1551024709-8f23befc6f87"),
+  // Drinks
+  pinkDrink: u("1609951651556-5334e2706168"),
+  spritz: u("1560512823-829485b8bf24"),
+  amber: u("1514362545857-3bc16c4c7d1b"),
+  lemonade: u("1621263764928-df1444c5e859"),
+  barPrep: u("1609345265499-2133bbeb6ce5"),
+  cheers: u("1541532713592-79a0317b6b77"),
+  trio: u("1551024709-8f23befc6f87"),
+  // Events & lifestyle
+  dj: u("1470225620780-dba8ba36b745"),
+  lights: u("1517457373958-b7bdd4587205"),
+  crowdSunset: u("1524368535928-5b5e00ddc76b"),
+  confetti: u("1492684223066-81342ee5ff30"),
+  toast: u("1527529482837-4698179dc6ce"),
+  friendsSunset: u("1506869640319-fe1a24fd76dc"),
+  friends: u("1529156069898-49953e39b3ac"),
+  beachSunset: u("1507525428034-b723cf961d3e"),
 } as const;
+
+export type ImgKey = keyof typeof IMG;
 
 export const SITE = {
-  name: "kokoy",
-  tagline: "A courtyard of water & straw",
-  place: "[Town], Sri Lanka",
-  address: ["[Street address]", "[Town], Sri Lanka"],
-  hours: [
-    ["Pool", "[7:00 – 19:00]"],
-    ["Café & bar", "[8:00 – 23:00]"],
+  name: "KOKOY",
+  // TODO(confirm): production domain.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // TODO(confirm): official WhatsApp number, digits only with country code (e.g. "9477…").
+  // Left empty on purpose so no visitor messages a wrong number. While empty,
+  // WhatsApp opens its contact picker with the message pre-filled.
+  whatsapp: "",
+  // TODO(confirm): official email.
+  email: "hello@kokoy.lk",
+  // TODO(confirm): exact Google Maps place link.
+  maps: "https://www.google.com/maps/search/?api=1&query=Unawatuna%2C%20Sri%20Lanka",
+  // TODO(confirm): drop the hero film (16:9, muted loop) in /public/video and set the path, e.g. "/video/hero.mp4".
+  heroVideo: "",
+  // TODO(confirm): social handles and links.
+  instagram: { handle: "@kokoy.poolclub", url: "https://www.instagram.com/" },
+  social: [
+    { label: "Instagram", url: "https://www.instagram.com/" },
+    { label: "TikTok", url: "https://www.tiktok.com/" },
+    { label: "TripAdvisor", url: "https://www.tripadvisor.com/" },
   ],
-  whatsapp: "[+94 …]",
-  email: "hello@[kokoy].lk",
-  owner: "[Owner name]",
-};
-
-export const NAV = [
-  { label: "Our story", href: "#story", img: IMG.balcony },
-  { label: "The spaces", href: "#spaces", img: IMG.resortPool },
-  { label: "A day here", href: "#day", img: IMG.deck },
-  { label: "Café & bar", href: "#menu", img: IMG.cocktails },
-  { label: "Gallery", href: "#gallery", img: IMG.lagoon },
-  { label: "Getting here", href: "#visit", img: IMG.courtyard },
-];
-
-export const STORY_TEXT =
-  "It began with an empty plot, a stair that went nowhere, and the idea of a pool you could hear before you could see it.";
-
-export const DETAILS = [
-  { title: "The stair wall", body: "The old stair wall. We kept it, softened its edges and painted it the colour of milk." },
-  { title: "Breeze blocks", body: "Terracotta breeze blocks, laid one by one to let the air through." },
-  { title: "The straw ceiling", body: "A ceiling of dried straw, tied by hand in small bundles." },
-];
-
-export const SPACES = [
-  { n: "01", name: "The pool", line: "One long, lit pool under a ceiling of woven straw.", src: IMG.resortPool, shape: "rect", w: "w-[78vw] md:w-[44vw]", h: "h-[52vh] md:h-[62vh]" },
-  { n: "02", name: "The arches", line: "A lantern-lit walk from the street to the water.", src: IMG.courtyard, shape: "arch", w: "w-[64vw] md:w-[26vw]", h: "h-[52vh] md:h-[56vh]" },
-  { n: "03", name: "The bar", line: "Coffee by day, slow drinks at night.", src: IMG.cabana, shape: "rect", w: "w-[74vw] md:w-[34vw]", h: "h-[44vh] md:h-[46vh]" },
-  { n: "04", name: "The shower", line: "Rain from above, inside a tiled arch.", src: IMG.lagoon, shape: "arch", w: "w-[60vw] md:w-[22vw]", h: "h-[54vh] md:h-[62vh]" },
-  { n: "05", name: "The façade", line: "Arched windows above a quiet street.", src: IMG.woodPool, shape: "bowl", w: "w-[66vw] md:w-[26vw]", h: "h-[48vh] md:h-[52vh]" },
-  { n: "06", name: "The edge", line: "A soft curve of stone to sit on, feet in the water.", src: IMG.edgePool, shape: "rect", w: "w-[78vw] md:w-[36vw]", h: "h-[52vh] md:h-[60vh]" },
-] as const;
-
-export const MOMENTS = [
-  { time: "07:00", title: "First light swim", body: "The water is still, the courtyard empty. Slow lengths before the day begins.", src: IMG.infinity, bg: "#F3EEE4", fg: "#23241F" },
-  { time: "10:30", title: "Coffee under the arches", body: "Iced coconut lattes, a book, a long table in the shade.", src: IMG.coffee, bg: "#ECE2CF", fg: "#23241F" },
-  { time: "16:00", title: "A long, lazy afternoon", body: "Swim, dry off on the rattan chairs, swim again. No one is in a hurry.", src: IMG.deck, bg: "#C9A27E", fg: "#1F1D18" },
-  { time: "19:30", title: "Lanterns on", body: "The straw ceiling glows, the bar opens, the water turns to glass.", src: IMG.cabana, bg: "#1B1C17", fg: "#F3EEE4" },
-];
-
-export const MENUS = {
-  morning: {
-    label: "Morning",
-    cap: "Served 8:00 – 12:00",
-    img: IMG.coffeeCheers,
-    alt: "Three flat whites raised together",
-    items: [
-      { name: "Iced coconut latte", desc: "Espresso, young coconut, palm sugar", price: "LKR 1,250" },
-      { name: "Ceylon cold brew", desc: "Eighteen-hour steep, orange peel", price: "LKR 1,100" },
-      { name: "Smashed avocado toast", desc: "Sourdough, chilli oil, lime", price: "LKR 1,900" },
-      { name: "Mango & kithul bowl", desc: "Yoghurt, granola, kithul treacle", price: "LKR 1,700" },
-    ],
-  },
-  day: {
-    label: "Day",
-    cap: "Served poolside, 12:00 – 18:00",
-    img: IMG.bowl,
-    alt: "A bright poke bowl from above",
-    items: [
-      { name: "King coconut", desc: "In the shell, very cold", price: "LKR 600" },
-      { name: "Hopper tacos", desc: "Crisp hoppers, devilled prawns, pol sambol", price: "LKR 2,600" },
-      { name: "Butterfly-pea lemonade", desc: "Lime, mint, soda", price: "LKR 950" },
-      { name: "Green papaya salad", desc: "Peanut, chilli, lime leaf", price: "LKR 1,800" },
-    ],
-  },
-  evening: {
-    label: "Evening",
-    cap: "Bar open 18:00 – 23:00",
-    img: IMG.cocktail,
-    alt: "An amber cocktail on a dark bar",
-    items: [
-      { name: "Arrack sour", desc: "Coconut arrack, tamarind, egg white", price: "LKR 2,200" },
-      { name: "Lemongrass spritz", desc: "Passionfruit, lemongrass, soda", price: "LKR 1,400" },
-      { name: "Grilled seer fish", desc: "Curry leaf butter, charred lime", price: "LKR 3,400" },
-      { name: "Watalappan", desc: "Jaggery custard, cashew crumb", price: "LKR 1,200" },
-    ],
-  },
 } as const;
 
-export type MenuKey = keyof typeof MENUS;
+export function waLink(message: string) {
+  const text = encodeURIComponent(message);
+  return SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}?text=${text}` : `https://wa.me/?text=${text}`;
+}
 
-export const GALLERY = [
-  { src: IMG.aerial, alt: "A small boat on clear turquoise water", h: "aspect-[4/5]" },
-  { src: IMG.temple, alt: "Lake temple at dawn", h: "aspect-[3/4]", arch: true },
-  { src: IMG.palmPool, alt: "Pool lined with palms at sunset", h: "aspect-[4/5]" },
-  { src: IMG.beach, alt: "Palm leaning over a white beach", h: "aspect-square" },
-  { src: IMG.jungle, alt: "Rice terraces cut into the jungle", h: "aspect-[4/5]" },
-  { src: IMG.cocktails, alt: "Three tropical cocktails on the bar", h: "aspect-[3/4]", arch: true },
-  { src: IMG.infinity, alt: "Infinity pool deck under the trees", h: "aspect-[3/4]", arch: true },
-  { src: IMG.palms, alt: "Palm fronds against a soft sky", h: "aspect-[4/5]" },
-  { src: IMG.edgePool, alt: "A pool lit blue at dusk", h: "aspect-square" },
+// The four signature drinks drive the colour of their section.
+export const DRINK_STYLE: { color: string; img: ImgKey }[] = [
+  { color: "#FF4F91", img: "pinkDrink" },
+  { color: "#FF9D38", img: "spritz" },
+  { color: "#FF654F", img: "amber" },
+  { color: "#FFF1D9", img: "lemonade" },
+];
+
+export const BRUNCH_IMG: ImgKey[] = ["pancakes", "eggsToast", "brunchSpread", "fruitBowl", "frenchToast", "brunchPlate"];
+export const DAY_IMG: ImgKey[] = ["poolLounger", "brunchSpread", "poolSunset", "lights"];
+export const DAY_SKY = [
+  { bg: "#FFF1D9", fg: "#25232B" },
+  { bg: "#FF9D38", fg: "#25232B" },
+  { bg: "#FF654F", fg: "#25232B" },
+  { bg: "#25232B", fg: "#FFF1D9" },
+] as const;
+export const EVENT_IMG: ImgKey[] = ["dj", "confetti", "longTable", "lights"];
+
+// Image keys plus a shape index (see Gallery). Alt text lives in the dictionaries.
+export const GALLERY_ROWS: { src: ImgKey; shape: number }[][] = [
+  [
+    { src: "friendsSunset", shape: 0 },
+    { src: "pinkDrink", shape: 1 },
+    { src: "poolTropic", shape: 2 },
+    { src: "toast", shape: 3 },
+    { src: "underwater", shape: 0 },
+    { src: "pancakes", shape: 1 },
+  ],
+  [
+    { src: "lights", shape: 3 },
+    { src: "poolLounger", shape: 2 },
+    { src: "cheers", shape: 0 },
+    { src: "sandLegs", shape: 1 },
+    { src: "brunchSpread", shape: 2 },
+    { src: "beachSunset", shape: 3 },
+  ],
 ];
