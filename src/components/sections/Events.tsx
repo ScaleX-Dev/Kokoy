@@ -1,0 +1,178 @@
+"use client";
+
+import Image from "next/image";
+import clsx from "clsx";
+import { useRef, useState } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { EVENT_IMG, IMG } from "@/lib/content";
+import { useUI } from "../Providers";
+import Rich from "../ui/Rich";
+import { WhatsAppButton } from "../ui/Buttons";
+
+function SoundBars({ label }: { label: string }) {
+  return (
+    <span className="inline-flex h-4 items-end gap-[3px]" role="img" aria-label={label}>
+      {[0.9, 0.5, 1.1, 0.7].map((d, i) => (
+        <span
+          key={i}
+          className="h-full w-[3px] origin-bottom rounded-full bg-coral"
+          style={{ animation: `kk-eq ${d}s ease-in-out ${i * 0.12}s infinite` }}
+        />
+      ))}
+    </span>
+  );
+}
+
+export default function Events() {
+  const { t } = useUI();
+  const root = useRef<HTMLElement>(null);
+  const list = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState(-1);
+  const follow = useRef<{ x: (v: number) => void; y: (v: number) => void } | null>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from("[data-ev-in]", {
+          y: 50,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.08,
+          ease: "expo.out",
+          scrollTrigger: { trigger: root.current, start: "top 70%" },
+        });
+        gsap.from("[data-ev-row]", {
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.08,
+          ease: "expo.out",
+          scrollTrigger: { trigger: list.current, start: "top 85%" },
+        });
+        gsap.from("[data-ev-private]", {
+          y: 80,
+          rotate: 2,
+          opacity: 0,
+          duration: 1.4,
+          ease: "expo.out",
+          scrollTrigger: { trigger: "[data-ev-private]", start: "top 90%" },
+        });
+      });
+      // The floating photo only exists for a real pointer.
+      mm.add("(hover: hover) and (min-width: 1024px)", () => {
+        follow.current = {
+          x: gsap.quickTo("[data-ev-float]", "x", { duration: 0.6, ease: "power3" }),
+          y: gsap.quickTo("[data-ev-float]", "y", { duration: 0.6, ease: "power3" }),
+        };
+        return () => {
+          follow.current = null;
+        };
+      });
+    },
+    { scope: root },
+  );
+
+  const onMove = (e: React.PointerEvent) => {
+    if (!follow.current || !list.current) return;
+    const r = list.current.getBoundingClientRect();
+    follow.current.x(e.clientX - r.left);
+    follow.current.y(e.clientY - r.top);
+  };
+
+  return (
+    <section ref={root} id="events" className="relative overflow-hidden bg-charcoal py-24 text-cream md:py-36">
+      <div className="pad grid gap-10 md:grid-cols-12 md:items-end">
+        <div className="md:col-span-8">
+          <p data-ev-in className="eyebrow flex items-center gap-3 text-cream/80">
+            <SoundBars label={t.a11y.sound} />
+            {t.events.label}
+          </p>
+          <h2 data-ev-in className="display mt-5 text-[clamp(2.3rem,6vw,6rem)] font-extrabold">
+            <Rich text={t.events.title} />
+          </h2>
+        </div>
+        <p data-ev-in className="text-lg leading-relaxed text-cream/75 md:col-span-4">
+          {t.events.body}
+        </p>
+      </div>
+
+      <div ref={list} className="pad relative mt-16 md:mt-24" onPointerMove={onMove} onPointerLeave={() => setHover(-1)}>
+        <ul className="relative">
+        {t.events.rows.map((r, i) => (
+          <li
+            key={r.name}
+            data-ev-row
+            onPointerEnter={() => setHover(i)}
+            className="group relative border-t border-cream/15 last:border-b"
+          >
+            <div className="relative z-10 grid grid-cols-[auto_1fr] items-center gap-x-5 gap-y-2 py-6 transition-[padding] duration-500 ease-soft md:grid-cols-[9rem_1fr_auto] md:py-9 lg:group-hover:pl-6">
+              <span className="row-span-2 font-display text-[clamp(1.75rem,4vw,3.5rem)] font-black tracking-[-0.04em] text-coral md:row-span-1">
+                {r.day}
+              </span>
+              <div className="min-w-0">
+                <h3 className="font-display text-[clamp(1.35rem,3vw,2.75rem)] leading-tight font-bold tracking-[-0.03em]">{r.name}</h3>
+                <p className="mt-1 text-cream/75 md:text-lg">{r.detail}</p>
+              </div>
+              <span className="col-start-2 justify-self-start rounded-full border border-cream/30 px-3 py-1 text-[13px] font-semibold md:col-start-3 md:justify-self-end">
+                {r.tag}
+              </span>
+            </div>
+            {/* Phones get the photo inline. */}
+            <div className="relative mb-6 aspect-[16/9] overflow-hidden rounded-[24px] lg:hidden">
+              <Image src={IMG[EVENT_IMG[i]]} alt={t.alt[EVENT_IMG[i]]} fill sizes="92vw" className="object-cover" />
+            </div>
+          </li>
+        ))}
+        </ul>
+
+        <div
+          data-ev-float
+          aria-hidden="true"
+          className={clsx(
+            "pointer-events-none absolute top-0 left-0 z-0 hidden aspect-[4/5] w-[18vw] max-w-[280px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[28px] transition-[opacity,scale,rotate] duration-500 ease-soft lg:block",
+            hover >= 0 ? "scale-100 rotate-[-4deg] opacity-100" : "scale-75 rotate-0 opacity-0",
+          )}
+        >
+          {EVENT_IMG.map((k, i) => (
+            <Image
+              key={k}
+              src={IMG[k]}
+              alt=""
+              fill
+              sizes="280px"
+              className={clsx("object-cover transition-opacity duration-500", hover === i ? "opacity-100" : "opacity-0")}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="pad mt-10 flex justify-end">
+        <WhatsAppButton message={t.wa.events} tone="outline-cream">
+          {t.events.cta}
+        </WhatsAppButton>
+      </div>
+
+      {/* Private events */}
+      <div className="pad mt-20 md:mt-28">
+        <div data-ev-private className="relative grid overflow-hidden rounded-[40px] bg-coral text-charcoal md:grid-cols-2">
+          <div className="relative z-10 p-8 sm:p-10 md:p-14">
+            <h3 className="display text-[clamp(2rem,4.4vw,4rem)] font-extrabold">{t.events.privateTitle}</h3>
+            <p className="mt-5 max-w-[42ch] text-lg leading-relaxed">{t.events.privateBody}</p>
+            <WhatsAppButton message={t.wa.private} tone="charcoal" className="mt-8">
+              {t.events.privateCta}
+            </WhatsAppButton>
+          </div>
+          <div className="relative min-h-[300px] md:min-h-full">
+            <div className="absolute inset-0 md:inset-y-8 md:right-8 md:left-0">
+              <div className="relative size-full overflow-hidden rounded-t-[40px] md:rounded-full">
+                <Image src={IMG.toast} alt={t.alt.toast} fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover" />
+              </div>
+            </div>
+            <div className="sun absolute -top-10 -right-10 size-40 rounded-full md:top-auto md:-bottom-12 md:left-[-3rem]" aria-hidden="true" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
