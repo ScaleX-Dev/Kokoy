@@ -1,5 +1,5 @@
 // English copy. ru.ts must match this shape exactly (enforced by the Dict type).
-// Markup in a few strings: *word* = coral highlight, {imgKey} = inline photo pill.
+// Markup in a few strings: *word* = coral highlight.
 
 const en = {
   meta: {
@@ -58,7 +58,7 @@ const en = {
   intro: {
     label: "Hello, we're KOKOY",
     statement:
-      "A pool club in Unawatuna for long {poolLounger} sunny days, good food, cold {pinkDrink} drinks and *even better company.* {friends}",
+      "A pool club in Unawatuna for long sunny days, good food, cold drinks and *even better company.* {friends}",
     body: "KOKOY is where a quick swim turns into brunch, brunch turns into sunset, and sunset turns into one more song. Come as you are. Stay as long as you like.",
   },
   day: {

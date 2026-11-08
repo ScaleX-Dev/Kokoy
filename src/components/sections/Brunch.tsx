@@ -17,7 +17,7 @@ export default function Brunch() {
   const { t } = useUI();
   const root = useRef<HTMLElement>(null);
   const rail = useRef<HTMLUListElement>(null);
-  const [progress, setProgress] = useState(0);
+  const thumb = useRef<HTMLDivElement>(null);
   const [edge, setEdge] = useState({ start: true, end: false });
 
   useGSAP(
@@ -38,7 +38,8 @@ export default function Brunch() {
           duration: 1.3,
           stagger: 0.08,
           ease: "expo.out",
-          scrollTrigger: { trigger: rail.current, start: "top 85%" },
+          clearProps: "transform,opacity",
+          scrollTrigger: { trigger: rail.current, start: "top 85%", once: true },
         });
       });
     },
@@ -51,8 +52,10 @@ export default function Brunch() {
     if (!el) return;
     const update = () => {
       const max = el.scrollWidth - el.clientWidth;
-      setProgress(max > 0 ? el.scrollLeft / max : 0);
-      setEdge({ start: el.scrollLeft < 8, end: el.scrollLeft > max - 8 });
+      // Progress is written straight to the DOM so scrolling never re-renders the rail.
+      if (thumb.current) thumb.current.style.transform = `translateX(${(max > 0 ? el.scrollLeft / max : 0) * 300}%)`;
+      const next = { start: el.scrollLeft < 8, end: el.scrollLeft > max - 8 };
+      setEdge((prev) => (prev.start === next.start && prev.end === next.end ? prev : next));
     };
     update();
     el.addEventListener("scroll", update, { passive: true });
@@ -62,13 +65,16 @@ export default function Brunch() {
     let moved = false;
     let x0 = 0;
     let s0 = 0;
+    let settle = 0;
     const onDown = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
       down = true;
       moved = false;
       x0 = e.clientX;
       s0 = el.scrollLeft;
+      window.clearTimeout(settle);
       el.style.scrollSnapType = "none";
+      el.style.scrollBehavior = "auto";
     };
     const onMove = (e: PointerEvent) => {
       if (!down) return;
@@ -79,7 +85,13 @@ export default function Brunch() {
     const onUp = () => {
       if (!down) return;
       down = false;
-      el.style.scrollSnapType = "";
+      // Glide to the nearest card, then hand control back to scroll-snap.
+      const cards = Array.from(el.querySelectorAll<HTMLElement>("[data-dish]"));
+      const target = cards.reduce((best, c) => (Math.abs(c.offsetLeft - el.scrollLeft) < Math.abs(best.offsetLeft - el.scrollLeft) ? c : best), cards[0]);
+      if (target) el.scrollTo({ left: target.offsetLeft - parseFloat(getComputedStyle(target).scrollMarginLeft || "0"), behavior: "smooth" });
+      settle = window.setTimeout(() => {
+        el.style.scrollSnapType = "";
+      }, 600);
     };
     const onClick = (e: MouseEvent) => {
       if (moved) {
@@ -92,6 +104,7 @@ export default function Brunch() {
     window.addEventListener("pointerup", onUp);
     el.addEventListener("click", onClick, true);
     return () => {
+      window.clearTimeout(settle);
       el.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
       el.removeEventListener("pointerdown", onDown);
@@ -141,8 +154,8 @@ export default function Brunch() {
 
         <ul
           ref={rail}
-          className="pad flex cursor-grab snap-x snap-mandatory gap-6 overflow-x-auto pb-6 select-none active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          data-lenis-prevent-touch
+          className="pad flex cursor-grab snap-x snap-mandatory overscroll-x-contain gap-6 overflow-x-auto pb-6 select-none active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          data-lenis-prevent
           aria-label={t.brunch.label}
         >
           {t.brunch.items.map((d, i) => (
@@ -151,7 +164,7 @@ export default function Brunch() {
               data-dish
               className="w-[78vw] shrink-0 snap-start scroll-ml-4 sm:w-[46vw] md:scroll-ml-8 lg:w-[30vw] xl:w-[25vw]"
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[32px] bg-sand">
+              <div className="relative aspect-[4/5] transform-gpu overflow-hidden rounded-[32px] bg-sand">
                 <Image
                   src={IMG[BRUNCH_IMG[i]]}
                   alt={t.alt[BRUNCH_IMG[i]]}
@@ -179,7 +192,7 @@ export default function Brunch() {
 
         <div className="pad mt-6 flex items-center gap-6">
           <div className="relative h-[3px] flex-1 overflow-hidden rounded-full bg-charcoal/10" aria-hidden="true">
-            <div className="absolute inset-y-0 left-0 w-1/4 rounded-full bg-orange" style={{ transform: `translateX(${progress * 300}%)` }} />
+            <div ref={thumb} className="absolute inset-y-0 left-0 w-1/4 rounded-full bg-orange will-change-transform" />
           </div>
           <p className="hidden text-sm text-charcoal/70 sm:block">{t.brunch.note}</p>
           <div className="flex gap-2">

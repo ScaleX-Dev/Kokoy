@@ -1,23 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { IMG, type ImgKey } from "@/lib/content";
 import { useUI } from "../Providers";
 
-type Token = { kind: "word"; text: string } | { kind: "hl"; words: string[] } | { kind: "img"; key: ImgKey };
+type Token = { kind: "word"; text: string } | { kind: "hl"; words: string[] };
 
-// "{key}" becomes a photo pill, "*a few words*" one coral-marked phrase.
+// "*a few words*" one coral-marked phrase.
 function tokenize(src: string): Token[] {
   const out: Token[] = [];
   let group: string[] | null = null;
   for (const raw of src.split(/\s+/)) {
-    const img = raw.match(/^\{(\w+)\}$/);
-    if (img && img[1] in IMG) {
-      out.push({ kind: "img", key: img[1] as ImgKey });
-      continue;
-    }
     if (raw.startsWith("*")) group = [];
     const word = raw.replace(/\*/g, "");
     if (group) {
@@ -43,7 +36,6 @@ export default function Intro() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const st = { trigger: "[data-statement]", start: "top 82%", end: "bottom 50%", scrub: true };
         gsap.fromTo("[data-w]", { opacity: 0.14 }, { opacity: 1, ease: "none", stagger: 0.1, scrollTrigger: st });
-        gsap.fromTo("[data-pill]", { width: 0 }, { width: "1.9em", ease: "none", stagger: 0.4, scrollTrigger: st });
         gsap.fromTo("[data-hl]", { backgroundSize: "0% 100%" }, { backgroundSize: "100% 100%", ease: "none", scrollTrigger: st });
         gsap.to("[data-intro-sun]", {
           yPercent: -30,
@@ -83,16 +75,7 @@ export default function Intro() {
         className="relative mt-8 max-w-[22ch] hyphens-manual font-display text-[clamp(1.85rem,4.9vw,5rem)] leading-[1.12] font-semibold tracking-[-0.03em] md:mt-10"
       >
         {tokens.map((tok, i) =>
-          tok.kind === "img" ? (
-            <span
-              key={i}
-              data-pill
-              aria-hidden="true"
-              className="relative mx-[0.12em] inline-block h-[0.78em] w-[1.9em] -translate-y-[0.04em] overflow-hidden rounded-full align-middle"
-            >
-              <Image src={IMG[tok.key]} alt="" fill sizes="160px" className="object-cover" />
-            </span>
-          ) : tok.kind === "hl" ? (
+          tok.kind === "hl" ? (
             <span key={i}>
               <span
                 data-hl
