@@ -13,7 +13,8 @@ import { ArrowIcon, Burst } from "../ui/Icons";
 
 const STICKERS = ["bg-orange", "bg-pink", "bg-coral"];
 const TILT = ["-rotate-6", "rotate-3", "-rotate-2", "rotate-6"];
-const FRAME_TILT = ["-rotate-2", "rotate-[1.5deg]", "-rotate-1", "rotate-2"];
+// Tablet and up only: phones keep the original unframed, untilted cards.
+const FRAME_TILT = ["md:-rotate-2", "md:rotate-[1.5deg]", "md:-rotate-1", "md:rotate-2"];
 
 export default function Brunch() {
   const { t } = useUI();
@@ -128,13 +129,26 @@ export default function Brunch() {
   const arrow =
     "grid size-12 place-items-center rounded-full border-2 border-charcoal transition-colors duration-300 hover:bg-charcoal hover:text-cream disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-charcoal";
 
+  const arrows = (
+    <>
+      <button type="button" onClick={() => step(-1)} disabled={edge.start} aria-label={t.a11y.prev} className={arrow}>
+        <ArrowIcon dir="left" className="size-5" />
+      </button>
+      <button type="button" onClick={() => step(1)} disabled={edge.end} aria-label={t.a11y.next} className={arrow}>
+        <ArrowIcon className="size-5" />
+      </button>
+    </>
+  );
+
+  // Phones (below md) show the original layout the client prefers: a heavy sentence-case
+  // title, plain rounded photo cards and the arrows at the foot. From md up it is the
+  // reference layout: light/black caps title, framed polaroids, arrows by the heading.
   return (
     <section ref={root} id="brunch" className="section-y relative overflow-hidden bg-cream">
-      {/* Heading, caption and action stacked on the left; the rail's arrows on the right. */}
       <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-4xl">
-          <h2 data-brunch-in className="title">
-            <Rich text={t.brunch.title} className="font-black" />
+          <h2 data-brunch-in className="display text-[clamp(2.4rem,6.4vw,6.5rem)] font-extrabold md:title">
+            <Rich text={t.brunch.title} className="md:font-black" />
           </h2>
           <p data-brunch-in className="mt-5 max-w-[48ch] text-lg leading-relaxed text-charcoal/75">
             {t.brunch.body}
@@ -145,29 +159,22 @@ export default function Brunch() {
             </WhatsAppButton>
           </div>
         </div>
-        <div data-brunch-in className="flex shrink-0 items-end gap-8">
-          <div className="hidden md:block">
+        <div data-brunch-in className="hidden shrink-0 items-end gap-8 md:flex">
+          <div>
             <SpinBadge text={t.brunch.badge} className="w-32 bg-orange text-charcoal lg:w-36">
               <Burst className="size-9" />
             </SpinBadge>
           </div>
-          <div className="flex gap-2">
-            <button type="button" onClick={() => step(-1)} disabled={edge.start} aria-label={t.a11y.prev} className={arrow}>
-              <ArrowIcon dir="left" className="size-5" />
-            </button>
-            <button type="button" onClick={() => step(1)} disabled={edge.end} aria-label={t.a11y.next} className={arrow}>
-              <ArrowIcon className="size-5" />
-            </button>
-          </div>
+          <div className="flex gap-2">{arrows}</div>
         </div>
       </div>
 
-      <div className="relative mt-8 md:mt-12">
-        {/* Polaroid-style frames, each set at a slight angle that straightens on hover.
-            The vertical padding gives the tilted corners and shadows room inside the rail. */}
+      <div className="relative mt-10 md:mt-12">
+        {/* From md up: polaroid-style frames at a slight angle that straightens on hover, with
+            vertical padding so the tilted corners and shadows have room inside the rail. */}
         <ul
           ref={rail}
-          className="pad relative flex cursor-grab snap-x snap-mandatory overscroll-x-contain gap-6 overflow-x-auto py-10 select-none active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="pad relative flex cursor-grab snap-x snap-mandatory overscroll-x-contain gap-6 overflow-x-auto pb-6 select-none md:py-10 active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           // Only sideways gestures belong to the rail; vertical wheel still scrolls the page smoothly.
           data-lenis-prevent-horizontal
           aria-label={t.brunch.label}
@@ -176,11 +183,11 @@ export default function Brunch() {
             <li key={d.name} data-dish className="w-[78vw] shrink-0 snap-start scroll-ml-[var(--pad)] sm:w-[46vw] lg:w-[30vw] xl:w-[25vw]">
               <div
                 className={clsx(
-                  "group rounded-[28px] bg-white p-3 pb-6 shadow-[0_24px_50px_-28px_rgb(37_35_43/0.55)] transition-[rotate] duration-700 ease-soft hover:rotate-0",
+                  "group transition-[rotate] duration-700 ease-soft md:rounded-[28px] md:bg-white md:p-3 md:pb-6 md:shadow-[0_24px_50px_-28px_rgb(37_35_43/0.55)] md:hover:rotate-0",
                   FRAME_TILT[i % FRAME_TILT.length],
                 )}
               >
-                <div className="relative aspect-[4/5] transform-gpu overflow-hidden rounded-[20px] bg-sand">
+                <div className="relative aspect-[4/5] transform-gpu overflow-hidden rounded-[32px] bg-sand md:rounded-[20px]">
                   <Image
                     src={IMG[BRUNCH_IMG[i]]}
                     alt={t.alt[BRUNCH_IMG[i]]}
@@ -199,8 +206,8 @@ export default function Brunch() {
                     {d.tag}
                   </span>
                 </div>
-                <div className="px-2">
-                  <h3 className="display mt-5 text-[1.5rem] leading-tight">{d.name}</h3>
+                <div className="md:px-2">
+                  <h3 className="display mt-5 text-[1.6rem] leading-tight md:text-[1.5rem]">{d.name}</h3>
                   <p className="mt-2 leading-relaxed text-charcoal/75">{d.desc}</p>
                 </div>
               </div>
@@ -209,11 +216,12 @@ export default function Brunch() {
           <li aria-hidden="true" className="w-1 shrink-0 md:w-4" />
         </ul>
 
-        <div className="pad mt-2 flex items-center gap-6">
+        <div className="pad mt-6 flex items-center gap-6 md:mt-2">
           <div className="relative h-[3px] flex-1 overflow-hidden rounded-full bg-charcoal/10" aria-hidden="true">
             <div ref={thumb} className="absolute inset-y-0 left-0 w-1/4 rounded-full bg-orange will-change-transform" />
           </div>
           <p className="hidden text-sm text-charcoal/70 sm:block">{t.brunch.note}</p>
+          <div className="flex gap-2 md:hidden">{arrows}</div>
         </div>
       </div>
     </section>
