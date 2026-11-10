@@ -149,7 +149,7 @@ const en = {
       ["Bar", "11:00 – late"],
     ],
     contactLabel: "Say hello",
-    map: { bay: "Unawatuna Bay", ocean: "Indian Ocean", galle: "Galle Fort", jungle: "Jungle Beach", note: "Not to scale. Open Google Maps or Yandex Maps for the exact pin." },
+    mapHelp: { desktop: "Use {key} + scroll to zoom the map", mobile: "Use two fingers to move the map" },
     faqTitle: "Good to know",
     // TODO(confirm): every answer below with the KOKOY team.
     faq: [

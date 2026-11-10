@@ -1,65 +1,54 @@
 "use client";
 
-import { useRef } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { SITE, mapApps } from "@/lib/content";
 import { useUI } from "../Providers";
 import { MapButtons, WhatsAppButton } from "../ui/Buttons";
-import { PinIcon } from "../ui/Icons";
 
-/** Illustrative map of the bay. Not to scale; Google Maps carries the real pin. */
-function BayMap() {
+// MapLibre is ~1 MB, so it is fetched only when the visitor nears this section.
+const KokoyMap = dynamic(() => import("../ui/KokoyMap"), { ssr: false });
+
+/** A real map of Unawatuna in brand colours. The sun pin shows until the map is ready. */
+function VisitMap() {
   const { t, lang } = useUI();
-  const m = t.visit.map;
+  const box = useRef<HTMLDivElement>(null);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "800px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <a
-      href={SITE.maps[mapApps(lang)[0]]}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block aspect-[5/4] overflow-hidden rounded-[40px] bg-charcoal text-cream"
-      aria-label={`${t.cta.directions}: ${t.visit.address.join(", ")}`}
-    >
-      <svg viewBox="0 0 500 400" className="absolute inset-0 size-full" aria-hidden="true">
-        <defs>
-          <pattern id="kk-waves" width="28" height="14" patternUnits="userSpaceOnUse">
-            <path d="M0 7 q7 -6 14 0 t14 0" fill="none" stroke="currentColor" strokeOpacity="0.12" strokeWidth="1.5" />
-          </pattern>
-        </defs>
-        {/* Land */}
-        <path d="M0 0H500V175C455 170 430 205 400 240C372 272 330 285 290 282C240 278 205 250 180 230C150 206 120 205 95 222C70 240 40 250 0 245Z" fill="#FFF1D9" fillOpacity="0.08" />
-        {/* Sea */}
-        <path d="M0 245C40 250 70 240 95 222C120 205 150 206 180 230C205 250 240 278 290 282C330 285 372 272 400 240C430 205 455 170 500 175V400H0Z" fill="url(#kk-waves)" />
-        {/* Shoreline */}
-        <path d="M0 245C40 250 70 240 95 222C120 205 150 206 180 230C205 250 240 278 290 282C330 285 372 272 400 240C430 205 455 170 500 175" fill="none" stroke="#FF9D38" strokeWidth="3" strokeLinecap="round" strokeDasharray="2 9" />
-        {/* Road */}
-        <path d="M0 120C80 110 140 140 210 150C300 162 380 120 500 95" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" />
-        <text x="250" y="352" textAnchor="middle" className="fill-current text-[15px] font-semibold tracking-[0.2em] uppercase" fillOpacity="0.5">
-          {m.ocean}
-        </text>
-        <text x="250" y="305" textAnchor="middle" className="fill-current text-[15px] font-semibold" fillOpacity="0.75">
-          {m.bay}
-        </text>
-        <g fillOpacity="0.7" className="fill-current text-[15px] font-semibold">
-          <circle cx="40" cy="116" r="4" />
-          <text x="40" y="100" textAnchor="start">← {m.galle}</text>
-          <circle cx="455" cy="182" r="4" />
-          <text x="470" y="160" textAnchor="end">{m.jungle}</text>
-        </g>
-      </svg>
-
-      {/* The pin: a sun that pulses */}
-      <div className="absolute top-[52%] left-[56%] -translate-x-1/2 -translate-y-1/2">
-        <span className="sun absolute inset-0 rounded-full" style={{ animation: "kk-ping 2s ease-out infinite" }} aria-hidden="true" />
-        <span className="sun relative grid size-14 place-items-center rounded-full text-charcoal shadow-[0_0_40px_rgb(255_101_79/0.6)] transition-transform duration-500 ease-pop group-hover:scale-110">
-          <PinIcon className="size-6" />
+    <div ref={box} className="relative aspect-[5/4] overflow-hidden rounded-[40px] bg-[#34313B] shadow-[0_30px_60px_-30px_rgb(37_35_43/0.6)]">
+      <a
+        href={SITE.maps[mapApps(lang)[0]]}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${t.cta.directions}: ${t.visit.address.join(", ")}`}
+        className="absolute inset-0 grid place-items-center"
+      >
+        <span className="kk-pin" aria-hidden="true">
+          <span className="kk-pin-ping" />
+          <span className="kk-pin-sun" />
+          <span className="kk-pin-label">KOKOY</span>
         </span>
-        <span className="absolute top-1/2 left-full ml-3 -translate-y-1/2 rounded-full bg-cream px-3 py-1.5 font-display text-sm font-extrabold whitespace-nowrap text-charcoal">
-          KOKOY
-        </span>
-      </div>
-
-      <p className="absolute inset-x-6 bottom-5 text-xs text-cream/60">{m.note}</p>
-    </a>
+      </a>
+      {near && <KokoyMap lang={lang} gestureHelp={t.visit.mapHelp} />}
+    </div>
   );
 }
 
@@ -157,7 +146,7 @@ export default function Visit() {
           </div>
 
           <div data-visit-map className="-mt-8 lg:mt-0">
-            <BayMap />
+            <VisitMap />
           </div>
         </div>
       </div>

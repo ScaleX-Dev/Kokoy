@@ -189,3 +189,75 @@ details.faq[open]::details-content {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Visit map (MapLibre), recoloured to the brand ── */
+.kk-map {
+  font-family: var(--font-sans);
+}
+.kk-map .maplibregl-ctrl-group {
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-cream);
+  box-shadow: 0 10px 24px -12px rgb(37 35 43 / 0.6);
+}
+.kk-map .maplibregl-ctrl-group button {
+  width: 40px;
+  height: 40px;
+}
+.kk-map .maplibregl-ctrl-group button + button {
+  border-top-color: rgb(37 35 43 / 0.12);
+}
+.kk-map .maplibregl-ctrl-top-right {
+  top: 12px;
+  right: 12px;
+}
+.kk-map .maplibregl-ctrl-attrib {
+  background: rgb(255 241 217 / 0.85);
+  color: var(--color-charcoal);
+}
+.kk-map .maplibregl-cooperative-gesture-screen {
+  background: rgb(37 35 43 / 0.75);
+  color: var(--color-cream);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* The pin: the brand sun with a pulse and the name beside it. */
+.kk-pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+}
+.kk-pin-sun,
+.kk-pin-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: radial-gradient(circle at 32% 28%, var(--color-orange) 0%, var(--color-coral) 48%, var(--color-pink) 100%);
+}
+.kk-pin-sun {
+  box-shadow: 0 0 40px rgb(255 101 79 / 0.65);
+  transition: scale 0.5s var(--ease-pop);
+}
+.kk-pin:hover .kk-pin-sun {
+  scale: 1.12;
+}
+.kk-pin-ping {
+  animation: kk-ping 2s ease-out infinite;
+}
+.kk-pin-label {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  translate: 0 -50%;
+  border-radius: 999px;
+  background: var(--color-cream);
+  padding: 6px 12px;
+  color: var(--color-charcoal);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+}
