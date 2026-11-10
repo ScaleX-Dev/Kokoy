@@ -85,11 +85,7 @@ export default function Visit() {
   return (
     <section ref={root} id="visit" className="relative bg-coral pt-[var(--sy)] pb-10 text-charcoal md:pb-14">
       <div className="pad max-w-5xl">
-        <p data-visit-in className="eyebrow flex items-center gap-2">
-          <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
-          {t.visit.label}
-        </p>
-        <h2 data-visit-in className="title mt-5">
+        <h2 data-visit-in className="title">
           <Rich text={t.visit.title} className="font-black" />
         </h2>
         <p data-visit-in className="mt-6 max-w-[44ch] text-lg leading-relaxed md:text-xl">

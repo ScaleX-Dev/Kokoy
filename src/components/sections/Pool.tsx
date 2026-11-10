@@ -79,11 +79,7 @@ export default function Pool() {
 
         <div data-pool-cap className="pad absolute inset-x-0 bottom-0 grid gap-6 pb-10 text-cream md:grid-cols-12 md:items-end md:pb-14">
           <div className="md:col-span-7">
-            <p className="eyebrow flex items-center gap-2 text-cream/90">
-              <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
-              {t.pool.label}
-            </p>
-            <h2 className="title mt-4 text-[clamp(2.25rem,5.2vw,5.25rem)]">
+            <h2 className="title text-[clamp(2.25rem,5.2vw,5.25rem)]">
               <Rich text={t.pool.title} className="font-black" />
             </h2>
           </div>

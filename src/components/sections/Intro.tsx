@@ -67,14 +67,10 @@ export default function Intro() {
         className="sun pointer-events-none absolute -right-[22vw] bottom-[-18vw] size-[52vw] rounded-full opacity-90 md:-right-[12vw] md:bottom-[-14vw] md:size-[34vw]"
       />
 
-      <p className="eyebrow relative flex items-center gap-2 text-charcoal/70">
-        <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
-        {t.intro.label}
-      </p>
 
       <h2
         data-statement
-        className="relative mt-8 max-w-[22ch] hyphens-manual font-display text-[clamp(1.85rem,4.9vw,5rem)] leading-[1.12] font-semibold tracking-[-0.03em] md:mt-10"
+        className="relative max-w-[22ch] hyphens-manual font-display text-[clamp(1.85rem,4.9vw,5rem)] leading-[1.12] font-semibold tracking-[-0.03em]"
       >
         {tokens.map((tok, i) =>
           tok.kind === "hl" ? (

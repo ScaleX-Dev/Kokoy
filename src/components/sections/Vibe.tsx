@@ -64,12 +64,8 @@ export default function Vibe() {
             </div>
           </div>
 
-          <p className="eyebrow flex items-center gap-2 text-cream/85">
-            <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
-            {t.vibe.label}
-          </p>
           {/* Light, then black in coral: the same title tactic as every section. */}
-          <h2 className="title mt-5 text-[clamp(3rem,8.4vw,8.75rem)] md:-mr-[10vw]">
+          <h2 className="title text-[clamp(3rem,8.4vw,8.75rem)] md:-mr-[10vw]">
             <span className="block overflow-hidden pb-[0.04em]">
               <span data-vibe-line className="block">
                 {t.vibe.lead}

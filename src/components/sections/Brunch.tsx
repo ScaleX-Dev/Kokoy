@@ -133,11 +133,7 @@ export default function Brunch() {
       {/* Heading, caption and action stacked on the left; the rail's arrows on the right. */}
       <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-4xl">
-          <p data-brunch-in className="eyebrow flex items-center gap-2 text-charcoal/70">
-            <span className="size-2.5 rounded-full bg-orange" aria-hidden="true" />
-            {t.brunch.label}
-          </p>
-          <h2 data-brunch-in className="title mt-5">
+          <h2 data-brunch-in className="title">
             <Rich text={t.brunch.title} className="font-black" />
           </h2>
           <p data-brunch-in className="mt-5 max-w-[48ch] text-lg leading-relaxed text-charcoal/75">

@@ -68,11 +68,7 @@ export default function Menu() {
     <section ref={root} id="menu" className="section-y relative overflow-hidden bg-cream">
       <div className="pad flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-4xl">
-          <p data-menu-in className="eyebrow flex items-center gap-2 text-charcoal/70">
-            <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
-            {t.eats.label}
-          </p>
-          <h2 data-menu-in className="title mt-5">
+          <h2 data-menu-in className="title">
             <Rich text={t.eats.title} className="font-black" />
           </h2>
           <p data-menu-in className="mt-5 max-w-[46ch] text-lg leading-relaxed text-charcoal/75">
