@@ -143,7 +143,7 @@ export default function Hero() {
             className="flex flex-col-reverse items-start gap-5 pb-[calc(var(--pill-h)_+_var(--pill-gap)_*_2)] sm:flex-row sm:items-end sm:justify-between sm:gap-8 min-[1440px]:pb-[var(--pill-gap)]"
           >
             <div data-hero-in className="min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)]">
-              <p className="eyebrow text-cream/85">{t.visit.hoursLabel}</p>
+              <p className="eyebrow text-cream/85">{t.hero.hoursLabel}</p>
               <p className="mt-1.5 font-display text-[clamp(1.375rem,3vw,2.25rem)] leading-none font-extrabold tracking-[-0.03em] tabular-nums min-[1440px]:text-[clamp(1.25rem,1.6vw,2.5rem)]">
                 {t.hero.hours}
               </p>
