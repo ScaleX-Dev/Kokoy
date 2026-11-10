@@ -57,7 +57,12 @@ export const SITE = {
   // TODO(confirm): official email.
   email: "hello@kokoy.lk",
   // TODO(confirm): exact Google Maps place link.
-  maps: "https://www.google.com/maps/search/?api=1&query=Unawatuna%2C%20Sri%20Lanka",
+  // TODO(confirm): exact place links once KOKOY is listed on Google Maps and Yandex Maps.
+  // Russian visitors mostly use Yandex, so they are offered it first (see mapApps).
+  maps: {
+    google: "https://www.google.com/maps/search/?api=1&query=Unawatuna%2C%20Sri%20Lanka",
+    yandex: "https://yandex.com/maps/?text=Unawatuna%2C%20Sri%20Lanka",
+  },
   // TODO(confirm): drop the hero film (16:9, muted loop) in /public/video and set the path, e.g. "/video/hero.mp4".
   heroVideo: "",
   // TODO(confirm): social handles and links.
@@ -68,6 +73,13 @@ export const SITE = {
     { label: "TripAdvisor", url: "https://www.tripadvisor.com/" },
   ],
 } as const;
+
+export type MapApp = keyof typeof SITE.maps;
+
+/** Map apps in the order this visitor is most likely to use them. */
+export function mapApps(lang: string): MapApp[] {
+  return lang === "ru" ? ["yandex", "google"] : ["google", "yandex"];
+}
 
 export function waLink(message: string) {
   const text = encodeURIComponent(message);

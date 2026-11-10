@@ -2,18 +2,18 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { SITE } from "@/lib/content";
+import { SITE, mapApps } from "@/lib/content";
 import { useUI } from "../Providers";
-import { LinkButton, WhatsAppButton } from "../ui/Buttons";
+import { MapButtons, WhatsAppButton } from "../ui/Buttons";
 import { PinIcon } from "../ui/Icons";
 
 /** Illustrative map of the bay. Not to scale; Google Maps carries the real pin. */
 function BayMap() {
-  const { t } = useUI();
+  const { t, lang } = useUI();
   const m = t.visit.map;
   return (
     <a
-      href={SITE.maps}
+      href={SITE.maps[mapApps(lang)[0]]}
       target="_blank"
       rel="noopener noreferrer"
       className="group relative block aspect-[5/4] overflow-hidden rounded-[40px] bg-charcoal text-cream"
@@ -149,9 +149,10 @@ export default function Visit() {
               <WhatsAppButton message={t.wa.general} tone="charcoal" className="w-full">
                 {t.cta.whatsapp}
               </WhatsAppButton>
-              <LinkButton href={SITE.maps} external tone="outline-charcoal" className="w-full">
-                {t.cta.directions}
-              </LinkButton>
+              <p className="eyebrow mt-3 text-charcoal/70">{t.cta.directions}</p>
+              <div className="grid grid-cols-2 gap-3">
+                <MapButtons tone="outline-charcoal" className="w-full px-3 whitespace-nowrap" />
+              </div>
             </div>
           </div>
 
