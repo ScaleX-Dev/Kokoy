@@ -8,7 +8,7 @@ import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import { WhatsAppButton } from "../ui/Buttons";
 
-/** The weekly line-up as a row of cards: picture, day, name, detail and one clear action. */
+/** The weekly line-up as a row of cards; one "What's on this week?" action covers them all. */
 export default function Events() {
   const { t } = useUI();
   const root = useRef<HTMLElement>(null);
@@ -77,9 +77,6 @@ export default function Events() {
             <h3 className="mt-6 font-display text-[clamp(1.4rem,1.9vw,1.9rem)] leading-tight font-bold tracking-[-0.03em]">{r.name}</h3>
             <p className="mt-2 flex-1 text-cream/75">{r.detail}</p>
             <p className="eyebrow mt-4 text-coral">{r.tag}</p>
-            <WhatsAppButton message={t.wa.events} className="mt-5 w-full">
-              {t.cta.whatsapp}
-            </WhatsAppButton>
           </li>
         ))}
       </ul>

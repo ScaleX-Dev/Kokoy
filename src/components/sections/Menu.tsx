@@ -14,7 +14,7 @@ import { WhatsAppButton } from "../ui/Buttons";
 import { Burst } from "../ui/Icons";
 
 type Tab = "food" | "drinks";
-type Shot = { name: string; note: string; img: ImgKey };
+type Shot = { key: string; img: ImgKey };
 
 const TILT = ["-rotate-[4deg]", "rotate-[3deg]", "-rotate-[2deg]", "rotate-[4deg]", "-rotate-[3deg]", "rotate-[2deg]"];
 const LIFT = ["translate-y-6", "-translate-y-4", "translate-y-10", "-translate-y-2", "translate-y-4", "-translate-y-6"];
@@ -23,7 +23,8 @@ const PROPS: Partial<Record<number, "sun" | "badge" | "burst">> = { 0: "sun", 2:
 
 /**
  * The menu teaser, after the reference: a heading with a Food / Drinks switch and one
- * clear action, then a drifting row of polaroids showing what's actually on the menu.
+ * clear action, then a drifting row of photo polaroids. The dishes themselves are listed in
+ * the Brunch and Drinks sections, so they are not repeated here.
  */
 export default function Menu() {
   const { t } = useUI();
@@ -31,8 +32,8 @@ export default function Menu() {
   const [tab, setTab] = useState<Tab>("food");
 
   const shots: Record<Tab, Shot[]> = {
-    food: t.brunch.items.map((d, i) => ({ name: d.name, note: d.desc, img: BRUNCH_IMG[i] })),
-    drinks: t.drinks.items.map((d, i) => ({ name: d.name, note: d.spec, img: DRINK_STYLE[i].img })),
+    food: t.brunch.items.map((d, i) => ({ key: d.name, img: BRUNCH_IMG[i] })),
+    drinks: t.drinks.items.map((d, i) => ({ key: d.name, img: DRINK_STYLE[i].img })),
   };
   const tabs: Tab[] = ["food", "drinks"];
   // A short list (four drinks) is repeated so one copy of the row is always wider than
@@ -110,11 +111,11 @@ export default function Menu() {
             {/* Polaroids drift past; scrolling speeds them up, like the ticker. */}
             <Marquee duration={row.length * 10} trackClassName="py-14 md:py-16">
               {row.map((s, i) => (
-                <Fragment key={`${s.name}-${i}`}>
+                <Fragment key={`${s.key}-${i}`}>
                   <figure
                     aria-hidden={i >= shots[tab].length || undefined}
                     className={clsx(
-                      "group relative z-10 mx-3 w-[clamp(210px,22vw,330px)] shrink-0 rounded-[8px] bg-white p-3 pb-4 shadow-[0_28px_50px_-26px_rgb(37_35_43/0.6)] transition-[rotate] duration-700 ease-soft hover:rotate-0 md:mx-5 md:p-4 md:pb-5",
+                      "group relative z-10 mx-3 w-[clamp(210px,22vw,330px)] shrink-0 rounded-[8px] bg-white p-3 pb-10 shadow-[0_28px_50px_-26px_rgb(37_35_43/0.6)] transition-[rotate] duration-700 ease-soft hover:rotate-0 md:mx-5 md:p-4 md:pb-14",
                       TILT[i % TILT.length],
                       LIFT[i % LIFT.length],
                     )}
@@ -122,10 +123,6 @@ export default function Menu() {
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-sand">
                       <Image src={IMG[s.img]} alt={t.alt[s.img]} fill sizes="(min-width: 768px) 22vw, 210px" className="object-cover transition-transform duration-[1.4s] ease-soft group-hover:scale-105" />
                     </div>
-                    <figcaption className="mt-3 px-0.5">
-                      <span className="block font-display text-[15px] leading-tight font-bold tracking-[-0.01em] uppercase md:text-[17px]">{s.name}</span>
-                      <span className="mt-1 block truncate text-[13px] text-charcoal/65 md:text-sm">{s.note}</span>
-                    </figcaption>
                   </figure>
                   {PROPS[i] && (
                     <div aria-hidden="true" className="relative z-0 -mx-[7vw] w-[clamp(130px,15vw,230px)] shrink-0 translate-y-[30%]">

@@ -6,7 +6,7 @@ import { SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import LangSwitch from "../ui/LangSwitch";
-import { MapButtons, WhatsAppButton, useAnchor } from "../ui/Buttons";
+import { useAnchor } from "../ui/Buttons";
 import { ArrowIcon } from "../ui/Icons";
 
 /** Everything centred on one axis: sign-off, links, address, socials, then the sunset wordmark. */
@@ -34,12 +34,8 @@ export default function Footer() {
         <h2 className="title">
           <Rich text={t.footer.title} className="font-black text-coral" />
         </h2>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <WhatsAppButton message={t.wa.general}>{t.cta.whatsapp}</WhatsAppButton>
-          <MapButtons tone="outline-cream" />
-        </div>
-
-        <nav aria-label={t.footer.explore} className="mt-14 md:mt-20">
+        {/* No buttons here: the Visit section right above already offers WhatsApp and directions. */}
+        <nav aria-label={t.footer.explore} className="mt-10 md:mt-14">
           <ul className="flex flex-wrap justify-center gap-x-2 gap-y-1">
             {t.nav.map((l) => (
               <li key={l.id}>

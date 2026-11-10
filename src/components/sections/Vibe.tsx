@@ -6,7 +6,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { IMG } from "@/lib/content";
 import { useUI } from "../Providers";
 import SpinBadge from "../ui/SpinBadge";
-import { LinkButton, WhatsAppButton, useAnchor } from "../ui/Buttons";
+import { LinkButton, useAnchor } from "../ui/Buttons";
 import { Burst } from "../ui/Icons";
 
 /**
@@ -81,7 +81,6 @@ export default function Vibe() {
           <div data-vibe-cap>
             <p className="mt-7 max-w-[46ch] text-lg leading-relaxed text-cream/90">{t.vibe.body}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <WhatsAppButton message={t.wa.pool}>{t.pool.cta}</WhatsAppButton>
               <LinkButton href="#pool" onClick={anchor("pool")} tone="outline-cream">
                 {t.pool.label}
               </LinkButton>
