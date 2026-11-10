@@ -11,7 +11,7 @@ export default function Ticker() {
   const words = t.ticker;
 
   return (
-    <section aria-label={words.join(", ")} className="relative z-10 -mt-px overflow-hidden bg-cream py-14 md:py-20">
+    <section aria-label={words.join(", ")} className="relative z-10 -mt-px overflow-hidden bg-cream py-10 md:py-14">
       <div className="relative">
         <div className="relative z-10 -mx-4 -rotate-[2.5deg] bg-coral py-3 text-charcoal shadow-[0_18px_40px_-24px_rgb(37_35_43/0.5)] md:py-5">
           <Marquee duration={28}>

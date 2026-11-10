@@ -15,6 +15,18 @@ import { ArrowIcon, Burst } from "../ui/Icons";
  * middle, opening hours and the headline in the bottom corners. The floating nav pill
  * (see Header) rests between those corners on wide screens and below them otherwise.
  */
+/** Splits a title into words, marking those inside "*…*" as accent (set in black). */
+function accentWords(title: string) {
+  const words: { text: string; accent: boolean }[] = [];
+  let inside = false;
+  for (const raw of title.split(" ")) {
+    if (raw.startsWith("*")) inside = true;
+    words.push({ text: raw.replace(/\*/g, ""), accent: inside });
+    if (raw.endsWith("*")) inside = false;
+  }
+  return words;
+}
+
 export default function Hero() {
   const { t } = useUI();
   const anchor = useAnchor();
@@ -43,7 +55,7 @@ export default function Hero() {
     { scope: root },
   );
 
-  const titleWords = t.hero.title.split(" ");
+  const titleWords = accentWords(t.hero.title);
 
   return (
     <section ref={root} id="top" className="relative flex h-[100svh] min-h-[var(--hero-min)] flex-col overflow-hidden bg-charcoal text-cream">
@@ -134,14 +146,14 @@ export default function Hero() {
                 {t.hero.hours}
               </p>
             </div>
-            <h1 className="display max-w-[12ch] text-[clamp(2rem,4vw,2.75rem)] font-extrabold sm:text-right min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)] min-[1440px]:text-[clamp(1.375rem,2vw,3rem)]">
+            <h1 className="title max-w-[12ch] text-[clamp(2rem,4vw,2.75rem)] sm:text-right min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)] min-[1440px]:text-[clamp(1.375rem,2vw,3rem)]">
               <span className="sr-only">KOKOY Pool Club. </span>
               {/* The space sits between the clipping wrappers: inside an inline-block it collapses. */}
               {titleWords.map((w, i) => (
                 <Fragment key={i}>
                   <span className="-mb-[0.1em] inline-block overflow-hidden pb-[0.1em] align-bottom">
-                    <span data-hero-line className="inline-block">
-                      {w}
+                    <span data-hero-line className={w.accent ? "inline-block font-black" : "inline-block"}>
+                      {w.text}
                     </span>
                   </span>
                   {i < titleWords.length - 1 ? " " : null}

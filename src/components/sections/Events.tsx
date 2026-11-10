@@ -54,7 +54,7 @@ export default function Events() {
   );
 
   return (
-    <section ref={root} id="events" className="relative overflow-hidden bg-charcoal py-24 text-cream md:py-32">
+    <section ref={root} id="events" className="section-y relative overflow-hidden bg-charcoal text-cream">
       {/* Heading on the left, the general action on the right. */}
       <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-4xl">
@@ -62,8 +62,8 @@ export default function Events() {
             <SoundBars label={t.a11y.sound} />
             {t.events.label}
           </p>
-          <h2 data-ev-in className="display mt-5 text-[clamp(2.3rem,5.4vw,5.5rem)] font-extrabold">
-            <Rich text={t.events.title} />
+          <h2 data-ev-in className="title mt-5">
+            <Rich text={t.events.title} className="font-black text-coral" />
           </h2>
           <p data-ev-in className="mt-5 max-w-[52ch] text-lg leading-relaxed text-cream/75">
             {t.events.body}
@@ -76,7 +76,7 @@ export default function Events() {
         </div>
       </div>
 
-      <ul ref={list} className="pad mt-14 grid gap-x-5 gap-y-12 sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
+      <ul ref={list} className="pad mt-10 grid gap-x-5 gap-y-12 sm:grid-cols-2 md:mt-14 lg:grid-cols-4">
         {t.events.rows.map((r, i) => (
           <li key={r.name} data-ev-card className="group flex flex-col">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-cream/5">

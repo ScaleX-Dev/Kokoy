@@ -49,7 +49,7 @@ const en = {
   },
   hero: {
     kicker: "Pool club · Unawatuna, Sri Lanka",
-    title: "Meet us by the pool.",
+    title: "Meet us *by the pool.*",
     sub: "Pool, all-day brunch, signature drinks and music. One sunny spot, and a reason to stay a little longer.",
     badge: "SUNSET CLUB · UNAWATUNA · SRI LANKA · ",
     scroll: "Scroll",
@@ -78,7 +78,7 @@ const en = {
     label: "The pool",
     before: "Sun's out.",
     after: "Pool's open.",
-    title: "Your poolside escape starts here.",
+    title: "Your poolside escape *starts here.*",
     body: "Sunbeds, shade when you want it, and drinks that find you without you having to move. Stay for an hour or the whole afternoon.",
     features: [
       { title: "Loungers & day beds", body: "Pick your spot, in the sun or in the shade." },
@@ -89,7 +89,7 @@ const en = {
   },
   brunch: {
     label: "Food & brunch",
-    title: "Brunch that doesn't clock off.",
+    title: "Brunch that *doesn't clock off.*",
     body: "All-day brunch with island flavours, big plates for sharing and a few things you'll come back for.",
     badge: "ALL-DAY BRUNCH · ALL-DAY BRUNCH · ",
     note: "The menu changes with the season.",
@@ -105,7 +105,7 @@ const en = {
   },
   drinks: {
     label: "Signature drinks",
-    title: "Something cold, something colourful.",
+    title: "Something cold, *something colourful.*",
     cta: "Ask for the drinks list",
     badge: "SIGNATURE · DRINKS · KOKOY · ",
     items: [
@@ -130,13 +130,13 @@ const en = {
   },
   gallery: {
     label: "Life at KOKOY",
-    title: "Good days, on repeat.",
+    title: "Good days, *on repeat.*",
     body: "Tag us in yours and we'll share our favourites.",
     cta: "Follow us",
   },
   visit: {
     label: "Location & contact",
-    title: "Plan your visit.",
+    title: "Plan *your visit.*",
     body: "We're in Unawatuna, on Sri Lanka's south coast. Message us on WhatsApp and we'll help you plan the day.",
     addressLabel: "Find us",
     // TODO(confirm): street address.
@@ -176,7 +176,7 @@ const en = {
     ],
   },
   footer: {
-    title: "Make a day of it.",
+    title: "Make a day *of it.*",
     explore: "Explore",
     follow: "Follow",
     visit: "Visit",

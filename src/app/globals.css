@@ -71,6 +71,24 @@
   text-wrap: balance;
 }
 
+/* Section titles, after the reference: big, all caps, tight, in a light weight, with the
+   *accent* words (see Rich) set in black. Weight carries the contrast, so the accent works
+   in charcoal on light sections and in coral on dark ones. */
+@utility title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.25rem, 6.2vw, 6.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* One vertical rhythm for every section; two sections meet at twice this. */
+@utility section-y {
+  padding-block: var(--sy);
+}
+
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 12px;
@@ -91,9 +109,11 @@
   --pill-h: 56px;
   --pill-gap: 16px;
   --pill-w: 51rem; /* fits the Russian labels on one line */
+  --sy: 56px;
 }
 @media (min-width: 48rem) {
   :root {
+    --sy: 72px;
     --pad: 32px;
     --pill-h: 64px;
     --pill-gap: 24px;
@@ -102,6 +122,7 @@
 @media (min-width: 80rem) {
   :root {
     --pad: 48px;
+    --sy: 88px;
   }
 }
 

@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GALLERY_ROWS, IMG, SITE } from "@/lib/content";
 import { useUI } from "../Providers";
+import Rich from "../ui/Rich";
 import Marquee from "../ui/Marquee";
 import { LinkButton } from "../ui/Buttons";
 
@@ -39,14 +40,14 @@ export default function Gallery() {
   );
 
   return (
-    <section ref={root} id="gallery" className="relative overflow-hidden bg-cream py-24 md:py-36">
+    <section ref={root} id="gallery" className="section-y relative overflow-hidden bg-cream">
       <div className="pad mx-auto max-w-4xl text-center">
         <p data-gal-in className="eyebrow inline-flex items-center gap-2 text-charcoal/70">
           <span className="size-2.5 rounded-full bg-pink" aria-hidden="true" />
           {t.gallery.label}
         </p>
-        <h2 data-gal-in className="display mt-5 text-[clamp(2.4rem,6.4vw,6.5rem)] font-extrabold">
-          {t.gallery.title}
+        <h2 data-gal-in className="title mt-5">
+          <Rich text={t.gallery.title} className="font-black" />
         </h2>
         <p data-gal-in className="mx-auto mt-5 max-w-[40ch] text-lg text-charcoal/75">
           {t.gallery.body}
@@ -58,7 +59,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      <div className="mt-16 flex flex-col gap-4 md:mt-24 md:gap-6">
+      <div className="mt-10 flex flex-col gap-4 md:mt-14 md:gap-6">
         {GALLERY_ROWS.map((row, r) => (
           <Marquee key={r} duration={r ? 55 : 45} reverse={r === 1}>
             {row.map((g) => (

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { BRUNCH_IMG, IMG } from "@/lib/content";
 import { useUI } from "../Providers";
+import Rich from "../ui/Rich";
 import SpinBadge from "../ui/SpinBadge";
 import { WhatsAppButton } from "../ui/Buttons";
 import { ArrowIcon, Burst } from "../ui/Icons";
@@ -128,7 +129,7 @@ export default function Brunch() {
     "grid size-12 place-items-center rounded-full border-2 border-charcoal transition-colors duration-300 hover:bg-charcoal hover:text-cream disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-charcoal";
 
   return (
-    <section ref={root} id="brunch" className="relative overflow-hidden bg-cream py-24 md:py-32">
+    <section ref={root} id="brunch" className="section-y relative overflow-hidden bg-cream">
       {/* Heading, caption and action stacked on the left; the rail's arrows on the right. */}
       <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-4xl">
@@ -136,8 +137,8 @@ export default function Brunch() {
             <span className="size-2.5 rounded-full bg-orange" aria-hidden="true" />
             {t.brunch.label}
           </p>
-          <h2 data-brunch-in className="display mt-5 text-[clamp(2.4rem,6vw,6rem)] font-extrabold">
-            {t.brunch.title}
+          <h2 data-brunch-in className="title mt-5">
+            <Rich text={t.brunch.title} className="font-black" />
           </h2>
           <p data-brunch-in className="mt-5 max-w-[48ch] text-lg leading-relaxed text-charcoal/75">
             {t.brunch.body}

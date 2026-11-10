@@ -57,7 +57,7 @@ export default function Intro() {
   );
 
   return (
-    <section ref={root} id="about" className="pad relative overflow-hidden bg-cream pt-16 pb-24 md:pt-24 md:pb-36">
+    <section ref={root} id="about" className="pad section-y relative overflow-hidden bg-cream">
       {/* An oversized half sun peeking in from the edge. */}
       <div
         data-intro-sun

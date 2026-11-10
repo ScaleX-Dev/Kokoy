@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { SITE } from "@/lib/content";
 import { useUI } from "../Providers";
+import Rich from "../ui/Rich";
 import LangSwitch from "../ui/LangSwitch";
 import { MapButtons, WhatsAppButton, useAnchor } from "../ui/Buttons";
 import { ArrowIcon } from "../ui/Icons";
@@ -28,9 +29,11 @@ export default function Footer() {
   );
 
   return (
-    <footer ref={root} className="relative overflow-hidden bg-charcoal pt-24 text-cream md:pt-32">
+    <footer ref={root} className="relative overflow-hidden bg-charcoal pt-[var(--sy)] text-cream">
       <div className="pad flex flex-col items-center text-center">
-        <h2 className="display text-[clamp(2.6rem,6.4vw,6.5rem)] font-black">{t.footer.title}</h2>
+        <h2 className="title">
+          <Rich text={t.footer.title} className="font-black text-coral" />
+        </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <WhatsAppButton message={t.wa.general}>{t.cta.whatsapp}</WhatsAppButton>
           <MapButtons tone="outline-cream" />

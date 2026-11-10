@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { SITE, mapApps } from "@/lib/content";
 import { useUI } from "../Providers";
+import Rich from "../ui/Rich";
 import { MapButtons, WhatsAppButton } from "../ui/Buttons";
 
 // MapLibre is ~1 MB, so it is fetched only when the visitor nears this section.
@@ -82,14 +83,14 @@ export default function Visit() {
   );
 
   return (
-    <section ref={root} id="visit" className="relative bg-coral pt-24 pb-10 text-charcoal md:pt-32 md:pb-14">
+    <section ref={root} id="visit" className="relative bg-coral pt-[var(--sy)] pb-10 text-charcoal md:pb-14">
       <div className="pad max-w-5xl">
         <p data-visit-in className="eyebrow flex items-center gap-2">
           <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
           {t.visit.label}
         </p>
-        <h2 data-visit-in className="display mt-5 text-[clamp(2.6rem,7vw,7rem)] font-black">
-          {t.visit.title}
+        <h2 data-visit-in className="title mt-5">
+          <Rich text={t.visit.title} className="font-black" />
         </h2>
         <p data-visit-in className="mt-6 max-w-[44ch] text-lg leading-relaxed md:text-xl">
           {t.visit.body}
@@ -152,7 +153,7 @@ export default function Visit() {
       </div>
 
       {/* FAQ */}
-      <div className="pad mt-20 md:mt-28">
+      <div className="pad mt-14 md:mt-20">
         <div className="grid gap-8 rounded-[40px] bg-cream p-6 sm:p-10 md:grid-cols-12 md:p-14">
           <div className="md:col-span-4">
             <h3 className="display text-[clamp(2rem,3.6vw,3.25rem)] font-extrabold">{t.visit.faqTitle}</h3>

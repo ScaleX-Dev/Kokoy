@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { DRINK_STYLE, IMG } from "@/lib/content";
 import { useUI } from "../Providers";
+import Rich from "../ui/Rich";
 import SpinBadge from "../ui/SpinBadge";
 import { WhatsAppButton } from "../ui/Buttons";
 
@@ -73,7 +74,7 @@ export default function Drinks() {
     <section
       ref={root}
       id="drinks"
-      className="relative overflow-hidden py-24 text-charcoal transition-colors duration-700 ease-soft md:py-32 lg:min-h-[100svh]"
+      className="section-y relative overflow-hidden text-charcoal transition-colors duration-700 ease-soft"
       style={{ backgroundColor: style.color }}
     >
       <div className="pad grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-6">
@@ -82,8 +83,8 @@ export default function Drinks() {
             <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
             {t.drinks.label}
           </p>
-          <h2 data-drinks-in className="display mt-5 max-w-[14ch] text-[clamp(2.2rem,4.6vw,4.5rem)] font-extrabold">
-            {t.drinks.title}
+          <h2 data-drinks-in className="title mt-5 max-w-[14ch] text-[clamp(2.25rem,4.8vw,4.75rem)]">
+            <Rich text={t.drinks.title} className="font-black" />
           </h2>
 
           <div data-drinks-in className="mt-10 flex flex-wrap gap-2" role="tablist" aria-label={t.drinks.label} onKeyDown={onKey}>
