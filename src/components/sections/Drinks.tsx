@@ -19,7 +19,7 @@ function DrinkCopy({ index, n, name, spec, note }: { index: number; n: number; n
       <p className="font-display text-sm font-bold tabular-nums opacity-60">
         0{index + 1} / 0{n}
       </p>
-      <h3 className="mt-2 font-display text-[clamp(2.6rem,7vw,6.5rem)] leading-[0.92] font-black tracking-[-0.04em] uppercase">{name}</h3>
+      <h3 className="mt-2 font-display text-[clamp(2.1rem,7vw,6.5rem)] leading-[0.92] font-black tracking-[-0.04em] uppercase">{name}</h3>
       <p className="mt-5 text-lg font-medium md:text-xl">{spec}</p>
       <p className="mt-2 text-lg opacity-75">{note}</p>
     </>
@@ -82,7 +82,7 @@ export default function Drinks() {
           Tablets (md to lg): the left column dissolves (display: contents) so the photo sits
           between the title and the drink buttons. Desktop: the two-column layout. */}
       <div className="pad grid gap-12 md:gap-8 lg:grid-cols-12 lg:items-center lg:gap-6">
-        <div className="md:contents lg:col-span-6 lg:block">
+        <div className="min-w-0 md:contents lg:col-span-6 lg:block">
           <div className="md:order-1">
             <h2
               data-drinks-in
