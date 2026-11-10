@@ -38,12 +38,11 @@ export default function Day() {
         gsap.set(imgs.slice(1), { clipPath: "circle(0% at 50% 50%)" });
         gsap.set(ticks.slice(1), { opacity: 0.35 });
 
-        // Each moment holds, then hands over to the next; scrolling snaps to the holds.
+        // Each moment holds, then hands over to the next.
         const n = stops.length;
         const HOLD = 0.6;
         const MOVE = 1;
         const total = HOLD + (n - 1) * (MOVE + HOLD);
-        const holds = Array.from({ length: n }, (_, i) => (i * (MOVE + HOLD) + HOLD / 2) / total);
         const tl = gsap.timeline({
           defaults: { ease: "power2.inOut" },
           scrollTrigger: {
@@ -52,7 +51,8 @@ export default function Day() {
             end: `+=${n * 85}%`,
             scrub: 0.8,
             pin: true,
-            snap: { snapTo: holds, duration: { min: 0.2, max: 0.6 }, delay: 0.1, ease: "power1.inOut" },
+            // No ScrollTrigger snap: it scrolls the window behind Lenis's back and the two
+            // fight each other, which shows up as a judder when the visitor stops scrolling.
             onUpdate: (self) => setSun(0.02 + self.progress * 0.96),
           },
         });
@@ -72,7 +72,9 @@ export default function Day() {
   );
 
   return (
-    <section ref={root} id="day" className="relative overflow-hidden bg-cream text-charcoal lg:h-[100svh]">
+    // overflow-clip, not overflow-hidden: hidden makes the section a scroll container,
+    // which silently disables the sticky cards on phones and tablets.
+    <section ref={root} id="day" className="relative overflow-clip bg-cream text-charcoal lg:h-[100svh]">
       {/* ── Desktop: pinned sky ── */}
       <div className="pad relative hidden h-full flex-col pt-28 pb-10 lg:flex">
         {/* The sky: a horizon line, the sun's arc and the sun itself. */}
