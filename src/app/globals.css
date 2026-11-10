@@ -30,6 +30,8 @@
     interpolate-size: allow-keywords;
   }
   body {
+    /* Positioning context for the header's sticky track, which spans the whole page. */
+    position: relative;
     font-family: var(--font-sans);
     background: var(--color-cream);
     -webkit-font-smoothing: antialiased;
@@ -81,12 +83,20 @@
   background: radial-gradient(circle at 32% 28%, var(--color-orange) 0%, var(--color-coral) 48%, var(--color-pink) 100%);
 }
 
+/* --pill-*: the floating nav. It rests at the foot of the hero (whose height is
+   max(100svh, var(--hero-min))) and sticks to the top once scrolled past. */
 :root {
   --pad: 16px;
+  --hero-min: 640px;
+  --pill-h: 56px;
+  --pill-gap: 16px;
+  --pill-w: 51rem; /* fits the Russian labels on one line */
 }
 @media (min-width: 48rem) {
   :root {
     --pad: 32px;
+    --pill-h: 64px;
+    --pill-gap: 24px;
   }
 }
 @media (min-width: 80rem) {
@@ -123,6 +133,13 @@
 @keyframes kk-show {
   to {
     visibility: visible;
+  }
+}
+
+@keyframes kk-rise {
+  from {
+    opacity: 0;
+    translate: 0 24px;
   }
 }
 

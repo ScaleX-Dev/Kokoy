@@ -52,6 +52,9 @@ const en = {
     sub: "Pool, all-day brunch, signature drinks and music. One sunny spot, and a reason to stay a little longer.",
     badge: "SUNSET CLUB · UNAWATUNA · SRI LANKA · ",
     scroll: "Scroll",
+    // TODO(confirm): matches the earliest opening and the bar's close under visit.hours.
+    hours: "9:00 – late",
+    strip: ["Pool", "All-day brunch", "Signature drinks", "Sunset Sessions every Friday", "Unawatuna, Sri Lanka"],
   },
   ticker: ["Pool", "Brunch", "Signature drinks", "Music", "Sunsets", "Good company"],
   intro: {
