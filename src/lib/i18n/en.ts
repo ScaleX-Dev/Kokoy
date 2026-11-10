@@ -56,7 +56,7 @@ const en = {
     hours: "10:00 – 21:00",
     strip: ["Pool", "All-day brunch", "Signature drinks", "Sunset Sessions every Friday", "Unawatuna, Sri Lanka"],
   },
-  ticker: ["Pool", "Brunch", "Signature drinks", "Music", "Sunsets", "Good company"],
+  ticker: ["Brunch", "Cocktails", "Dip & Sip", "Sunset Grooves"],
   eats: {
     label: "Food & drinks",
     title: "Eat well, *stay long.*",
