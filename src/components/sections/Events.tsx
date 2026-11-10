@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { IMG } from "@/lib/content";
 import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import { WhatsAppButton } from "../ui/Buttons";
@@ -46,14 +44,6 @@ export default function Events() {
           stagger: 0.08,
           ease: "expo.out",
           scrollTrigger: { trigger: list.current, start: "top 85%" },
-        });
-        gsap.from("[data-ev-private]", {
-          y: 80,
-          rotate: 2,
-          opacity: 0,
-          duration: 1.4,
-          ease: "expo.out",
-          scrollTrigger: { trigger: "[data-ev-private]", start: "top 90%" },
         });
       });
     },
@@ -106,27 +96,6 @@ export default function Events() {
         <WhatsAppButton message={t.wa.events} tone="outline-cream">
           {t.events.cta}
         </WhatsAppButton>
-      </div>
-
-      {/* Private events */}
-      <div className="pad mt-20 md:mt-28">
-        <div data-ev-private className="relative grid overflow-hidden rounded-[40px] bg-coral text-charcoal md:grid-cols-2">
-          <div className="relative z-10 p-8 sm:p-10 md:p-14">
-            <h3 className="display text-[clamp(2rem,4.4vw,4rem)] font-extrabold">{t.events.privateTitle}</h3>
-            <p className="mt-5 max-w-[42ch] text-lg leading-relaxed">{t.events.privateBody}</p>
-            <WhatsAppButton message={t.wa.private} tone="charcoal" className="mt-8">
-              {t.events.privateCta}
-            </WhatsAppButton>
-          </div>
-          <div className="relative min-h-[300px] md:min-h-full">
-            <div className="absolute inset-0 md:inset-y-8 md:right-8 md:left-0">
-              <div className="relative size-full overflow-hidden rounded-t-[40px] md:rounded-full">
-                <Image src={IMG.toast} alt={t.alt.toast} fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover" />
-              </div>
-            </div>
-            <div className="sun absolute -top-10 -right-10 size-40 rounded-full md:top-auto md:-bottom-12 md:left-[-3rem]" aria-hidden="true" />
-          </div>
-        </div>
       </div>
     </section>
   );

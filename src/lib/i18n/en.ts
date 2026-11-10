@@ -40,7 +40,6 @@ const en = {
     brunch: "Hi KOKOY! Could you send me today's brunch menu?",
     drinks: "Hi KOKOY! Could you send me the drinks list?",
     events: "Hi KOKOY! What's on this week?",
-    private: "Hi KOKOY! I'm planning a private event. Date: … Group size: …",
     question: "Hi KOKOY! I have a question: ",
   },
   announcement: {
@@ -124,10 +123,6 @@ const en = {
       { day: "1×", name: "Guest DJ Night", detail: "A special guest behind the decks", tag: "Monthly" },
     ],
     cta: "What's on this week?",
-    privateTitle: "Got something to celebrate?",
-    privateBody:
-      "Birthdays, team days, engagements, or just because. Tell us the date and how many of you there are, and we'll take it from there.",
-    privateCta: "Plan a private event",
   },
   gallery: {
     label: "Life at KOKOY",
