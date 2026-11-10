@@ -96,7 +96,7 @@ export default function Pool() {
       <ul data-features className="pad grid gap-10 py-20 sm:grid-cols-3 sm:gap-6 md:py-28 lg:gap-10">
         {t.pool.features.map((f, i) => (
           <li key={f.title} data-feature className={clsx(i === 1 && "sm:mt-16", i === 2 && "sm:mt-32")}>
-            <div className={clsx("relative aspect-[4/5] overflow-hidden", FEATURE_SHAPE[i], i === 2 && "aspect-square")}>
+            <div className={clsx("relative overflow-hidden", FEATURE_SHAPE[i], i === 2 ? "aspect-square" : "aspect-[4/5]")}>
               <Image src={IMG[FEATURE_IMG[i]]} alt={t.alt[FEATURE_IMG[i]]} fill sizes="(min-width: 640px) 30vw, 92vw" className="object-cover transition-transform duration-[1.4s] ease-soft hover:scale-105" />
             </div>
             <div className="mt-6 flex gap-4">
