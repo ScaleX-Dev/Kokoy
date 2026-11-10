@@ -137,23 +137,24 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Bottom corners. From 1440px they flank the nav pill; otherwise they sit above it. */}
+          {/* Bottom corners, one row on every screen: hours on the left, the headline on the right.
+              From 1440px they flank the nav pill; otherwise they sit above it. */}
           <div
             data-hero-corners
-            className="flex flex-col-reverse items-start gap-5 pb-[calc(var(--pill-h)_+_var(--pill-gap)_*_2)] sm:flex-row sm:items-end sm:justify-between sm:gap-8 min-[1440px]:pb-[var(--pill-gap)]"
+            className="flex items-end justify-between gap-4 pb-[calc(var(--pill-h)_+_var(--pill-gap)_*_2)] sm:gap-8 min-[1440px]:pb-[var(--pill-gap)]"
           >
-            <div data-hero-in className="min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)]">
+            <div data-hero-in className="shrink-0 min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)]">
               <p className="eyebrow text-cream/85">{t.hero.hoursLabel}</p>
-              <p className="mt-1.5 font-display text-[clamp(1.375rem,3vw,2.25rem)] leading-none font-extrabold tracking-[-0.03em] tabular-nums min-[1440px]:text-[clamp(1.25rem,1.6vw,2.5rem)]">
+              <p className="mt-1.5 font-display text-[clamp(1rem,4.6vw,1.375rem)] leading-none sm:text-[clamp(1.375rem,3vw,2.25rem)] font-extrabold tracking-[-0.03em] tabular-nums min-[1440px]:text-[clamp(1.25rem,1.6vw,2.5rem)]">
                 {t.hero.hours}
               </p>
             </div>
-            <h1 className="title max-w-[12ch] self-end text-right text-[clamp(2rem,4vw,2.75rem)] min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)] min-[1440px]:text-[clamp(1.375rem,2vw,3rem)]">
+            <h1 className="title max-w-[12ch] min-w-0 text-right text-[clamp(1.25rem,6vw,2rem)] sm:text-[clamp(2rem,4vw,2.75rem)] min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)] min-[1440px]:text-[clamp(1.375rem,2vw,3rem)]">
               <span className="sr-only">KOKOY Pool Club. </span>
               {/* The space sits between the clipping wrappers: inside an inline-block it collapses. */}
               {titleWords.map((w, i) => (
                 <Fragment key={i}>
-                  <span className="-mb-[0.1em] inline-block overflow-hidden pb-[0.1em] align-bottom">
+                  <span className="-mt-[0.16em] -mb-[0.1em] inline-block overflow-hidden pt-[0.16em] pb-[0.1em] align-bottom">
                     <span data-hero-line className={w.accent ? "inline-block font-black" : "inline-block"}>
                       {w.text}
                     </span>
