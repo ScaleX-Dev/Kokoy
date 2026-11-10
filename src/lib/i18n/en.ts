@@ -53,8 +53,7 @@ const en = {
     sub: "Pool, all-day brunch, signature drinks and music. One sunny spot, and a reason to stay a little longer.",
     badge: "SUNSET CLUB · UNAWATUNA · SRI LANKA · ",
     scroll: "Scroll",
-    // TODO(confirm): matches the earliest opening and the bar's close under visit.hours.
-    hours: "9:00 – late",
+    hours: "8:00 – 21:00",
     strip: ["Pool", "All-day brunch", "Signature drinks", "Sunset Sessions every Friday", "Unawatuna, Sri Lanka"],
   },
   ticker: ["Pool", "Brunch", "Signature drinks", "Music", "Sunsets", "Good company"],
@@ -156,12 +155,7 @@ const en = {
     // TODO(confirm): street address.
     address: ["Unawatuna", "Galle District, Sri Lanka"],
     hoursLabel: "Open daily",
-    // TODO(confirm): opening hours.
-    hours: [
-      ["Pool", "9:00 – 19:00"],
-      ["Kitchen", "9:00 – 22:00"],
-      ["Bar", "11:00 – late"],
-    ],
+    hours: [["Mon – Sun", "8:00 – 21:00"]],
     contactLabel: "Say hello",
     mapHelp: { desktop: "Use {key} + scroll to zoom the map", mobile: "Use two fingers to move the map" },
     faqTitle: "Good to know",
