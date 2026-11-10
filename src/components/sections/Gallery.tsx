@@ -2,16 +2,20 @@
 
 import Image from "next/image";
 import clsx from "clsx";
-import { Fragment, useRef } from "react";
+import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { GALLERY_ROWS, IMG, SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 import Marquee from "../ui/Marquee";
 import { LinkButton } from "../ui/Buttons";
-import { Burst } from "../ui/Icons";
 
-// A tight full-bleed wall: 3 × 3 on phones, 5 × 2 from tablets up.
-const TILES = GALLERY_ROWS.flat().slice(0, 10);
+// Playful geometric frames: rounded rectangle, circle, arch, pill.
+const SHAPES = [
+  "aspect-[4/5] w-[56vw] rounded-[32px] sm:w-[34vw] md:w-[22vw]",
+  "aspect-square w-[46vw] rounded-full sm:w-[28vw] md:w-[17vw]",
+  "aspect-[3/4] w-[50vw] rounded-t-full rounded-b-[32px] sm:w-[30vw] md:w-[19vw]",
+  "aspect-[5/4] w-[64vw] rounded-full sm:w-[40vw] md:w-[26vw]",
+];
 
 export default function Gallery() {
   const { t } = useUI();
@@ -29,74 +33,42 @@ export default function Gallery() {
           ease: "expo.out",
           scrollTrigger: { trigger: root.current, start: "top 70%" },
         });
-        gsap.from("[data-gal-tile]", {
-          scale: 0.9,
-          opacity: 0,
-          duration: 1,
-          stagger: { each: 0.05, from: "random" },
-          ease: "expo.out",
-          scrollTrigger: { trigger: "[data-gal-grid]", start: "top 85%" },
-        });
       });
     },
     { scope: root },
   );
 
   return (
-    <section ref={root} id="gallery" className="relative overflow-hidden bg-cream pt-24 md:pt-32">
-      <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-        <div className="max-w-4xl">
-          <p data-gal-in className="eyebrow flex items-center gap-2 text-charcoal/70">
-            <span className="size-2.5 rounded-full bg-pink" aria-hidden="true" />
-            {t.gallery.label}
-          </p>
-          <h2 data-gal-in className="display mt-5 text-[clamp(2.4rem,6vw,6rem)] font-extrabold">
-            {t.gallery.title}
-          </h2>
-          <p data-gal-in className="mt-5 max-w-[40ch] text-lg text-charcoal/75">
-            {t.gallery.body}
-          </p>
-        </div>
-        <div data-gal-in className="shrink-0">
+    <section ref={root} id="gallery" className="relative overflow-hidden bg-cream py-24 md:py-36">
+      <div className="pad mx-auto max-w-4xl text-center">
+        <p data-gal-in className="eyebrow inline-flex items-center gap-2 text-charcoal/70">
+          <span className="size-2.5 rounded-full bg-pink" aria-hidden="true" />
+          {t.gallery.label}
+        </p>
+        <h2 data-gal-in className="display mt-5 text-[clamp(2.4rem,6.4vw,6.5rem)] font-extrabold">
+          {t.gallery.title}
+        </h2>
+        <p data-gal-in className="mx-auto mt-5 max-w-[40ch] text-lg text-charcoal/75">
+          {t.gallery.body}
+        </p>
+        <div data-gal-in className="mt-7">
           <LinkButton href={SITE.instagram.url} external tone="charcoal">
             {t.gallery.cta} {SITE.instagram.handle}
           </LinkButton>
         </div>
       </div>
 
-      <ul data-gal-grid className="mt-14 grid grid-cols-3 gap-1 md:mt-20 md:grid-cols-5">
-        {TILES.map((g, i) => (
-          <li key={g.src} data-gal-tile className={clsx("group relative aspect-square overflow-hidden bg-sand", i === 9 && "hidden md:block")}>
-            <Image
-              src={IMG[g.src]}
-              alt={t.alt[g.src]}
-              fill
-              sizes="(min-width: 768px) 20vw, 33vw"
-              className="object-cover transition-transform duration-[1.4s] ease-soft group-hover:scale-105"
-            />
-          </li>
+      <div className="mt-16 flex flex-col gap-4 md:mt-24 md:gap-6">
+        {GALLERY_ROWS.map((row, r) => (
+          <Marquee key={r} duration={r ? 55 : 45} reverse={r === 1}>
+            {row.map((g) => (
+              <figure key={g.src} className={clsx("relative mx-2 shrink-0 overflow-hidden md:mx-3", SHAPES[g.shape])}>
+                <Image src={IMG[g.src]} alt={t.alt[g.src]} fill sizes="(min-width: 768px) 26vw, 64vw" className="object-cover" />
+              </figure>
+            ))}
+          </Marquee>
         ))}
-      </ul>
-
-      {/* The sign-off strip: one running link to Instagram. */}
-      <a
-        href={SITE.instagram.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${t.gallery.cta} ${SITE.instagram.handle}`}
-        className="block bg-coral py-3 text-charcoal transition-colors duration-300 hover:bg-orange md:py-4"
-      >
-        <Marquee duration={30}>
-          {[0, 1, 2, 3].map((k) => (
-            <Fragment key={k}>
-              <span className="px-6 font-display text-[clamp(1.1rem,2.2vw,1.75rem)] font-extrabold tracking-[-0.02em] whitespace-nowrap uppercase md:px-8">
-                {t.gallery.cta} {SITE.instagram.handle}
-              </span>
-              <Burst className="size-5 shrink-0 md:size-6" />
-            </Fragment>
-          ))}
-        </Marquee>
-      </a>
+      </div>
     </section>
   );
 }
