@@ -87,8 +87,10 @@ export default function Brunch() {
       down = false;
       // Glide to the nearest card, then hand control back to scroll-snap.
       const cards = Array.from(el.querySelectorAll<HTMLElement>("[data-dish]"));
-      const target = cards.reduce((best, c) => (Math.abs(c.offsetLeft - el.scrollLeft) < Math.abs(best.offsetLeft - el.scrollLeft) ? c : best), cards[0]);
-      if (target) el.scrollTo({ left: target.offsetLeft - parseFloat(getComputedStyle(target).scrollMarginLeft || "0"), behavior: "smooth" });
+      const margin = cards[0] ? parseFloat(getComputedStyle(cards[0]).scrollMarginLeft) || 0 : 0;
+      const snapOf = (c: HTMLElement) => Math.min(c.offsetLeft - margin, el.scrollWidth - el.clientWidth);
+      const target = cards.reduce((best, c) => (Math.abs(snapOf(c) - el.scrollLeft) < Math.abs(snapOf(best) - el.scrollLeft) ? c : best), cards[0]);
+      if (target) el.scrollTo({ left: snapOf(target), behavior: "smooth" });
       settle = window.setTimeout(() => {
         el.style.scrollSnapType = "";
       }, 600);
@@ -154,15 +156,16 @@ export default function Brunch() {
 
         <ul
           ref={rail}
-          className="pad flex cursor-grab snap-x snap-mandatory overscroll-x-contain gap-6 overflow-x-auto pb-6 select-none active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          data-lenis-prevent
+          className="pad relative flex cursor-grab snap-x snap-mandatory overscroll-x-contain gap-6 overflow-x-auto pb-6 select-none active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          // Only sideways gestures belong to the rail; vertical wheel still scrolls the page smoothly.
+          data-lenis-prevent-horizontal
           aria-label={t.brunch.label}
         >
           {t.brunch.items.map((d, i) => (
             <li
               key={d.name}
               data-dish
-              className="w-[78vw] shrink-0 snap-start scroll-ml-4 sm:w-[46vw] md:scroll-ml-8 lg:w-[30vw] xl:w-[25vw]"
+              className="w-[78vw] shrink-0 snap-start scroll-ml-[var(--pad)] sm:w-[46vw] lg:w-[30vw] xl:w-[25vw]"
             >
               <div className="relative aspect-[4/5] transform-gpu overflow-hidden rounded-[32px] bg-sand">
                 <Image
