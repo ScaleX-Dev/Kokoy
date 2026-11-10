@@ -3,6 +3,8 @@ import MobileMenu from "@/components/MobileMenu";
 import WhatsAppFab from "@/components/WhatsAppFab";
 import Hero from "@/components/sections/Hero";
 import Ticker from "@/components/sections/Ticker";
+import Menu from "@/components/sections/Menu";
+import Vibe from "@/components/sections/Vibe";
 import Intro from "@/components/sections/Intro";
 import Day from "@/components/sections/Day";
 import Pool from "@/components/sections/Pool";
@@ -26,6 +28,8 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Ticker />
+        <Menu />
+        <Vibe />
         <Intro />
         {SHOW_DAY && <Day />}
         <Pool />

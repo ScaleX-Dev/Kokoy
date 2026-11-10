@@ -58,6 +58,20 @@ const en = {
     strip: ["Pool", "All-day brunch", "Signature drinks", "Sunset Sessions every Friday", "Unawatuna, Sri Lanka"],
   },
   ticker: ["Pool", "Brunch", "Signature drinks", "Music", "Sunsets", "Good company"],
+  eats: {
+    label: "Food & drinks",
+    title: "Eat well, *stay long.*",
+    body: "Island flavours and all-day favourites, from the first coffee to the last cocktail.",
+    food: "Food",
+    drinks: "Drinks",
+    cta: "Get the full menu",
+  },
+  vibe: {
+    label: "The vibe",
+    lead: "Island pool",
+    accent: "vibes.",
+    body: "Good music, warm water and nowhere else to be. Pick a lounger in the sun or a table in the shade, and let the afternoon do its thing.",
+  },
   intro: {
     label: "Hello, we're KOKOY",
     statement:
