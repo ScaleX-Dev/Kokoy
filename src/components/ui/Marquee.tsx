@@ -34,7 +34,14 @@ export default function Marquee({
         );
         // Start far from zero so scrolling up can run it backwards indefinitely.
         tween.totalTime(duration * 1000);
+
+        // Speed is eased through one reusable setter, so scrolling creates no new tweens
+        // (it used to spawn two per scroll event, per strip, which added up on phones).
         let dir = 1;
+        const speed = { v: 1 };
+        const setSpeed = gsap.quickTo(speed, "v", { duration: 0.4, ease: "power2.out", onUpdate: () => void tween.timeScale(speed.v) });
+        const settle = gsap.delayedCall(0.25, () => setSpeed(dir)).pause();
+
         const st = ScrollTrigger.create({
           trigger: root.current,
           start: "top bottom",
@@ -43,12 +50,16 @@ export default function Marquee({
           onUpdate: (self) => {
             const v = self.getVelocity();
             if (Math.abs(v) > 40) dir = v > 0 ? 1 : -1;
-            const boost = 1 + Math.min(Math.abs(v) / 400, 5);
-            gsap.to(tween, { timeScale: dir * boost, duration: 0.2, overwrite: true });
-            gsap.to(tween, { timeScale: dir, duration: 1, delay: 0.25, ease: "power2.out" });
+            setSpeed(dir * (1 + Math.min(Math.abs(v) / 400, 5)));
+            settle.restart(true);
           },
         });
-        return () => st.kill();
+        // Strips that start off screen stay still until they scroll into view.
+        if (!st.isActive) tween.pause();
+        return () => {
+          st.kill();
+          settle.kill();
+        };
       });
     },
     { scope: root },

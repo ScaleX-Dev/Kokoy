@@ -27,9 +27,14 @@ export default function Providers({ t, lang, children }: { t: Dict; lang: Locale
   const lenisRef = useRef<Lenis | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Lenis drives the scroll; GSAP's ticker drives Lenis so ScrollTrigger stays in lockstep.
+  // Lenis smooths the mouse wheel; GSAP's ticker drives it so ScrollTrigger stays in lockstep.
+  // Touch screens keep native scrolling: their momentum is already smooth, and Lenis would
+  // only add work (it toggles classes on <html> on every scroll, restyling the whole page).
   useEffect(() => {
+    // Phones resize the viewport as the URL bar slides; never re-measure every trigger for that.
+    ScrollTrigger.config({ ignoreMobileResize: true });
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     const lenis = new Lenis({ duration: 1.1, easing: (x) => 1 - Math.pow(1 - x, 4) });
     lenisRef.current = lenis;
     lenis.on("scroll", ScrollTrigger.update);
@@ -107,10 +112,12 @@ export default function Providers({ t, lang, children }: { t: Dict; lang: Locale
     if (lenis) {
       lenis.start();
       lenis.scrollTo(target, { duration: 1.6, offset });
-    } else if (typeof target === "number") {
-      window.scrollTo({ top: target });
     } else {
-      document.querySelector(target)?.scrollIntoView();
+      // Native path (touch screens, reduced motion): same offset, browser-smooth unless reduced.
+      const el = typeof target === "string" ? document.querySelector(target) : null;
+      const top = el ? el.getBoundingClientRect().top + window.scrollY + offset : (target as number);
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
     }
   }, []);
 

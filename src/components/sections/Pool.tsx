@@ -32,7 +32,13 @@ export default function Pool() {
                 ? { trigger: "[data-pool-stage]", start: "top top", end: "+=150%", scrub: 1, pin: true }
                 : { trigger: "[data-pool-stage]", start: "top 80%", end: "bottom bottom", scrub: 1 },
             })
-            .fromTo("[data-pool-mask]", { clipPath: `circle(${r0}% at 50% 64%)` }, { clipPath: "circle(80% at 50% 50%)", duration: 1 })
+            // Desktop opens a circle onto the water. Phones get a scale-and-fade instead: an animated
+            // clip-path repaints the whole screen every frame, transforms and opacity do not.
+            .fromTo(
+              "[data-pool-mask]",
+              desktop ? { clipPath: `circle(${r0}% at 50% 64%)` } : { scale: 0.86, opacity: 0.35 },
+              desktop ? { clipPath: "circle(80% at 50% 50%)", duration: 1 } : { scale: 1, opacity: 1, duration: 1 },
+            )
             .fromTo("[data-pool-img]", { scale: 1.4 }, { scale: 1, duration: 1 }, 0)
             .to("[data-pool-top]", { yPercent: -120, opacity: 0, duration: 0.5 }, 0)
             .to("[data-pool-bot]", { yPercent: 120, opacity: 0, duration: 0.5 }, 0)

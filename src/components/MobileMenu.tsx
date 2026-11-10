@@ -32,7 +32,7 @@ export default function MobileMenu() {
           role="dialog"
           aria-modal="true"
           aria-label={t.menu}
-          className="fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-coral text-charcoal"
+          className="fixed inset-0 z-[70] flex flex-col overflow-y-auto overscroll-contain bg-coral text-charcoal"
           initial={{ clipPath: "circle(0% at 100% 0%)" }}
           animate={{ clipPath: "circle(150% at 100% 0%)" }}
           exit={{ clipPath: "circle(0% at 100% 0%)" }}
