@@ -42,11 +42,7 @@ export default function Gallery() {
   return (
     <section ref={root} id="gallery" className="section-y relative overflow-hidden bg-cream">
       <div className="pad mx-auto max-w-4xl text-center">
-        <p data-gal-in className="eyebrow inline-flex items-center gap-2 text-charcoal/70">
-          <span className="size-2.5 rounded-full bg-pink" aria-hidden="true" />
-          {t.gallery.label}
-        </p>
-        <h2 data-gal-in className="title mt-5">
+        <h2 data-gal-in className="title">
           <Rich text={t.gallery.title} className="font-black" />
         </h2>
         <p data-gal-in className="mx-auto mt-5 max-w-[40ch] text-lg text-charcoal/75">

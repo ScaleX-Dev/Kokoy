@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useUI } from "../Providers";
-import { LinkButton, WhatsAppButton, useAnchor } from "../ui/Buttons";
 
 type Token = { kind: "word"; text: string } | { kind: "hl"; words: string[] };
 
@@ -28,7 +27,6 @@ function tokenize(src: string): Token[] {
 
 export default function Intro() {
   const { t } = useUI();
-  const anchor = useAnchor();
   const root = useRef<HTMLElement>(null);
   const tokens = tokenize(t.intro.statement);
 
@@ -67,14 +65,10 @@ export default function Intro() {
         className="sun pointer-events-none absolute -right-[22vw] bottom-[-18vw] size-[52vw] rounded-full opacity-90 md:-right-[12vw] md:bottom-[-14vw] md:size-[34vw]"
       />
 
-      <p className="eyebrow relative flex items-center gap-2 text-charcoal/70">
-        <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
-        {t.intro.label}
-      </p>
 
       <h2
         data-statement
-        className="relative mt-8 max-w-[22ch] hyphens-manual font-display text-[clamp(1.85rem,4.9vw,5rem)] leading-[1.12] font-semibold tracking-[-0.03em] md:mt-10"
+        className="relative max-w-[22ch] hyphens-manual font-display text-[clamp(1.85rem,4.9vw,5rem)] leading-[1.12] font-semibold tracking-[-0.03em]"
       >
         {tokens.map((tok, i) =>
           tok.kind === "hl" ? (
@@ -104,15 +98,6 @@ export default function Intro() {
           <p data-intro-in className="max-w-[48ch] text-lg leading-relaxed text-charcoal/75 md:text-xl">
             {t.intro.body}
           </p>
-          {/* Every section ends with a next step; here, talk to us or see how to get here. */}
-          <div data-intro-in className="mt-7 flex flex-wrap gap-3">
-            <WhatsAppButton message={t.wa.general} tone="charcoal">
-              {t.cta.whatsapp}
-            </WhatsAppButton>
-            <LinkButton href="#visit" onClick={anchor("visit")} tone="outline-charcoal">
-              {t.cta.plan}
-            </LinkButton>
-          </div>
         </div>
       </div>
     </section>

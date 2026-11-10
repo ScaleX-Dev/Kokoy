@@ -82,11 +82,7 @@ export default function Drinks() {
       <div className="pad grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-6">
         <div className="contents lg:block lg:col-span-6">
           <div className="order-1">
-            <p data-drinks-in className="eyebrow flex items-center gap-2">
-              <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
-              {t.drinks.label}
-            </p>
-            <h2 data-drinks-in className="title mt-5 max-w-[14ch] text-[clamp(2.25rem,4.8vw,4.75rem)]">
+            <h2 data-drinks-in className="title max-w-[14ch] text-[clamp(2.25rem,4.8vw,4.75rem)]">
               <Rich text={t.drinks.title} className="font-black" />
             </h2>
           </div>

@@ -8,21 +8,7 @@ import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import { WhatsAppButton } from "../ui/Buttons";
 
-function SoundBars({ label }: { label: string }) {
-  return (
-    <span className="inline-flex h-4 items-end gap-[3px]" role="img" aria-label={label}>
-      {[0.9, 0.5, 1.1, 0.7].map((d, i) => (
-        <span
-          key={i}
-          className="h-full w-[3px] origin-bottom rounded-full bg-coral"
-          style={{ animation: `kk-eq ${d}s ease-in-out ${i * 0.12}s infinite` }}
-        />
-      ))}
-    </span>
-  );
-}
-
-/** The weekly line-up as a row of cards: picture, day, name, detail and one clear action. */
+/** The weekly line-up as a row of cards; one "What's on this week?" action covers them all. */
 export default function Events() {
   const { t } = useUI();
   const root = useRef<HTMLElement>(null);
@@ -58,11 +44,7 @@ export default function Events() {
       {/* Heading on the left, the general action on the right. */}
       <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-4xl">
-          <p data-ev-in className="eyebrow flex items-center gap-3 text-cream/80">
-            <SoundBars label={t.a11y.sound} />
-            {t.events.label}
-          </p>
-          <h2 data-ev-in className="title mt-5">
+          <h2 data-ev-in className="title">
             <Rich text={t.events.title} className="font-black text-coral" />
           </h2>
           <p data-ev-in className="mt-5 max-w-[52ch] text-lg leading-relaxed text-cream/75">
@@ -95,9 +77,6 @@ export default function Events() {
             <h3 className="mt-6 font-display text-[clamp(1.4rem,1.9vw,1.9rem)] leading-tight font-bold tracking-[-0.03em]">{r.name}</h3>
             <p className="mt-2 flex-1 text-cream/75">{r.detail}</p>
             <p className="eyebrow mt-4 text-coral">{r.tag}</p>
-            <WhatsAppButton message={t.wa.events} className="mt-5 w-full">
-              {t.cta.whatsapp}
-            </WhatsAppButton>
           </li>
         ))}
       </ul>

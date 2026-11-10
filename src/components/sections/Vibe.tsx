@@ -6,7 +6,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { IMG } from "@/lib/content";
 import { useUI } from "../Providers";
 import SpinBadge from "../ui/SpinBadge";
-import { LinkButton, WhatsAppButton, useAnchor } from "../ui/Buttons";
+import { LinkButton, useAnchor } from "../ui/Buttons";
 import { Burst } from "../ui/Icons";
 
 /**
@@ -64,12 +64,8 @@ export default function Vibe() {
             </div>
           </div>
 
-          <p className="eyebrow flex items-center gap-2 text-cream/85">
-            <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
-            {t.vibe.label}
-          </p>
           {/* Light, then black in coral: the same title tactic as every section. */}
-          <h2 className="title mt-5 text-[clamp(3rem,8.4vw,8.75rem)] md:-mr-[10vw]">
+          <h2 className="title text-[clamp(3rem,8.4vw,8.75rem)] md:-mr-[10vw]">
             <span className="block overflow-hidden pb-[0.04em]">
               <span data-vibe-line className="block">
                 {t.vibe.lead}
@@ -85,7 +81,6 @@ export default function Vibe() {
           <div data-vibe-cap>
             <p className="mt-7 max-w-[46ch] text-lg leading-relaxed text-cream/90">{t.vibe.body}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <WhatsAppButton message={t.wa.pool}>{t.pool.cta}</WhatsAppButton>
               <LinkButton href="#pool" onClick={anchor("pool")} tone="outline-cream">
                 {t.pool.label}
               </LinkButton>

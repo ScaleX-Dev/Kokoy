@@ -32,7 +32,13 @@ export default function Pool() {
                 ? { trigger: "[data-pool-stage]", start: "top top", end: "+=150%", scrub: 1, pin: true }
                 : { trigger: "[data-pool-stage]", start: "top 80%", end: "bottom bottom", scrub: 1 },
             })
-            .fromTo("[data-pool-mask]", { clipPath: `circle(${r0}% at 50% 64%)` }, { clipPath: "circle(80% at 50% 50%)", duration: 1 })
+            // Desktop opens a circle onto the water. Phones get a scale-and-fade instead: an animated
+            // clip-path repaints the whole screen every frame, transforms and opacity do not.
+            .fromTo(
+              "[data-pool-mask]",
+              desktop ? { clipPath: `circle(${r0}% at 50% 64%)` } : { scale: 0.86, opacity: 0.35 },
+              desktop ? { clipPath: "circle(80% at 50% 50%)", duration: 1 } : { scale: 1, opacity: 1, duration: 1 },
+            )
             .fromTo("[data-pool-img]", { scale: 1.4 }, { scale: 1, duration: 1 }, 0)
             .to("[data-pool-top]", { yPercent: -120, opacity: 0, duration: 0.5 }, 0)
             .to("[data-pool-bot]", { yPercent: 120, opacity: 0, duration: 0.5 }, 0)
@@ -79,11 +85,7 @@ export default function Pool() {
 
         <div data-pool-cap className="pad absolute inset-x-0 bottom-0 grid gap-6 pb-10 text-cream md:grid-cols-12 md:items-end md:pb-14">
           <div className="md:col-span-7">
-            <p className="eyebrow flex items-center gap-2 text-cream/90">
-              <span className="size-2.5 rounded-full bg-coral" aria-hidden="true" />
-              {t.pool.label}
-            </p>
-            <h2 className="title mt-4 text-[clamp(2.25rem,5.2vw,5.25rem)]">
+            <h2 className="title text-[clamp(2.25rem,5.2vw,5.25rem)]">
               <Rich text={t.pool.title} className="font-black" />
             </h2>
           </div>

@@ -106,7 +106,9 @@ export default function Hero() {
         </div>
 
         {/* Sunset grade: warms any footage and keeps the type readable. */}
-        <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_85%_0%,rgb(255_157_56/0.5),transparent_60%)] mix-blend-soft-light" />
+        {/* A plain translucent glow, not a blend mode: blending recomposites the whole screen
+            against the moving photo on every scroll frame, which phones feel. */}
+        <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_85%_0%,rgb(255_157_56/0.22),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(70%_45%_at_50%_50%,rgb(37_35_43/0.38),transparent_75%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(37_35_43/0.35)_0%,rgb(37_35_43/0)_25%,rgb(37_35_43/0)_55%,rgb(37_35_43/0.85)_100%)]" />
 
