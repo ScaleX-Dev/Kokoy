@@ -13,6 +13,11 @@ import Gallery from "@/components/sections/Gallery";
 import Visit from "@/components/sections/Visit";
 import Footer from "@/components/sections/Footer";
 
+// "Make a day of it" (one day, four moods) is hidden for now, not removed.
+// It is left out of the render rather than hidden with CSS: its pinned scroll would
+// otherwise still reserve several screens of empty scrolling. Set to true to bring it back.
+const SHOW_DAY = false;
+
 // Homepage flow from the brand foundation, §07.
 export default function Home() {
   return (
@@ -22,7 +27,7 @@ export default function Home() {
         <Hero />
         <Ticker />
         <Intro />
-        <Day />
+        {SHOW_DAY && <Day />}
         <Pool />
         <Brunch />
         <Drinks />
