@@ -29,7 +29,7 @@ export default function Header() {
 
       <nav
         aria-label={t.menu}
-        className="pointer-events-auto sticky top-3 mx-[var(--pad)] flex h-[var(--pill-h)] items-center justify-between gap-3 rounded-full bg-cream pr-1.5 pl-5 text-charcoal shadow-[0_14px_40px_-14px_rgb(37_35_43/0.5)] ring-1 ring-charcoal/5 motion-safe:animate-[kk-rise_1s_var(--ease-soft)_1.1s_both] md:top-4 md:pr-2 md:pl-6 xl:mx-auto xl:w-[var(--pill-w)]"
+        className="pointer-events-auto sticky top-3 mx-[var(--pad)] flex h-[var(--pill-h)] items-stretch justify-between gap-4 overflow-hidden rounded-full bg-cream pl-5 text-charcoal shadow-[0_12px_32px_-14px_rgb(37_35_43/0.45)] ring-1 ring-charcoal/5 motion-safe:animate-[kk-rise_1s_var(--ease-soft)_1.1s_both] md:top-4 lg:mx-auto lg:w-fit lg:max-w-[var(--pill-w)] lg:gap-6"
       >
         <a
           href="#top"
@@ -38,18 +38,18 @@ export default function Header() {
             scrollTo(0);
           }}
           aria-label={t.a11y.home}
-          className="shrink-0 text-[20px] md:text-[22px]"
+          className="flex shrink-0 items-center text-[17px] md:text-[18px]"
         >
           <Wordmark sub={false} />
         </a>
 
-        <ul className="hidden items-center lg:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex">
           {t.nav.map((l) => (
             <li key={l.id}>
               <a
                 href={`#${l.id}`}
                 onClick={anchor(l.id)}
-                className="inline-flex min-h-11 items-center rounded-full px-3 whitespace-nowrap text-[13px] font-bold tracking-[0.1em] uppercase transition-colors duration-300 hover:bg-charcoal/[0.07] xl:px-2.5 xl:tracking-[0.06em]"
+                className="inline-flex min-h-9 items-center rounded-full px-2.5 text-[12px] font-semibold tracking-[0.04em] whitespace-nowrap uppercase transition-colors duration-300 hover:bg-charcoal/[0.07]"
               >
                 {l.label}
               </a>
@@ -57,14 +57,14 @@ export default function Header() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-stretch">
           <a
             href={waLink(t.wa.general)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-[calc(var(--pill-h)_-_12px)] shrink-0 items-center whitespace-nowrap gap-2 rounded-full bg-coral px-4 text-[13px] font-bold tracking-[0.1em] text-charcoal uppercase transition-colors duration-300 hover:bg-orange md:h-[calc(var(--pill-h)_-_16px)] md:px-5 xl:tracking-[0.06em]"
+            className="order-2 inline-flex shrink-0 items-center gap-2 bg-coral px-4 text-[12px] font-semibold tracking-[0.04em] whitespace-nowrap text-charcoal uppercase transition-colors duration-300 hover:bg-orange md:px-6"
           >
-            <WhatsAppIcon className="size-[18px] shrink-0" />
+            <WhatsAppIcon className="size-4 shrink-0" />
             <span className="hidden sm:inline">{t.cta.chat}</span>
             <span className="sr-only">
               <span className="sm:hidden">{t.cta.chat} </span>({t.a11y.newTab})
@@ -74,7 +74,7 @@ export default function Header() {
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label={t.a11y.openMenu}
-            className="grid size-11 place-items-center rounded-full bg-charcoal/[0.07] lg:hidden"
+            className="order-1 mr-1.5 grid size-10 place-items-center self-center rounded-full bg-charcoal/[0.07] lg:hidden"
           >
             <span className="flex w-5 flex-col gap-[5px]" aria-hidden="true">
               <span className="h-[2px] w-full rounded bg-current" />

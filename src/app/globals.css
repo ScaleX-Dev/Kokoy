@@ -106,16 +106,16 @@
 :root {
   --pad: 16px;
   --hero-min: 640px;
-  --pill-h: 56px;
+  --pill-h: 48px;
   --pill-gap: 16px;
-  --pill-w: 51rem; /* fits the Russian labels on one line */
+  --pill-w: 48rem; /* the most the pill may grow (Russian needs ~754px); it hugs its content */
   --sy: 56px;
 }
 @media (min-width: 48rem) {
   :root {
     --sy: 72px;
     --pad: 32px;
-    --pill-h: 64px;
+    --pill-h: 50px;
     --pill-gap: 24px;
   }
 }
