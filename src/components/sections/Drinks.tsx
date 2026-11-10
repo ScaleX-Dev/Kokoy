@@ -77,17 +77,21 @@ export default function Drinks() {
       className="section-y relative overflow-hidden text-charcoal transition-colors duration-700 ease-soft"
       style={{ backgroundColor: style.color }}
     >
-      <div className="pad grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-6">
-        <div className="lg:col-span-6">
-          <p data-drinks-in className="eyebrow flex items-center gap-2">
-            <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
-            {t.drinks.label}
-          </p>
-          <h2 data-drinks-in className="title mt-5 max-w-[14ch] text-[clamp(2.25rem,4.8vw,4.75rem)]">
-            <Rich text={t.drinks.title} className="font-black" />
-          </h2>
+      {/* Phones: the left column dissolves (display: contents) so the photo can sit between the
+          title and the drink buttons; tapping a drink then changes the picture in view. */}
+      <div className="pad grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-6">
+        <div className="contents lg:block lg:col-span-6">
+          <div className="order-1">
+            <p data-drinks-in className="eyebrow flex items-center gap-2">
+              <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
+              {t.drinks.label}
+            </p>
+            <h2 data-drinks-in className="title mt-5 max-w-[14ch] text-[clamp(2.25rem,4.8vw,4.75rem)]">
+              <Rich text={t.drinks.title} className="font-black" />
+            </h2>
+          </div>
 
-          <div data-drinks-in className="mt-10 flex flex-wrap gap-2" role="tablist" aria-label={t.drinks.label} onKeyDown={onKey}>
+          <div data-drinks-in className="order-3 flex flex-wrap gap-2 lg:mt-10" role="tablist" aria-label={t.drinks.label} onKeyDown={onKey}>
             {t.drinks.items.map((d, i) => (
               <button
                 key={d.name}
@@ -114,7 +118,7 @@ export default function Drinks() {
 
           {/* Every drink is laid out invisibly in the same cell, so the panel is always as tall as
               the longest one. Switching drinks never moves the page below it. */}
-          <div id="drink-panel" role="tabpanel" aria-labelledby={`drink-tab-${active}`} className="mt-10 grid">
+          <div id="drink-panel" role="tabpanel" aria-labelledby={`drink-tab-${active}`} className="order-4 grid lg:mt-10">
             {t.drinks.items.map((d, i) => (
               <div key={d.name} className="invisible [grid-area:1/1]" aria-hidden="true">
                 <DrinkCopy index={i} n={n} name={d.name} spec={d.spec} note={d.note} />
@@ -135,14 +139,14 @@ export default function Drinks() {
             </div>
           </div>
 
-          <div data-drinks-in className="mt-4">
+          <div data-drinks-in className="order-5 lg:mt-4">
             <WhatsAppButton message={t.wa.drinks} tone="charcoal">
               {t.drinks.cta}
             </WhatsAppButton>
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[560px] lg:col-span-5 lg:col-start-8">
+        <div className="relative order-2 mx-auto w-[78%] max-w-[560px] sm:w-[60%] lg:order-none lg:col-span-5 lg:col-start-8 lg:w-full">
           <div data-drink-orb className="relative aspect-square">
             {/* Rings that echo the sun motif. */}
             <div className="absolute -inset-[6%] rounded-full border-2 border-charcoal/15" aria-hidden="true" />

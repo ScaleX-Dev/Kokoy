@@ -27,6 +27,8 @@
     background: var(--color-charcoal);
     color: var(--color-charcoal);
     -webkit-text-size-adjust: 100%;
+    /* No grey flash on tap; every control has its own pressed/hover state. */
+    -webkit-tap-highlight-color: transparent;
     interpolate-size: allow-keywords;
   }
   body {

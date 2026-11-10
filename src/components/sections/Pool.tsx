@@ -96,9 +96,10 @@ export default function Pool() {
         </div>
       </div>
 
-      <ul data-features className="pad section-y grid gap-10 sm:grid-cols-3 sm:gap-6 lg:gap-10">
+      {/* Phones swipe through the three; wider screens see them side by side. */}
+      <ul data-features data-lenis-prevent-horizontal className="pad section-y flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] sm:grid sm:overflow-visible [&::-webkit-scrollbar]:hidden gap-4 sm:grid-cols-3 sm:gap-6 lg:gap-10">
         {t.pool.features.map((f, i) => (
-          <li key={f.title} data-feature className={clsx(i === 1 && "sm:mt-16", i === 2 && "sm:mt-32")}>
+          <li key={f.title} data-feature className={clsx("w-[78vw] shrink-0 snap-start scroll-ml-[var(--pad)] sm:w-auto", i === 1 && "sm:mt-16", i === 2 && "sm:mt-32")}>
             <div className={clsx("relative overflow-hidden", FEATURE_SHAPE[i], i === 2 ? "aspect-square" : "aspect-[4/5]")}>
               <Image src={IMG[FEATURE_IMG[i]]} alt={t.alt[FEATURE_IMG[i]]} fill sizes="(min-width: 640px) 30vw, 92vw" className="object-cover transition-transform duration-[1.4s] ease-soft hover:scale-105" />
             </div>

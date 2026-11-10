@@ -76,9 +76,10 @@ export default function Events() {
         </div>
       </div>
 
-      <ul ref={list} className="pad mt-10 grid gap-x-5 gap-y-12 sm:grid-cols-2 md:mt-14 lg:grid-cols-4">
+      {/* Phones swipe through the week; tablets and up see the grid. */}
+      <ul ref={list} data-lenis-prevent-horizontal className="pad mt-10 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] sm:grid sm:overflow-visible [&::-webkit-scrollbar]:hidden gap-4 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-12 md:mt-14 lg:grid-cols-4">
         {t.events.rows.map((r, i) => (
-          <li key={r.name} data-ev-card className="group flex flex-col">
+          <li key={r.name} data-ev-card className="group flex w-[80vw] shrink-0 snap-start scroll-ml-[var(--pad)] flex-col sm:w-auto">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-cream/5">
               <Image
                 src={IMG[EVENT_IMG[i]]}

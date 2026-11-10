@@ -114,6 +114,8 @@ export default function KokoyMap({ lang, gestureHelp }: { lang: Locale; gestureH
         map.touchZoomRotate.disableRotation();
         map.addControl(new NavigationControl({ showCompass: false }), "top-right");
         map.addControl(new AttributionControl({ compact: true }), "bottom-right");
+        // The compact credit opens itself on load and covers the map on phones; start it closed (ⓘ).
+        map.once("load", () => container.querySelector(".maplibregl-ctrl-attrib")?.classList.remove("maplibregl-compact-show"));
 
         // The pin: the brand sun, pulsing, with the name beside it.
         const pin = document.createElement("a");

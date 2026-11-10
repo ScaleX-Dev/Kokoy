@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
           <div>
             <p className="eyebrow text-cream/60">{t.visit.contactLabel}</p>
-            <a href={`mailto:${SITE.email}`} className="mt-3 block break-all hover:text-coral">
+            <a href={`mailto:${SITE.email}`} className="mt-1 inline-flex min-h-11 items-center break-all hover:text-coral">
               {SITE.email}
             </a>
           </div>

@@ -31,7 +31,7 @@ export default function LangSwitch({ className, tone = "light" }: { className?: 
             aria-label={NAMES[l]}
             onClick={() => !active && remember(l)}
             className={clsx(
-              "grid min-h-9 min-w-10 place-items-center rounded-full px-2.5 uppercase transition-colors duration-300",
+              "grid min-h-11 min-w-11 place-items-center rounded-full px-2.5 uppercase transition-colors duration-300",
               active ? (tone === "light" ? "bg-cream text-charcoal" : "bg-charcoal text-cream") : "hover:bg-current/10",
             )}
           >
