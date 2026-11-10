@@ -61,7 +61,7 @@ const en = {
   intro: {
     label: "Hello, we're KOKOY",
     statement:
-      "A pool club in Unawatuna for long sunny days, good food, cold drinks and *even better company.* {friends}",
+      "A pool club in Unawatuna for long sunny days, good food, cold drinks and *even better company.*",
     body: "KOKOY is where a quick swim turns into brunch, brunch turns into sunset, and sunset turns into one more song. Come as you are. Stay as long as you like.",
   },
   day: {
