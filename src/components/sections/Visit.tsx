@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { SITE, waLink } from "@/lib/content";
+import { SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 import { LinkButton, WhatsAppButton } from "../ui/Buttons";
 import { PinIcon } from "../ui/Icons";
@@ -93,69 +93,71 @@ export default function Visit() {
   );
 
   return (
-    <section ref={root} id="visit" className="relative bg-coral pt-24 pb-10 text-charcoal md:pt-36 md:pb-14">
-      <div className="pad grid gap-14 lg:grid-cols-12 lg:gap-8">
-        <div className="lg:col-span-6">
-          <p data-visit-in className="eyebrow flex items-center gap-2">
-            <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
-            {t.visit.label}
-          </p>
-          <h2 data-visit-in className="display mt-5 text-[clamp(2.6rem,7vw,7rem)] font-black">
-            {t.visit.title}
-          </h2>
-          <p data-visit-in className="mt-6 max-w-[44ch] text-lg leading-relaxed md:text-xl">
-            {t.visit.body}
-          </p>
-          <div data-visit-in className="mt-8 flex flex-wrap gap-3">
-            <WhatsAppButton message={t.wa.general} tone="charcoal">
-              {t.cta.whatsapp}
-            </WhatsAppButton>
-            <LinkButton href={SITE.maps} external tone="outline-charcoal">
-              {t.cta.directions}
-            </LinkButton>
+    <section ref={root} id="visit" className="relative bg-coral pt-24 pb-10 text-charcoal md:pt-32 md:pb-14">
+      <div className="pad max-w-5xl">
+        <p data-visit-in className="eyebrow flex items-center gap-2">
+          <span className="size-2.5 rounded-full bg-charcoal" aria-hidden="true" />
+          {t.visit.label}
+        </p>
+        <h2 data-visit-in className="display mt-5 text-[clamp(2.6rem,7vw,7rem)] font-black">
+          {t.visit.title}
+        </h2>
+        <p data-visit-in className="mt-6 max-w-[44ch] text-lg leading-relaxed md:text-xl">
+          {t.visit.body}
+        </p>
+      </div>
+
+      {/* The map as the big picture, with an info card laid over its edge. */}
+      <div className="pad mt-12 md:mt-16">
+        <div className="grid items-center lg:grid-cols-[minmax(0,26rem)_1fr]">
+          <div data-visit-in className="relative z-10 rounded-[32px] bg-cream p-6 shadow-[0_30px_60px_-30px_rgb(37_35_43/0.6)] sm:p-8 lg:-mr-12">
+            <dl className="divide-y-2 divide-charcoal/10">
+              <div className="pb-5">
+                <dt className="eyebrow text-charcoal/70">{t.visit.addressLabel}</dt>
+                <dd className="mt-2 text-lg leading-snug font-semibold">
+                  {t.visit.address.map((l) => (
+                    <span key={l} className="block">
+                      {l}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+              <div className="py-5">
+                <dt className="eyebrow text-charcoal/70">{t.visit.hoursLabel}</dt>
+                <dd className="mt-3 space-y-1.5">
+                  {t.visit.hours.map(([k, v]) => (
+                    <span key={k} className="flex justify-between gap-3 text-[15px]">
+                      <span>{k}</span>
+                      <span className="font-semibold tabular-nums">{v}</span>
+                    </span>
+                  ))}
+                </dd>
+              </div>
+              <div className="py-5">
+                <dt className="eyebrow text-charcoal/70">{t.visit.contactLabel}</dt>
+                <dd className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-[15px] font-semibold">
+                  <a href={`mailto:${SITE.email}`} className="break-all underline-offset-4 hover:underline">
+                    {SITE.email}
+                  </a>
+                  <a href={SITE.instagram.url} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+                    {SITE.instagram.handle}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+            <div className="mt-2 flex flex-col gap-3">
+              <WhatsAppButton message={t.wa.general} tone="charcoal" className="w-full">
+                {t.cta.whatsapp}
+              </WhatsAppButton>
+              <LinkButton href={SITE.maps} external tone="outline-charcoal" className="w-full">
+                {t.cta.directions}
+              </LinkButton>
+            </div>
           </div>
 
-          <dl className="mt-14 grid gap-8 border-t-2 border-charcoal/15 pt-8 sm:grid-cols-3 lg:gap-6">
-            <div data-visit-in>
-              <dt className="eyebrow opacity-75">{t.visit.addressLabel}</dt>
-              <dd className="mt-3 text-lg leading-snug font-semibold">
-                {t.visit.address.map((l) => (
-                  <span key={l} className="block">
-                    {l}
-                  </span>
-                ))}
-              </dd>
-            </div>
-            <div data-visit-in>
-              <dt className="eyebrow opacity-75">{t.visit.hoursLabel}</dt>
-              <dd className="mt-3 space-y-1">
-                {t.visit.hours.map(([k, v]) => (
-                  <span key={k} className="flex justify-between gap-3 text-[15px]">
-                    <span>{k}</span>
-                    <span className="font-semibold tabular-nums">{v}</span>
-                  </span>
-                ))}
-              </dd>
-            </div>
-            <div data-visit-in>
-              <dt className="eyebrow opacity-75">{t.visit.contactLabel}</dt>
-              <dd className="mt-3 space-y-1 text-[15px] font-semibold">
-                <a href={waLink(t.wa.general)} target="_blank" rel="noopener noreferrer" className="block underline-offset-4 hover:underline">
-                  WhatsApp
-                </a>
-                <a href={`mailto:${SITE.email}`} className="block break-all underline-offset-4 hover:underline">
-                  {SITE.email}
-                </a>
-                <a href={SITE.instagram.url} target="_blank" rel="noopener noreferrer" className="block underline-offset-4 hover:underline">
-                  {SITE.instagram.handle}
-                </a>
-              </dd>
-            </div>
-          </dl>
-        </div>
-
-        <div data-visit-map className="lg:col-span-6 lg:pt-10">
-          <BayMap />
+          <div data-visit-map className="-mt-8 lg:mt-0">
+            <BayMap />
+          </div>
         </div>
       </div>
 
