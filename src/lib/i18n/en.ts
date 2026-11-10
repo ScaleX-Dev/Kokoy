@@ -68,9 +68,12 @@ const en = {
   },
   vibe: {
     label: "The vibe",
-    lead: "Island pool",
-    accent: "vibes.",
-    body: "Good music, warm water and nowhere else to be. Pick a lounger in the sun or a table in the shade, and let the afternoon do its thing.",
+    // One line each; the last is set in the coral accent.
+    lines: ["Pool", "side", "paradise"],
+    body: [
+      "Picture this: a lazy afternoon on a lounge chair by the pool, your favourite martini in hand, and sunset grooves setting the mood.",
+      "Or simply treat yourself to a little poolside date.",
+    ],
   },
   intro: {
     label: "Hello, we're KOKOY",
