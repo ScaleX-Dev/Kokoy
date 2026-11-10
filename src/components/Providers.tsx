@@ -66,6 +66,33 @@ export default function Providers({ t, lang, children }: { t: Dict; lang: Locale
     };
   }, []);
 
+  // ScrollTrigger only re-measures on window resize. When content changes height on its own
+  // (an FAQ opening, late fonts), every trigger below it would fire at a stale position.
+  // Re-measure once the height has settled; pin spacers are ignored by comparing to the last
+  // height ScrollTrigger itself produced, so a refresh never triggers another one.
+  useEffect(() => {
+    const main = document.getElementById("main");
+    if (!main || typeof ResizeObserver === "undefined") return;
+    let last = main.offsetHeight;
+    let timer = 0;
+    const onRefresh = () => {
+      last = main.offsetHeight;
+    };
+    ScrollTrigger.addEventListener("refresh", onRefresh);
+    const ro = new ResizeObserver(() => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        if (Math.abs(main.offsetHeight - last) > 1) ScrollTrigger.refresh();
+      }, 200);
+    });
+    ro.observe(main);
+    return () => {
+      window.clearTimeout(timer);
+      ro.disconnect();
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
+    };
+  }, []);
+
   useEffect(() => {
     const lenis = lenisRef.current;
     if (menuOpen) lenis?.stop();
