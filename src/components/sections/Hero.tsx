@@ -148,7 +148,7 @@ export default function Hero() {
                 {t.hero.hours}
               </p>
             </div>
-            <h1 className="title max-w-[12ch] text-[clamp(2rem,4vw,2.75rem)] sm:text-right min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)] min-[1440px]:text-[clamp(1.375rem,2vw,3rem)]">
+            <h1 className="title max-w-[12ch] self-end text-right text-[clamp(2rem,4vw,2.75rem)] min-[1440px]:max-w-[calc(50%_-_var(--pill-w)_/_2_-_1.5rem)] min-[1440px]:text-[clamp(1.375rem,2vw,3rem)]">
               <span className="sr-only">KOKOY Pool Club. </span>
               {/* The space sits between the clipping wrappers: inside an inline-block it collapses. */}
               {titleWords.map((w, i) => (

@@ -49,7 +49,7 @@ const en = {
   },
   hero: {
     kicker: "Pool club · Unawatuna, Sri Lanka",
-    title: "Meet us *by the pool.*",
+    title: "Making Una *fun again*",
     sub: "Pool, all-day brunch, signature drinks and music. One sunny spot, and a reason to stay a little longer.",
     badge: "SUNSET CLUB · UNAWATUNA · SRI LANKA · ",
     scroll: "Scroll",
