@@ -99,13 +99,17 @@
   padding-inline: var(--pad);
 }
 
-/* The full-bleed KOKOY wordmark: "KOKOY" in Unbounded Black is ~4.3em wide,
-   so size it from the padded container width and it always fits edge to edge. */
+/* The full-bleed KOKOY wordmark: "KOKOY" in Unbounded Black measures ~4.5em wide.
+   It is sized from its full-width container (cqw), not 100vw, because 100vw includes
+   the scrollbar and would push the final "Y" past the edge on desktop. */
+@utility wordmark-stage {
+  container-type: inline-size;
+}
 @utility wordmark-fit {
   font-family: var(--font-display);
   font-weight: 900;
   letter-spacing: -0.04em;
-  font-size: calc((100vw - var(--pad) * 2) / 4.42);
+  font-size: calc((100cqw - var(--pad) * 2) / 4.56);
   line-height: 0.8;
 }
 

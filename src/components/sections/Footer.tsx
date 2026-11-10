@@ -80,7 +80,7 @@ export default function Footer() {
         </nav>
       </div>
 
-      <div data-foot-stage className="relative mt-20 overflow-hidden pt-[6vw] md:mt-28" aria-hidden="true">
+      <div data-foot-stage className="wordmark-stage relative mt-20 overflow-hidden pt-[6vw] md:mt-28" aria-hidden="true">
         <div
           data-foot-sun
           className="sun absolute top-0 left-1/2 aspect-square w-[58vw] -translate-x-1/2 rounded-full md:w-[40vw]"

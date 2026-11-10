@@ -40,7 +40,7 @@ export default function Hero() {
   const titleWords = t.hero.title.split(" ");
 
   return (
-    <section ref={root} id="top" className="relative h-[100svh] min-h-[640px] overflow-hidden bg-charcoal text-cream">
+    <section ref={root} id="top" className="wordmark-stage relative h-[100svh] min-h-[640px] overflow-hidden bg-charcoal text-cream">
       <div data-hero-media className="absolute inset-0 will-change-transform">
         <div data-hero-zoom className="absolute inset-0">
           {SITE.heroVideo ? (
@@ -65,11 +65,6 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(37_35_43/0.55)_0%,rgb(37_35_43/0)_22%,rgb(37_35_43/0.5)_52%,rgb(37_35_43/0.92)_100%)]" />
 
       <div data-await className="pad relative z-10 flex h-full flex-col justify-end pb-5 md:pb-6">
-        <div data-hero-badge className="absolute top-[19%] right-[var(--pad)] hidden md:block">
-          <SpinBadge text={t.hero.badge} className="sun w-[clamp(120px,11vw,170px)] text-charcoal">
-            <ArrowIcon dir="down" className="size-8" />
-          </SpinBadge>
-        </div>
         <div data-hero-copy className="grid items-end gap-8 pb-4 md:grid-cols-12 md:pb-6">
           <div className="md:col-span-7">
             <p data-hero-in className="eyebrow mb-5 flex items-center gap-2 text-cream/90">
@@ -88,7 +83,13 @@ export default function Hero() {
               ))}
             </h1>
           </div>
-          <div className="md:col-span-5 md:col-start-8 lg:col-span-4 lg:col-start-9">
+          <div className="relative md:col-span-5 md:col-start-8 lg:col-span-4 lg:col-start-9">
+            {/* Sits above the copy column so it can never cover the text; dropped on short screens. */}
+            <div data-hero-badge className="absolute right-0 bottom-full mb-8 hidden md:block [@media(max-height:860px)]:hidden">
+              <SpinBadge text={t.hero.badge} className="sun w-[clamp(120px,11vw,170px)] text-charcoal">
+                <ArrowIcon dir="down" className="size-8" />
+              </SpinBadge>
+            </div>
             <p data-hero-in className="max-w-[42ch] text-[17px] leading-relaxed text-cream [text-shadow:0_1px_18px_rgb(37_35_43/0.7)] md:text-lg">
               {t.hero.sub}
             </p>

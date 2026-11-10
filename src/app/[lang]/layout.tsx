@@ -20,6 +20,11 @@ const sans = Onest({
   display: "swap",
 });
 
+// Dev-only instant validation renders this layout with a placeholder `lang` that is not a
+// real locale, so notFound() below aborts it. Every real locale is prerendered by
+// generateStaticParams, so the route is already fully static.
+export const instant = false;
+
 export async function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));
 }
