@@ -34,13 +34,13 @@ const en = {
     directions: "Get directions",
     ask: "Ask us anything",
   },
+  mapApps: { google: "Google Maps", yandex: "Yandex Maps" },
   wa: {
     general: "Hi KOKOY! I'd like to plan a visit.",
     pool: "Hi KOKOY! I'd like to spend a day at the pool. What are the options?",
     brunch: "Hi KOKOY! Could you send me today's brunch menu?",
     drinks: "Hi KOKOY! Could you send me the drinks list?",
     events: "Hi KOKOY! What's on this week?",
-    private: "Hi KOKOY! I'm planning a private event. Date: … Group size: …",
     question: "Hi KOKOY! I have a question: ",
   },
   announcement: {
@@ -49,16 +49,33 @@ const en = {
   },
   hero: {
     kicker: "Pool club · Unawatuna, Sri Lanka",
-    title: "Meet us by the pool.",
+    title: "Meet us *by the pool.*",
     sub: "Pool, all-day brunch, signature drinks and music. One sunny spot, and a reason to stay a little longer.",
     badge: "SUNSET CLUB · UNAWATUNA · SRI LANKA · ",
     scroll: "Scroll",
+    // TODO(confirm): matches the earliest opening and the bar's close under visit.hours.
+    hours: "9:00 – late",
+    strip: ["Pool", "All-day brunch", "Signature drinks", "Sunset Sessions every Friday", "Unawatuna, Sri Lanka"],
   },
   ticker: ["Pool", "Brunch", "Signature drinks", "Music", "Sunsets", "Good company"],
+  eats: {
+    label: "Food & drinks",
+    title: "Eat well, *stay long.*",
+    body: "Island flavours and all-day favourites, from the first coffee to the last cocktail.",
+    food: "Food",
+    drinks: "Drinks",
+    cta: "Get the full menu",
+  },
+  vibe: {
+    label: "The vibe",
+    lead: "Island pool",
+    accent: "vibes.",
+    body: "Good music, warm water and nowhere else to be. Pick a lounger in the sun or a table in the shade, and let the afternoon do its thing.",
+  },
   intro: {
     label: "Hello, we're KOKOY",
     statement:
-      "A pool club in Unawatuna for long sunny days, good food, cold drinks and *even better company.* {friends}",
+      "A pool club in Unawatuna for long sunny days, good food, cold drinks and *even better company.*",
     body: "KOKOY is where a quick swim turns into brunch, brunch turns into sunset, and sunset turns into one more song. Come as you are. Stay as long as you like.",
   },
   day: {
@@ -75,7 +92,7 @@ const en = {
     label: "The pool",
     before: "Sun's out.",
     after: "Pool's open.",
-    title: "Your poolside escape starts here.",
+    title: "Your poolside escape *starts here.*",
     body: "Sunbeds, shade when you want it, and drinks that find you without you having to move. Stay for an hour or the whole afternoon.",
     features: [
       { title: "Loungers & day beds", body: "Pick your spot, in the sun or in the shade." },
@@ -86,7 +103,7 @@ const en = {
   },
   brunch: {
     label: "Food & brunch",
-    title: "Brunch that doesn't clock off.",
+    title: "Brunch that *doesn't clock off.*",
     body: "All-day brunch with island flavours, big plates for sharing and a few things you'll come back for.",
     badge: "ALL-DAY BRUNCH · ALL-DAY BRUNCH · ",
     note: "The menu changes with the season.",
@@ -102,7 +119,7 @@ const en = {
   },
   drinks: {
     label: "Signature drinks",
-    title: "Something cold, something colourful.",
+    title: "Something cold, *something colourful.*",
     cta: "Ask for the drinks list",
     badge: "SIGNATURE · DRINKS · KOKOY · ",
     items: [
@@ -124,20 +141,16 @@ const en = {
       { day: "1×", name: "Guest DJ Night", detail: "A special guest behind the decks", tag: "Monthly" },
     ],
     cta: "What's on this week?",
-    privateTitle: "Got something to celebrate?",
-    privateBody:
-      "Birthdays, team days, engagements, or just because. Tell us the date and how many of you there are, and we'll take it from there.",
-    privateCta: "Plan a private event",
   },
   gallery: {
     label: "Life at KOKOY",
-    title: "Good days, on repeat.",
+    title: "Good days, *on repeat.*",
     body: "Tag us in yours and we'll share our favourites.",
     cta: "Follow us",
   },
   visit: {
     label: "Location & contact",
-    title: "Plan your visit.",
+    title: "Plan *your visit.*",
     body: "We're in Unawatuna, on Sri Lanka's south coast. Message us on WhatsApp and we'll help you plan the day.",
     addressLabel: "Find us",
     // TODO(confirm): street address.
@@ -150,7 +163,7 @@ const en = {
       ["Bar", "11:00 – late"],
     ],
     contactLabel: "Say hello",
-    map: { bay: "Unawatuna Bay", ocean: "Indian Ocean", galle: "Galle Fort", jungle: "Jungle Beach", note: "Not to scale. Open Google Maps for the exact pin." },
+    mapHelp: { desktop: "Use {key} + scroll to zoom the map", mobile: "Use two fingers to move the map" },
     faqTitle: "Good to know",
     // TODO(confirm): every answer below with the KOKOY team.
     faq: [
@@ -177,7 +190,7 @@ const en = {
     ],
   },
   footer: {
-    title: "Make a day of it.",
+    title: "Make a day *of it.*",
     explore: "Explore",
     follow: "Follow",
     visit: "Visit",

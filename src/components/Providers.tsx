@@ -102,7 +102,8 @@ export default function Providers({ t, lang, children }: { t: Dict; lang: Locale
 
   const scrollTo = useCallback((target: string | number) => {
     const lenis = lenisRef.current;
-    const offset = typeof target === "string" ? -64 : 0;
+    // Clears the nav pill stuck at the top (gap + pill + breathing room).
+    const offset = typeof target === "string" ? -96 : 0;
     if (lenis) {
       lenis.start();
       lenis.scrollTo(target, { duration: 1.6, offset });

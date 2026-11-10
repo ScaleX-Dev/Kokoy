@@ -27,9 +27,13 @@
     background: var(--color-charcoal);
     color: var(--color-charcoal);
     -webkit-text-size-adjust: 100%;
+    /* No grey flash on tap; every control has its own pressed/hover state. */
+    -webkit-tap-highlight-color: transparent;
     interpolate-size: allow-keywords;
   }
   body {
+    /* Positioning context for the header's sticky track, which spans the whole page. */
+    position: relative;
     font-family: var(--font-sans);
     background: var(--color-cream);
     -webkit-font-smoothing: antialiased;
@@ -69,6 +73,24 @@
   text-wrap: balance;
 }
 
+/* Section titles, after the reference: big, all caps, tight, in a light weight, with the
+   *accent* words (see Rich) set in black. Weight carries the contrast, so the accent works
+   in charcoal on light sections and in coral on dark ones. */
+@utility title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.25rem, 6.2vw, 6.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* One vertical rhythm for every section; two sections meet at twice this. */
+@utility section-y {
+  padding-block: var(--sy);
+}
+
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 12px;
@@ -81,17 +103,28 @@
   background: radial-gradient(circle at 32% 28%, var(--color-orange) 0%, var(--color-coral) 48%, var(--color-pink) 100%);
 }
 
+/* --pill-*: the floating nav. It rests at the foot of the hero (whose height is
+   max(100svh, var(--hero-min))) and sticks to the top once scrolled past. */
 :root {
   --pad: 16px;
+  --hero-min: 640px;
+  --pill-h: 48px;
+  --pill-gap: 16px;
+  --pill-w: 48rem; /* the most the pill may grow (Russian needs ~754px); it hugs its content */
+  --sy: 56px;
 }
 @media (min-width: 48rem) {
   :root {
+    --sy: 72px;
     --pad: 32px;
+    --pill-h: 50px;
+    --pill-gap: 24px;
   }
 }
 @media (min-width: 80rem) {
   :root {
     --pad: 48px;
+    --sy: 88px;
   }
 }
 
@@ -123,6 +156,13 @@
 @keyframes kk-show {
   to {
     visibility: visible;
+  }
+}
+
+@keyframes kk-rise {
+  from {
+    opacity: 0;
+    translate: 0 24px;
   }
 }
 
@@ -171,4 +211,76 @@ details.faq[open]::details-content {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ── Visit map (MapLibre), recoloured to the brand ── */
+.kk-map {
+  font-family: var(--font-sans);
+}
+.kk-map .maplibregl-ctrl-group {
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-cream);
+  box-shadow: 0 10px 24px -12px rgb(37 35 43 / 0.6);
+}
+.kk-map .maplibregl-ctrl-group button {
+  width: 40px;
+  height: 40px;
+}
+.kk-map .maplibregl-ctrl-group button + button {
+  border-top-color: rgb(37 35 43 / 0.12);
+}
+.kk-map .maplibregl-ctrl-top-right {
+  top: 12px;
+  right: 12px;
+}
+.kk-map .maplibregl-ctrl-attrib {
+  background: rgb(255 241 217 / 0.85);
+  color: var(--color-charcoal);
+}
+.kk-map .maplibregl-cooperative-gesture-screen {
+  background: rgb(37 35 43 / 0.75);
+  color: var(--color-cream);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* The pin: the brand sun with a pulse and the name beside it. */
+.kk-pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+}
+.kk-pin-sun,
+.kk-pin-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: radial-gradient(circle at 32% 28%, var(--color-orange) 0%, var(--color-coral) 48%, var(--color-pink) 100%);
+}
+.kk-pin-sun {
+  box-shadow: 0 0 40px rgb(255 101 79 / 0.65);
+  transition: scale 0.5s var(--ease-pop);
+}
+.kk-pin:hover .kk-pin-sun {
+  scale: 1.12;
+}
+.kk-pin-ping {
+  animation: kk-ping 2s ease-out infinite;
+}
+.kk-pin-label {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  translate: 0 -50%;
+  border-radius: 999px;
+  background: var(--color-cream);
+  padding: 6px 12px;
+  color: var(--color-charcoal);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
 }

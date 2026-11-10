@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import { waLink } from "@/lib/content";
+import { SITE, mapApps, waLink } from "@/lib/content";
 import { useUI } from "../Providers";
 import { ArrowIcon, WhatsAppIcon } from "./Icons";
 
@@ -65,6 +65,20 @@ export function LinkButton({
       <span>{children}</span>
       <ArrowIcon dir={external ? "ne" : "right"} className="size-4 shrink-0 transition-transform duration-300 ease-soft group-hover/btn:translate-x-0.5" />
     </a>
+  );
+}
+
+/** One button per map app, the visitor's likely favourite first (Yandex for Russian). */
+export function MapButtons({ tone, className }: { tone?: Tone; className?: string }) {
+  const { t, lang } = useUI();
+  return (
+    <>
+      {mapApps(lang).map((app) => (
+        <LinkButton key={app} href={SITE.maps[app]} external tone={tone} className={className}>
+          {t.mapApps[app]}
+        </LinkButton>
+      ))}
+    </>
   );
 }
 
