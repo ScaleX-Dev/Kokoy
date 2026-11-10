@@ -12,6 +12,19 @@ import { WhatsAppButton } from "../ui/Buttons";
 
 const soft = [0.2, 0.7, 0.1, 1] as const;
 
+function DrinkCopy({ index, n, name, spec, note }: { index: number; n: number; name: string; spec: string; note: string }) {
+  return (
+    <>
+      <p className="font-display text-sm font-bold tabular-nums opacity-60">
+        0{index + 1} / 0{n}
+      </p>
+      <h3 className="mt-2 font-display text-[clamp(2.6rem,7vw,6.5rem)] leading-[0.92] font-black tracking-[-0.04em] uppercase">{name}</h3>
+      <p className="mt-5 text-lg font-medium md:text-xl">{spec}</p>
+      <p className="mt-2 text-lg opacity-75">{note}</p>
+    </>
+  );
+}
+
 /** Pick a drink and the whole section takes on its colour. */
 export default function Drinks() {
   const { t } = useUI();
@@ -98,25 +111,27 @@ export default function Drinks() {
             ))}
           </div>
 
-          <div id="drink-panel" role="tabpanel" aria-labelledby={`drink-tab-${active}`} className="relative mt-10 min-h-[230px] md:min-h-[260px]">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.45, ease: soft }}
-              >
-                <p className="font-display text-sm font-bold tabular-nums opacity-60">
-                  0{active + 1} / 0{n}
-                </p>
-                <h3 className="mt-2 font-display text-[clamp(2.6rem,7vw,6.5rem)] leading-[0.92] font-black tracking-[-0.04em] uppercase">
-                  {drink.name}
-                </h3>
-                <p className="mt-5 text-lg font-medium md:text-xl">{drink.spec}</p>
-                <p className="mt-2 text-lg opacity-75">{drink.note}</p>
-              </motion.div>
-            </AnimatePresence>
+          {/* Every drink is laid out invisibly in the same cell, so the panel is always as tall as
+              the longest one. Switching drinks never moves the page below it. */}
+          <div id="drink-panel" role="tabpanel" aria-labelledby={`drink-tab-${active}`} className="mt-10 grid">
+            {t.drinks.items.map((d, i) => (
+              <div key={d.name} className="invisible [grid-area:1/1]" aria-hidden="true">
+                <DrinkCopy index={i} n={n} name={d.name} spec={d.spec} note={d.note} />
+              </div>
+            ))}
+            <div className="[grid-area:1/1]">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.45, ease: soft }}
+                >
+                  <DrinkCopy index={active} n={n} name={drink.name} spec={drink.spec} note={drink.note} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
 
           <div data-drinks-in className="mt-4">
