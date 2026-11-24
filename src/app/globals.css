@@ -138,13 +138,6 @@
 @utility wordmark-stage {
   container-type: inline-size;
 }
-@utility wordmark-fit {
-  font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  font-size: calc((100cqw - var(--pad) * 2) / 4.56);
-  line-height: 0.8;
-}
 
 /* Hero content waits for GSAP when JS and motion are on; the fallback keeps it from staying hidden. */
 @media (prefers-reduced-motion: no-preference) {

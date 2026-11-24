@@ -8,21 +8,22 @@ import Rich from "../ui/Rich";
 import LangSwitch from "../ui/LangSwitch";
 import { useAnchor } from "../ui/Buttons";
 import { ArrowIcon } from "../ui/Icons";
+import { LogoMark, LogoWord } from "../ui/Wordmark";
 
-/** Everything centred on one axis: sign-off, links, address, socials, then the sunset wordmark. */
+/** Everything centred on one axis: sign-off, links, address, socials, then the logo at sunset. */
 export default function Footer() {
   const { t, scrollTo } = useUI();
   const anchor = useAnchor();
   const root = useRef<HTMLElement>(null);
 
-  // As the page ends the sun sets behind the wordmark.
+  // As the page ends the sun sets behind the logo, and the arch then the wordmark rise into view.
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const st = { trigger: "[data-foot-stage]", start: "top bottom", end: "bottom bottom", scrub: 1 };
         gsap.fromTo("[data-foot-sun]", { yPercent: 0 }, { yPercent: 30, ease: "none", scrollTrigger: st });
-        gsap.from("[data-foot-char]", { yPercent: 100, ease: "none", stagger: 0.05, scrollTrigger: st });
+        gsap.from("[data-foot-char]", { yPercent: 100, ease: "none", stagger: 0.12, scrollTrigger: st });
       });
     },
     { scope: root },
@@ -84,14 +85,18 @@ export default function Footer() {
       </div>
 
       <div data-foot-stage className="wordmark-stage relative mt-16 overflow-hidden pt-[6vw] md:mt-24" aria-hidden="true">
-        <div data-foot-sun className="sun absolute top-0 left-1/2 aspect-square w-[58vw] -translate-x-1/2 rounded-full md:w-[40vw]" />
-        <p className="pad wordmark-fit relative flex justify-between overflow-hidden select-none">
-          {"KOKOY".split("").map((c, i) => (
-            <span key={i} data-foot-char className="inline-block pb-[0.05em]">
-              {c}
-            </span>
-          ))}
-        </p>
+        <div data-foot-sun className="sun absolute top-0 left-1/2 aspect-square w-[52vw] -translate-x-1/2 rounded-full md:w-[30vw]" />
+        {/* The logo, arch and wordmark, centred as the sun sets behind it. Sized from the container
+            width (the lockup is 4.36em across): 86% of it on phones, 60% from md up, so it signs
+            off the page without swamping it. Arch and wordmark share one baseline, like the horizon. */}
+        <div className="pad relative flex items-end justify-center gap-[0.2em] overflow-hidden pb-[0.1em] text-[calc((100cqw_-_var(--pad)_*_2)_*_0.86_/_4.36)] md:text-[calc((100cqw_-_var(--pad)_*_2)_*_0.6_/_4.36)] leading-none text-cream select-none">
+          <span data-foot-char className="block">
+            <LogoMark className="h-[1.15em]" />
+          </span>
+          <span data-foot-char className="block">
+            <LogoWord className="h-[0.78em]" />
+          </span>
+        </div>
       </div>
 
       <div className="pad relative flex flex-col items-center gap-4 border-t border-cream/15 bg-charcoal py-6 text-center text-sm text-cream/70 md:flex-row md:justify-between md:text-left">
