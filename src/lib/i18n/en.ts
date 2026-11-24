@@ -95,7 +95,6 @@ const en = {
     label: "Hello, we're KOKOY",
     statement:
       "A pool club in Unawatuna for long sunny days, good food, cold drinks and *even better company.*",
-    body: "KOKOY is where a quick swim turns into brunch, brunch turns into sunset, and sunset turns into one more song. Come as you are. Stay as long as you like.",
   },
   day: {
     label: "Make a day of it",
@@ -109,16 +108,11 @@ const en = {
   },
   pool: {
     label: "The pool",
-    before: "Sun's out.",
-    after: "Pool's open.",
-    title: "Your poolside escape *starts here.*",
-    body: "Sunbeds, shade when you want it, and drinks that find you without you having to move. Stay for an hour or the whole afternoon.",
     features: [
       { title: "Loungers & day beds", body: "Pick your spot, in the sun or in the shade." },
       { title: "Poolside service", body: "Food and drinks, brought straight to your lounger." },
       { title: "Sunset swims", body: "The best light of the day happens in the water." },
     ],
-    cta: "Ask about pool access",
   },
   brunch: {
     label: "Food & brunch",

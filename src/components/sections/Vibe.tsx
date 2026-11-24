@@ -7,7 +7,6 @@ import { IMG, SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 import Film from "../ui/Film";
 import SpinBadge from "../ui/SpinBadge";
-import { LinkButton, useAnchor } from "../ui/Buttons";
 import { Burst } from "../ui/Icons";
 
 /**
@@ -17,7 +16,6 @@ import { Burst } from "../ui/Icons";
  */
 export default function Vibe() {
   const { t } = useUI();
-  const anchor = useAnchor();
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -33,7 +31,7 @@ export default function Vibe() {
           .from("[data-vibe-porthole]", { scale: 0.6, rotate: -15, opacity: 0, duration: 0.6 }, 0.1)
           .from("[data-vibe-polaroid]", { y: -60, rotate: -20, opacity: 0, duration: 0.5 }, 0.2)
           .from("[data-vibe-line]", { yPercent: 60, opacity: 0, stagger: 0.12, duration: 0.5 }, 0.25)
-          .from("[data-vibe-cap] > *, [data-vibe-cta]", { y: 24, opacity: 0, stagger: 0.08, duration: 0.4 }, 0.5);
+          .from("[data-vibe-cap] > *", { y: 24, opacity: 0, stagger: 0.08, duration: 0.4 }, 0.5);
 
         // Leaving: the water drifts slower than the page.
         gsap.to("[data-vibe-img]", {
@@ -120,12 +118,6 @@ export default function Vibe() {
               {para}
             </p>
           ))}
-        </div>
-
-        <div data-vibe-cta className="order-3 flex flex-wrap gap-3 md:order-none md:mt-8 md:pl-[6vw]">
-          <LinkButton href="#pool" onClick={anchor("pool")} tone="outline-cream">
-            {t.pool.label}
-          </LinkButton>
         </div>
       </div>
     </section>
