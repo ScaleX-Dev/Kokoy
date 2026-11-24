@@ -7,12 +7,11 @@ import { useUI } from "../Providers";
 import Marquee from "../ui/Marquee";
 import LangSwitch from "../ui/LangSwitch";
 import { LogoMark, LogoWord } from "../ui/Wordmark";
-import { useAnchor } from "../ui/Buttons";
 import Film from "../ui/Film";
-import { ArrowIcon, Burst } from "../ui/Icons";
+import { Burst } from "../ui/Icons";
 
 /**
- * Full-bleed opener: announcement and a running strip on top, the KOKOY lockup in the
+ * Full-bleed opener: a running strip on top, the KOKOY lockup in the
  * middle, opening hours and the headline in the bottom corners. The floating nav pill
  * (see Header) rests between those corners on wide screens and below them otherwise.
  */
@@ -30,7 +29,6 @@ function accentWords(title: string) {
 
 export default function Hero() {
   const { t } = useUI();
-  const anchor = useAnchor();
   const root = useRef<HTMLElement>(null);
   // Which file to play depends on the screen shape, so the video mounts only once that is known.
   const [film, setFilm] = useState<string>();
@@ -70,20 +68,9 @@ export default function Hero() {
 
   return (
     <section ref={root} id="top" className="relative flex h-[100svh] min-h-[var(--hero-min)] flex-col overflow-hidden bg-charcoal text-cream">
-      {/* ── Top: announcement and a running strip ── */}
+      {/* ── Top: a running strip ── */}
       <div className="relative z-20 shrink-0 bg-coral text-charcoal">
-        <a href="#events" onClick={anchor("events")} className="pad group flex min-h-10 items-center justify-center gap-3 py-2 text-center text-[13px] font-semibold">
-          <span className="relative flex size-2 shrink-0" aria-hidden="true">
-            <span className="absolute inset-0 rounded-full bg-charcoal" style={{ animation: "kk-ping 1.6s ease-out infinite" }} />
-            <span className="relative size-2 rounded-full bg-charcoal" />
-          </span>
-          <span className="truncate">{t.announcement.text}</span>
-          <span className="hidden items-center gap-1 font-bold underline decoration-2 underline-offset-4 sm:inline-flex">
-            {t.announcement.link}
-            <ArrowIcon className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-          </span>
-        </a>
-        <div className="border-t border-charcoal/15 py-2.5 md:py-3" aria-hidden="true">
+        <div className="py-2.5 md:py-3" aria-hidden="true">
           <Marquee duration={45}>
             {t.hero.strip.map((w) => (
               <Fragment key={w}>

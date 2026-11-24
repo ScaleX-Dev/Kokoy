@@ -42,10 +42,6 @@ const en = {
     drinks: "Hi KOKOY! Could you send me the drinks list?",
     question: "Hi KOKOY! I have a question: ",
   },
-  announcement: {
-    text: "Sunset Sessions every Friday · DJs from 5 pm till late",
-    link: "See what's on",
-  },
   hero: {
     kicker: "Pool club · Unawatuna, Sri Lanka",
     title: "Making Una *fun again*",
