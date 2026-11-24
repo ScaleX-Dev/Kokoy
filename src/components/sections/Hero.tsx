@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { Fragment, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { IMG, SITE } from "@/lib/content";
+import { SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 import Marquee from "../ui/Marquee";
 import LangSwitch from "../ui/LangSwitch";
@@ -27,10 +26,61 @@ function accentWords(title: string) {
   return words;
 }
 
+/**
+ * A muted, looping background film that reliably starts. React does not always write the
+ * `muted` attribute, and browsers refuse to autoplay a video that is not muted, so it is set
+ * on the element itself. Play is requested once the element exists, again when it can play,
+ * and (if the browser still blocks it, e.g. low-power mode) on the first scroll or tap.
+ * Reduced motion keeps the still poster.
+ */
+function Film({ src, className, poster }: { src: string; className: string; poster?: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const kick = () => {
+      if (reduce.matches) v.pause();
+      else if (v.paused) v.play().catch(() => {});
+    };
+    const gestures = ["pointerdown", "touchstart", "keydown", "scroll"] as const;
+    const retry = () => {
+      kick();
+      if (!v.paused) gestures.forEach((g) => window.removeEventListener(g, retry));
+    };
+    kick();
+    v.addEventListener("canplay", kick);
+    reduce.addEventListener("change", kick);
+    document.addEventListener("visibilitychange", kick);
+    gestures.forEach((g) => window.addEventListener(g, retry, { passive: true }));
+    return () => {
+      v.removeEventListener("canplay", kick);
+      reduce.removeEventListener("change", kick);
+      document.removeEventListener("visibilitychange", kick);
+      gestures.forEach((g) => window.removeEventListener(g, retry));
+    };
+  }, [src]);
+
+  return <video ref={ref} className={className} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-hidden="true" />;
+}
+
 export default function Hero() {
   const { t } = useUI();
   const anchor = useAnchor();
   const root = useRef<HTMLElement>(null);
+  // Which file to play depends on the screen shape, so the video mounts only once that is known.
+  const [film, setFilm] = useState<string>();
+
+  useEffect(() => {
+    const aspect = window.matchMedia("(min-aspect-ratio: 1/1)");
+    const pick = () => setFilm(aspect.matches ? SITE.heroVideo.wide : SITE.heroVideo.src);
+    pick();
+    aspect.addEventListener("change", pick);
+    return () => aspect.removeEventListener("change", pick);
+  }, []);
 
   useGSAP(
     () => {
@@ -88,20 +138,12 @@ export default function Hero() {
       <div className="relative flex-1 overflow-hidden">
         <div data-hero-media className="absolute inset-0 will-change-transform">
           <div data-hero-zoom className="absolute inset-0">
-            {SITE.heroVideo ? (
-              <video
-                className="absolute inset-0 size-full object-cover"
-                src={SITE.heroVideo}
-                poster={`${IMG.hero}?auto=format&fit=crop&w=1920&q=70`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                aria-hidden="true"
-              />
-            ) : (
-              <Image src={IMG.hero} alt={t.alt.hero} fill preload quality={80} sizes="100vw" className="object-cover object-[50%_60%]" />
-            )}
+            {/* The reel is vertical (9:16). Landscape: it fills the stage edge to edge, cropped to a
+                horizontal band. Portrait: it fills the stage down to the text zone (hours, headline,
+                nav pill) so its burned-in captions never sit under them, then fades into a tiny
+                blurred copy of itself. */}
+            <Film className="hero-backdrop" src={SITE.heroVideo.blur} />
+            {film && <Film key={film} className="hero-film" src={film} poster={SITE.heroVideo.poster} />}
           </div>
         </div>
 
@@ -121,7 +163,7 @@ export default function Hero() {
           <div data-hero-lockup className="flex flex-1 flex-col items-center justify-center py-6 text-center">
             <p
               aria-hidden="true"
-              className="flex items-center gap-[0.14em] font-display text-[clamp(2.9rem,14vw,13rem)] leading-[0.8] font-black tracking-[-0.04em] select-none [text-shadow:0_6px_40px_rgb(37_35_43/0.35)]"
+              className="flex items-center gap-[0.14em] font-display text-[clamp(2.9rem,14vw,13rem)] lg:text-[clamp(4rem,10vw,10.5rem)] leading-[0.8] font-black tracking-[-0.04em] select-none [text-shadow:0_6px_40px_rgb(37_35_43/0.35)]"
             >
               <span data-hero-sun className="sun inline-block size-[0.74em] shrink-0 rounded-full shadow-[0_0_80px_rgb(255_157_56/0.55)]" />
               <span className="flex overflow-hidden pt-[0.04em] pb-[0.08em]">

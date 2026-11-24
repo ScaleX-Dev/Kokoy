@@ -63,8 +63,10 @@ export const SITE = {
     google: "https://www.google.com/maps/search/?api=1&query=Unawatuna%2C%20Sri%20Lanka",
     yandex: "https://yandex.com/maps/?text=Unawatuna%2C%20Sri%20Lanka",
   },
-  // TODO(confirm): drop the hero film (16:9, muted loop) in /public/video and set the path, e.g. "/video/hero.mp4".
-  heroVideo: "",
+  // The hero film is a vertical (9:16) reel, full-bleed on every screen. Landscape screens crop it
+  // to a horizontal band, so they get the 1080p file ("wide"); portrait ones get 720p. "blur" is a
+  // tiny copy of the same clip, used only as the backdrop under the portrait film.
+  heroVideo: { src: "/video/hero.mp4", wide: "/video/hero-wide.mp4", blur: "/video/hero-blur.mp4", poster: "/video/hero-poster.jpg" },
   // TODO(confirm): social handles and links.
   instagram: { handle: "@kokoy.poolclub", url: "https://www.instagram.com/" },
   social: [
