@@ -4,9 +4,7 @@ import Hero from "@/components/sections/Hero";
 import Ticker from "@/components/sections/Ticker";
 import Menu from "@/components/sections/Menu";
 import Vibe from "@/components/sections/Vibe";
-import Intro from "@/components/sections/Intro";
 import Day from "@/components/sections/Day";
-import Pool from "@/components/sections/Pool";
 import Brunch from "@/components/sections/Brunch";
 import Drinks from "@/components/sections/Drinks";
 import Events from "@/components/sections/Events";
@@ -29,9 +27,7 @@ export default function Home() {
         <Ticker />
         <Menu />
         <Vibe />
-        <Intro />
         {SHOW_DAY && <Day />}
-        <Pool />
         <Brunch />
         <Drinks />
         <Events />

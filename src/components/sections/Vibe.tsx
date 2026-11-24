@@ -57,8 +57,9 @@ export default function Vibe() {
     </span>
   ));
 
+  // id "pool": this is the pool section the nav's POOL link (and /lang#pool) lands on.
   return (
-    <section ref={root} id="vibe" className="relative overflow-hidden bg-charcoal text-cream">
+    <section ref={root} id="pool" className="relative overflow-hidden bg-charcoal text-cream">
       <div data-vibe-img className="absolute inset-0 will-change-transform">
         {/* After the reference: nothing but sunlit pool water seen from above. */}
         <Image src={IMG.poolWater} alt="" fill sizes="100vw" quality={80} className="object-cover" />
