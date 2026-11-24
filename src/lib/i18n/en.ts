@@ -69,17 +69,21 @@ const en = {
   menuPage: {
     meta: {
       title: "Menu · KOKOY Pool Club, Unawatuna",
-      description: "Signature cocktails, zero-proof coolers, smoothies, fresh juice and coffee at KOKOY Pool Club in Unawatuna, Sri Lanka.",
+      description: "All-day brunch, burgers, seafood, pizza, signature cocktails, mocktails, smoothies and coffee at KOKOY Pool Club in Unawatuna, Sri Lanka.",
     },
     label: "The menu",
     title: "The KOKOY *menu*",
-    tagline: "Feel the magic in every moment.",
-    service: "Prices in Sri Lankan rupees. A 10% service charge is added to the bill.",
+    tagline: "Taste the magic in every moment.",
+    service: "Prices in Sri Lankan rupees. All prices are subject to a 10% service charge.",
     jump: "Menu sections",
-    count: "{n} drinks",
-    foodTitle: "Hungry *too?*",
-    foodBody: "Our kitchen menu changes with the season. Message us and we'll send you today's dishes.",
-    foodCta: "Ask for today's food menu",
+    groups: "Food or drinks",
+    food: "Food",
+    drinks: "Drinks",
+    count: "{n} on the menu",
+    // The band at the foot switches to the other menu.
+    switchToDrinks: { title: "Thirsty *too?*", body: "Signature cocktails, mocktails, smoothies and island coffee, all day.", cta: "See the drinks menu" },
+    switchToFood: { title: "Hungry *too?*", body: "All-day brunch, stacked sandwiches, seafood, pizza and more.", cta: "See the food menu" },
+    ask: "Questions or allergies? Message us",
     back: "Back to KOKOY",
   },
   vibe: {

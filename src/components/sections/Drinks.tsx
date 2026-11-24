@@ -141,7 +141,7 @@ export default function Drinks() {
           </div>
 
           <div data-drinks-in className="mt-4 md:order-5 md:mt-0 lg:mt-4">
-            <LinkButton href={`/${lang}/menu`} tone="charcoal">
+            <LinkButton href={`/${lang}/menu#drinks`} tone="charcoal">
               {t.drinks.cta}
             </LinkButton>
           </div>
