@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    agentUpgrade: "security",
+  },
   images: {
     // Placeholder photography is resized on Unsplash's CDN, so nothing is
     // optimised (or cached to disk) by the Next server. Swap for local images later.
