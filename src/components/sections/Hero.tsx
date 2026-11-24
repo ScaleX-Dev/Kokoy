@@ -98,8 +98,9 @@ export default function Hero() {
         {/* A plain translucent glow, not a blend mode: blending recomposites the whole screen
             against the moving photo on every scroll frame, which phones feel. */}
         <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_85%_0%,rgb(255_157_56/0.22),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(70%_45%_at_50%_50%,rgb(37_35_43/0.38),transparent_75%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(37_35_43/0.35)_0%,rgb(37_35_43/0)_25%,rgb(37_35_43/0)_55%,rgb(37_35_43/0.85)_100%)]" />
+        {/* The film stays bright, as in the reference: only a light shade at the top and a fade at
+            the foot, where the hours and headline sit. */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(37_35_43/0.22)_0%,rgb(37_35_43/0)_22%,rgb(37_35_43/0)_58%,rgb(37_35_43/0.78)_100%)]" />
 
         <div data-await className="pad relative z-10 flex h-full flex-col">
           <div className="flex justify-end pt-4 md:pt-6">
@@ -108,16 +109,13 @@ export default function Hero() {
 
           {/* Centre: the lockup */}
           <div data-hero-lockup className="relative flex flex-1 flex-col items-center justify-center py-6 text-center">
-            {/* A soft, see-through shade just behind the logo so it reads over any shot of the film. The
-                logo itself is 80% opaque (text-cream/80 below) so the film shows through it. */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[min(60vh,30rem)] w-[min(92vw,62rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(37_35_43/0.26),rgb(37_35_43/0.1)_60%,transparent)]"
-            />
+            {/* The focus of the hero, after the reference: the full KOKOY lockup, large, in cream at 80% so
+                the film shows through it. A soft shadow (no shade over the film) keeps it legible
+                over every shot, bright or dark. */}
             <p
               role="img"
               aria-label="KOKOY"
-              className="flex items-center gap-[0.22em] text-cream/80 font-display text-[clamp(2.9rem,14vw,13rem)] leading-none select-none lg:text-[clamp(4rem,10vw,10.5rem)] [filter:drop-shadow(0_6px_40px_rgb(37_35_43/0.35))]"
+              className="flex items-center gap-[0.2em] font-display text-[clamp(3.2rem,17vw,14rem)] leading-none text-cream/80 select-none lg:text-[clamp(5rem,13vw,15rem)] [filter:drop-shadow(0_2px_3px_rgb(37_35_43/0.35))_drop-shadow(0_10px_40px_rgb(37_35_43/0.4))]"
             >
               <span data-hero-sun className="flex">
                 <LogoMark className="h-[1.15em]" />
@@ -128,7 +126,7 @@ export default function Hero() {
                 </span>
               </span>
             </p>
-            <p data-hero-in className="eyebrow mt-4 text-cream md:mt-6 md:text-[13px]">
+            <p data-hero-in className="eyebrow mt-5 text-cream [text-shadow:0_1px_12px_rgb(37_35_43/0.6)] md:mt-7 md:text-[14px]">
               {t.hero.kicker}
             </p>
           </div>
