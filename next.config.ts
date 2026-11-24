@@ -7,12 +7,10 @@ const nextConfig: NextConfig = {
     agentUpgrade: "security",
   },
   images: {
-    // Placeholder photography is resized on Unsplash's CDN, so nothing is
-    // optimised (or cached to disk) by the Next server. Swap for local images later.
-    loader: "custom",
-    loaderFile: "./src/lib/image-loader.ts",
+    // The shoot photography lives in /public/photos and is resized by Next's own optimiser;
+    // nothing else may be optimised.
     qualities: [70, 80],
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+    localPatterns: [{ pathname: "/photos/**", search: "" }],
   },
   turbopack: {
     rules: {

@@ -2,46 +2,48 @@
 // Anything marked TODO(confirm) is a placeholder listed under "Items to confirm"
 // in the brand foundation, and must be replaced before launch.
 
-const u = (id: string) => `https://images.unsplash.com/photo-${id}`;
+const p = (n: number) => `/photos/kokoy-${n}.webp`;
 
-// Placeholder photography until the KOKOY shoot is delivered.
+// Photography from the KOKOY shoot (Drive: KOKOY POOL CLUB / PHOTOS, PHOTOS-2, PHOTOS-03), named by
+// the camera's frame number (LKJ_<n>.NEF). The keys are slots the sections ask for; what each one
+// shows is described by its alt text in the dictionaries.
 export const IMG = {
   // Pool & property
-  hero: u("1563911302283-d2bc129e7570"),
-  poolSunset: u("1600011689032-8b628b8a8747"),
-  poolLounger: u("1586611292717-f828b167408c"),
-  poolTropic: u("1617859047452-8510bcf207fd"),
-  poolVilla: u("1582610116397-edb318620f90"),
-  poolDeck: u("1572331165267-854da2b10ccc"),
-  poolInfinity: u("1584132967334-10e028bd69f7"),
-  underwater: u("1528495612343-9ca9f4a4de28"),
-  sandLegs: u("1591017403286-fd8493524e1e"),
-  // Food & brunch
-  brunchSpread: u("1504754524776-8f4f37790ca0"),
-  pancakes: u("1567620905732-2d1ec7ab7445"),
-  eggsToast: u("1525351484163-7529414344d8"),
-  brunchPlate: u("1495214783159-3503fd1b572d"),
-  fruitBowl: u("1490474418585-ba9bad8fd0ea"),
-  frenchToast: u("1484723091739-30a097e8f929"),
-  longTable: u("1528605248644-14dd04022da1"),
-  coffee: u("1509042239860-f550ce710b93"),
-  // Drinks
-  pinkDrink: u("1609951651556-5334e2706168"),
-  spritz: u("1560512823-829485b8bf24"),
-  amber: u("1514362545857-3bc16c4c7d1b"),
-  lemonade: u("1621263764928-df1444c5e859"),
-  barPrep: u("1609345265499-2133bbeb6ce5"),
-  cheers: u("1541532713592-79a0317b6b77"),
-  trio: u("1551024709-8f23befc6f87"),
-  // Events & lifestyle
-  dj: u("1470225620780-dba8ba36b745"),
-  lights: u("1517457373958-b7bdd4587205"),
-  crowdSunset: u("1524368535928-5b5e00ddc76b"),
-  confetti: u("1492684223066-81342ee5ff30"),
-  toast: u("1527529482837-4698179dc6ce"),
-  friendsSunset: u("1506869640319-fe1a24fd76dc"),
-  friends: u("1529156069898-49953e39b3ac"),
-  beachSunset: u("1507525428034-b723cf961d3e"),
+  hero: p(5094),
+  poolSunset: p(5091),
+  poolLounger: p(5094),
+  poolTropic: p(5087),
+  poolVilla: p(5096),
+  poolDeck: p(5095),
+  poolInfinity: p(4727),
+  underwater: p(4487),
+  sandLegs: p(4489),
+  // Food
+  brunchSpread: p(4618),
+  pancakes: p(4653),
+  eggsToast: p(4608),
+  brunchPlate: p(4703),
+  fruitBowl: p(4685),
+  frenchToast: p(4669),
+  longTable: p(4566),
+  coffee: p(5117),
+  // Drinks & bar
+  pinkDrink: p(4545),
+  spritz: p(4527),
+  amber: p(4505),
+  lemonade: p(5133),
+  barPrep: p(4511),
+  cheers: p(4565),
+  trio: p(4522),
+  // Evenings & guests
+  dj: p(4740),
+  lights: p(4757),
+  crowdSunset: p(4755),
+  confetti: p(4578),
+  toast: p(4629),
+  friendsSunset: p(4555),
+  friends: p(4589),
+  beachSunset: p(5173),
 } as const;
 
 export type ImgKey = keyof typeof IMG;

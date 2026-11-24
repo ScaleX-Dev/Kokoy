@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       description: t.meta.description,
       locale: lang === "ru" ? "ru_RU" : "en_GB",
       type: "website",
-      images: [{ url: "https://images.unsplash.com/photo-1563911302283-d2bc129e7570?auto=format&fit=crop&w=1200&h=630&q=70", width: 1200, height: 630 }],
+      images: [{ url: "/og.jpg", width: 1200, height: 630 }],
     },
   };
 }
