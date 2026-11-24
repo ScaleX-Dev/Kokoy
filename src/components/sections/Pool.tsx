@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import clsx from "clsx";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { IMG, type ImgKey } from "@/lib/content";
 import { useUI } from "../Providers";
@@ -10,7 +9,6 @@ import Rich from "../ui/Rich";
 import { WhatsAppButton } from "../ui/Buttons";
 
 const FEATURE_IMG: ImgKey[] = ["poolLounger", "poolDeck", "poolSunset"];
-const FEATURE_SHAPE = ["rounded-[36px]", "rounded-t-full rounded-b-[36px]", "rounded-full"];
 
 export default function Pool() {
   const { t } = useUI();
@@ -101,8 +99,8 @@ export default function Pool() {
       {/* Phones swipe through the three; wider screens see them side by side. */}
       <ul data-features data-lenis-prevent-horizontal className="pad section-y flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] sm:grid sm:overflow-visible [&::-webkit-scrollbar]:hidden gap-4 sm:grid-cols-3 sm:gap-6 lg:gap-10">
         {t.pool.features.map((f, i) => (
-          <li key={f.title} data-feature className={clsx("w-[78vw] shrink-0 snap-start scroll-ml-[var(--pad)] sm:w-auto", i === 1 && "sm:mt-16", i === 2 && "sm:mt-32")}>
-            <div className={clsx("relative overflow-hidden", FEATURE_SHAPE[i], i === 2 ? "aspect-square" : "aspect-[4/5]")}>
+          <li key={f.title} data-feature className="w-[78vw] shrink-0 snap-start scroll-ml-[var(--pad)] sm:w-auto">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[36px]">
               <Image src={IMG[FEATURE_IMG[i]]} alt={t.alt[FEATURE_IMG[i]]} fill sizes="(min-width: 640px) 30vw, 92vw" className="object-cover transition-transform duration-[1.4s] ease-soft hover:scale-105" />
             </div>
             <div className="mt-6 flex gap-4">
