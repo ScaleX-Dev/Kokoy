@@ -3,16 +3,17 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { IMG } from "@/lib/content";
+import { IMG, SITE } from "@/lib/content";
 import { useUI } from "../Providers";
+import Film from "../ui/Film";
 import SpinBadge from "../ui/SpinBadge";
 import { LinkButton, useAnchor } from "../ui/Buttons";
 import { Burst } from "../ui/Icons";
 
 /**
  * The vibe, after the reference. Desktop: a polaroid in the corner, the headline in one
- * huge line across the water and over a round shot on the right, the copy beneath it.
- * Phones: the copy on top, then the round shot with the headline stacked big across it.
+ * huge line across the water and over a tilted polaroid film on the right, the copy beneath it.
+ * Phones: the copy on top, then the polaroid film with the headline stacked big across it.
  */
 export default function Vibe() {
   const { t } = useUI();
@@ -78,22 +79,29 @@ export default function Vibe() {
         </div>
       </div>
 
-      {/* Phones, after the reference: copy first, then the round shot with the headline stacked
+      {/* Phones, after the reference: copy first, then the polaroid film with the headline stacked
           big across it, then the link. Desktop, after the reference: the headline in one huge
-          line across the middle, crossing the round shot on the right, with the copy beneath. */}
+          line across the middle, crossing the polaroid film on the right, with the copy beneath. */}
       <div className="pad relative z-10 flex min-h-[min(100svh,900px)] flex-col gap-10 py-20 md:justify-end md:gap-0 md:pt-28 md:pb-[12vh]">
         <div className="relative order-2 md:static md:order-none">
-          <div className="relative mx-auto mb-[16vw] w-[min(80vw,420px)] md:absolute md:top-1/2 md:right-[7vw] md:mb-0 md:w-[min(32vw,56vh)] md:-translate-y-1/2">
-            <div data-vibe-porthole className="relative aspect-square overflow-hidden rounded-full ring-[10px] ring-cream/20">
-              <Image src={IMG.underwater} alt={t.alt.underwater} fill sizes="(min-width: 768px) 32vw, 80vw" className="object-cover" />
+          <div className="relative mx-auto mb-[4vw] w-[min(72vw,380px)] md:absolute md:top-1/2 md:right-[7vw] md:mb-0 md:w-[min(27vw,48vh)] md:-translate-y-1/2">
+            {/* After the reference: a tilted polaroid that plays. A guest at the pool edge, snacking
+                and laughing, looping quietly with the same grade as the hero film. */}
+            <div data-vibe-porthole>
+              <div className="rotate-[4deg] bg-white p-3 pb-12 shadow-[0_34px_60px_-24px_rgb(0_0_0/0.75)] md:p-4 md:pb-16">
+                <div role="img" aria-label={t.alt.underwater} className="relative aspect-[4/5] overflow-hidden bg-charcoal">
+                  <Film src={SITE.vibeVideo.src} poster={SITE.vibeVideo.poster} className="absolute inset-0 size-full object-cover" />
+                </div>
+              </div>
             </div>
             <div className="absolute -top-4 -right-2 w-[30%] md:-top-6 md:-right-4" aria-hidden="true">
               <SpinBadge text={t.hero.badge} className="sun w-full text-charcoal">
                 <Burst className="size-[34%]" />
               </SpinBadge>
             </div>
-            {/* Phone headline: stacked huge and centred, wider than the picture and crossing it. */}
-            <h2 className="title absolute bottom-[-18%] left-1/2 w-[calc(100vw_-_var(--pad)_*_2)] -translate-x-1/2 text-center text-[12.5vw] leading-[0.86] [text-shadow:0_4px_28px_rgb(37_35_43/0.5)] md:hidden">
+            {/* Phone headline: stacked huge and centred, wider than the picture and crossing it, set low
+                over the film itself rather than the white frame so the cream type stays legible. */}
+            <h2 className="title absolute bottom-[7%] left-1/2 w-[calc(100vw_-_var(--pad)_*_2)] -translate-x-1/2 text-center text-[12.5vw] leading-[0.86] [text-shadow:0_4px_28px_rgb(37_35_43/0.5)] md:hidden">
               {headline}
             </h2>
           </div>

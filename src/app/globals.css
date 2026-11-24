@@ -285,6 +285,20 @@ details.faq[open]::details-content {
   white-space: nowrap;
 }
 
+/* Films (see ui/Film) are pictures, not players: taps fall through to the page, and the
+   browser's own play overlay never shows (iOS Safari draws one when autoplay is refused). */
+.film {
+  pointer-events: none;
+}
+.film::-webkit-media-controls,
+.film::-webkit-media-controls-panel,
+.film::-webkit-media-controls-start-playback-button,
+.film::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
+}
+
 /* Hero film: full-bleed on every screen. */
 .hero-film {
   position: absolute;
@@ -292,15 +306,4 @@ details.faq[open]::details-content {
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
-  /* A background, not something to click: taps fall through to the page. */
-  pointer-events: none;
-}
-/* Never show the browser's own play overlay (iOS Safari draws one when autoplay is refused). */
-.hero-film::-webkit-media-controls,
-.hero-film::-webkit-media-controls-panel,
-.hero-film::-webkit-media-controls-start-playback-button,
-.hero-film::-webkit-media-controls-overlay-play-button {
-  display: none !important;
-  -webkit-appearance: none;
-  opacity: 0 !important;
 }
