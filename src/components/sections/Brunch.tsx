@@ -53,16 +53,24 @@ export default function Brunch() {
   useEffect(() => {
     const el = rail.current;
     if (!el) return;
+    // Scroll extent is measured only when the layout can change, never per scroll event,
+    // so dragging the rail does not force a layout every frame.
+    let max = 0;
+    const measure = () => {
+      max = el.scrollWidth - el.clientWidth;
+      update();
+    };
     const update = () => {
-      const max = el.scrollWidth - el.clientWidth;
       // Progress is written straight to the DOM so scrolling never re-renders the rail.
       if (thumb.current) thumb.current.style.transform = `translateX(${(max > 0 ? el.scrollLeft / max : 0) * 300}%)`;
       const next = { start: el.scrollLeft < 8, end: el.scrollLeft > max - 8 };
       setEdge((prev) => (prev.start === next.start && prev.end === next.end ? prev : next));
     };
-    update();
+    measure();
     el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    Array.from(el.children).forEach((c) => ro.observe(c));
 
     let down = false;
     let moved = false;
@@ -111,7 +119,7 @@ export default function Brunch() {
     return () => {
       window.clearTimeout(settle);
       el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      ro.disconnect();
       el.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
