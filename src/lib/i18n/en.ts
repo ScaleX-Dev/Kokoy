@@ -59,11 +59,8 @@ const en = {
   },
   ticker: ["Brunch", "Cocktails", "Dip & Sip", "Sunset Grooves"],
   eats: {
-    label: "Food & drinks",
     title: "Indulge *aplenty*",
     body: "Island flavours and all-day favourites, from the first coffee to the last cocktail.",
-    food: "Food",
-    drinks: "Drinks",
     cta: "Get the full menu",
   },
   menuPage: {
