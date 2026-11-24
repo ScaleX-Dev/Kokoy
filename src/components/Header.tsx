@@ -38,9 +38,9 @@ export default function Header() {
             scrollTo(0);
           }}
           aria-label={t.a11y.home}
-          className="flex shrink-0 items-center text-[17px] md:text-[18px]"
+          className="flex shrink-0 items-center text-[19px] md:text-[20px]"
         >
-          <Wordmark sub={false} />
+          <Wordmark />
         </a>
 
         <ul className="hidden items-center gap-0.5 lg:flex">

@@ -6,6 +6,7 @@ import { SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 import Marquee from "../ui/Marquee";
 import LangSwitch from "../ui/LangSwitch";
+import { LogoMark, LogoWord } from "../ui/Wordmark";
 import { useAnchor } from "../ui/Buttons";
 import { ArrowIcon, Burst } from "../ui/Icons";
 
@@ -90,7 +91,7 @@ export default function Hero() {
         gsap
           .timeline({ defaults: { ease: "expo.out" } })
           .fromTo("[data-hero-zoom]", { scale: 1.25 }, { scale: 1, duration: 2.8 }, 0)
-          .from("[data-hero-sun]", { scale: 0, rotate: -90, duration: 1.4, ease: "back.out(1.5)" }, 0.15)
+          .from("[data-hero-sun]", { yPercent: 25, scale: 0.85, opacity: 0, duration: 1.4, ease: "expo.out" }, 0.15)
           .from("[data-hero-char]", { yPercent: 110, duration: 1.4, stagger: 0.07 }, 0.25)
           .from("[data-hero-line]", { yPercent: 110, duration: 1.2, stagger: 0.08 }, 0.6)
           .from("[data-hero-in]", { y: 24, opacity: 0, duration: 1, stagger: 0.08 }, 0.7);
@@ -162,16 +163,17 @@ export default function Hero() {
           {/* Centre: the lockup */}
           <div data-hero-lockup className="flex flex-1 flex-col items-center justify-center py-6 text-center">
             <p
-              aria-hidden="true"
-              className="flex items-center gap-[0.14em] font-display text-[clamp(2.9rem,14vw,13rem)] lg:text-[clamp(4rem,10vw,10.5rem)] leading-[0.8] font-black tracking-[-0.04em] select-none [text-shadow:0_6px_40px_rgb(37_35_43/0.35)]"
+              role="img"
+              aria-label="KOKOY"
+              className="flex items-center gap-[0.22em] font-display text-[clamp(2.9rem,14vw,13rem)] leading-none select-none lg:text-[clamp(4rem,10vw,10.5rem)] [filter:drop-shadow(0_6px_40px_rgb(37_35_43/0.35))]"
             >
-              <span data-hero-sun className="sun inline-block size-[0.74em] shrink-0 rounded-full shadow-[0_0_80px_rgb(255_157_56/0.55)]" />
-              <span className="flex overflow-hidden pt-[0.04em] pb-[0.08em]">
-                {"KOKOY".split("").map((c, i) => (
-                  <span key={i} data-hero-char className="inline-block">
-                    {c}
-                  </span>
-                ))}
+              <span data-hero-sun className="flex">
+                <LogoMark className="h-[1.15em]" />
+              </span>
+              <span className="flex overflow-hidden py-[0.04em]">
+                <span data-hero-char className="flex">
+                  <LogoWord className="h-[0.78em]" />
+                </span>
               </span>
             </p>
             <p data-hero-in className="eyebrow mt-4 text-cream md:mt-6 md:text-[13px]">

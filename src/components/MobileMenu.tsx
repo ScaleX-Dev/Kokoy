@@ -41,7 +41,7 @@ export default function MobileMenu() {
         >
           <div className="pad flex h-16 shrink-0 items-center justify-between md:h-[76px]">
             <span className="text-[22px]">
-              <Wordmark sub={false} mono />
+              <Wordmark />
             </span>
             <button
               ref={closeRef}
