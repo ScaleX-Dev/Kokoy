@@ -84,7 +84,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div data-foot-stage className="wordmark-stage relative mt-16 overflow-hidden pt-[6vw] md:mt-24" aria-hidden="true">
+      <div data-foot-stage className="wordmark-stage relative mt-12 overflow-hidden pt-[6vw] md:mt-16" aria-hidden="true">
         <div data-foot-sun className="sun absolute top-0 left-1/2 aspect-square w-[52vw] -translate-x-1/2 rounded-full md:w-[30vw]" />
         {/* The logo, arch and wordmark, centred as the sun sets behind it. Sized from the container
             width (the lockup is 4.36em across): 86% of it on phones, 60% from md up, so it signs

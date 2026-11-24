@@ -55,7 +55,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      <div className="mt-10 flex flex-col gap-4 md:mt-14 md:gap-6">
+      <div className="mt-8 flex flex-col gap-4 md:mt-10 md:gap-6">
         {GALLERY_ROWS.map((row, r) => (
           <Marquee key={r} duration={r ? 55 : 45} reverse={r === 1}>
             {row.map((g) => (

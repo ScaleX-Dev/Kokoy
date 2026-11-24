@@ -139,7 +139,7 @@ export default function Menu() {
 
       {/* Polaroids drift past; scrolling speeds them up, like the ticker. */}
       <div className="mt-2 md:mt-4">
-        <Marquee duration={SHOTS.length * 10} trackClassName="py-16 md:py-20">
+        <Marquee duration={SHOTS.length * 10} trackClassName="py-12 md:py-14">
           {SHOTS.map((img, i) => {
             const frame = FRAMES[i % FRAMES.length];
             const prop = PROPS[i];

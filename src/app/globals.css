@@ -111,11 +111,11 @@
   --pill-h: 48px;
   --pill-gap: 16px;
   --pill-w: 48rem; /* the most the pill may grow (Russian needs ~754px); it hugs its content */
-  --sy: 56px;
+  --sy: 44px;
 }
 @media (min-width: 48rem) {
   :root {
-    --sy: 72px;
+    --sy: 56px;
     --pad: 32px;
     --pill-h: 50px;
     --pill-gap: 24px;
@@ -124,7 +124,7 @@
 @media (min-width: 80rem) {
   :root {
     --pad: 48px;
-    --sy: 88px;
+    --sy: 68px;
   }
 }
 

@@ -177,7 +177,7 @@ export default function Brunch() {
         </div>
       </div>
 
-      <div className="relative mt-10 md:mt-12">
+      <div className="relative mt-8 md:mt-9">
         {/* From md up: polaroid-style frames at a slight angle that straightens on hover, with
             vertical padding so the tilted corners and shadows have room inside the rail. */}
         <ul

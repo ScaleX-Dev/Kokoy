@@ -94,7 +94,7 @@ export default function Visit() {
       </div>
 
       {/* The map as the big picture, with an info card laid over its edge. */}
-      <div className="pad mt-12 md:mt-16">
+      <div className="pad mt-10 md:mt-12">
         <div className="grid items-center lg:grid-cols-[minmax(0,26rem)_1fr]">
           <div data-visit-in className="relative z-10 rounded-[32px] bg-cream p-6 shadow-[0_30px_60px_-30px_rgb(37_35_43/0.6)] sm:p-8 lg:-mr-12">
             <dl className="divide-y-2 divide-charcoal/10">
@@ -149,7 +149,7 @@ export default function Visit() {
       </div>
 
       {/* FAQ */}
-      <div className="pad mt-14 md:mt-20">
+      <div className="pad mt-10 md:mt-14">
         <div className="grid gap-8 rounded-[40px] bg-cream p-6 sm:p-10 md:grid-cols-12 md:p-14">
           <div className="md:col-span-4">
             <h3 className="display text-[clamp(2rem,3.6vw,3.25rem)] font-extrabold">{t.visit.faqTitle}</h3>
