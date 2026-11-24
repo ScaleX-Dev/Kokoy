@@ -30,7 +30,9 @@ export default function SpinBadge({
           </textPath>
         </text>
       </svg>
-      <div className="relative">{children}</div>
+      {/* Fills the badge so children sized in % (e.g. a burst at 34%) are sized against the badge
+          and sit dead centre; an auto-sized wrapper left them off-centre. */}
+      <div className="relative grid size-full place-items-center">{children}</div>
     </div>
   );
 }
