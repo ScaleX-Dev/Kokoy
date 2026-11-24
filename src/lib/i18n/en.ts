@@ -66,6 +66,22 @@ const en = {
     drinks: "Drinks",
     cta: "Get the full menu",
   },
+  menuPage: {
+    meta: {
+      title: "Menu · KOKOY Pool Club, Unawatuna",
+      description: "Signature cocktails, zero-proof coolers, smoothies, fresh juice and coffee at KOKOY Pool Club in Unawatuna, Sri Lanka.",
+    },
+    label: "The menu",
+    title: "The KOKOY *menu*",
+    tagline: "Feel the magic in every moment.",
+    service: "Prices in Sri Lankan rupees. A 10% service charge is added to the bill.",
+    jump: "Menu sections",
+    count: "{n} drinks",
+    foodTitle: "Hungry *too?*",
+    foodBody: "Our kitchen menu changes with the season. Message us and we'll send you today's dishes.",
+    foodCta: "Ask for today's food menu",
+    back: "Back to KOKOY",
+  },
   vibe: {
     label: "The vibe",
     // One line each; the last is set in the coral accent.
@@ -124,7 +140,7 @@ const en = {
   drinks: {
     label: "Signature drinks",
     title: "Something cold, *something colourful.*",
-    cta: "Ask for the drinks list",
+    cta: "See the drinks menu",
     badge: "SIGNATURE · DRINKS · KOKOY · ",
     items: [
       { name: "Pink Hour", spec: "Gin, guava, hibiscus, soda", note: "Our sunset, in a glass." },

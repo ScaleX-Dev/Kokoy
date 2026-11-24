@@ -10,7 +10,8 @@ type UI = {
   lang: Locale;
   menuOpen: boolean;
   setMenuOpen: (v: boolean) => void;
-  scrollTo: (target: string | number) => void;
+  /** Scrolls to a selector or y. `extraOffset` clears anything stuck below the pill (e.g. a tab bar). */
+  scrollTo: (target: string | number, extraOffset?: number) => void;
 };
 
 const UIContext = createContext<UI | null>(null);
@@ -64,6 +65,15 @@ export default function Providers({ t, lang, children }: { t: Dict; lang: Locale
         const y = Number(saved);
         if (lenisRef.current) lenisRef.current.scrollTo(y, { immediate: true, force: true });
         else window.scrollTo({ top: y });
+      } else if (window.location.hash.length > 1) {
+        // Arrived from another page with a section link (e.g. /en#pool from the menu page):
+        // go there now that pins and fonts are measured, clearing the nav pill.
+        const el = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 96;
+          if (lenisRef.current) lenisRef.current.scrollTo(top, { immediate: true, force: true });
+          else window.scrollTo({ top });
+        }
       }
     });
     return () => {
@@ -105,10 +115,10 @@ export default function Providers({ t, lang, children }: { t: Dict; lang: Locale
     document.documentElement.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
 
-  const scrollTo = useCallback((target: string | number) => {
+  const scrollTo = useCallback((target: string | number, extraOffset = 0) => {
     const lenis = lenisRef.current;
     // Clears the nav pill stuck at the top (gap + pill + breathing room).
-    const offset = typeof target === "string" ? -96 : 0;
+    const offset = typeof target === "string" ? -96 - extraOffset : 0;
     if (lenis) {
       lenis.start();
       lenis.scrollTo(target, { duration: 1.6, offset });

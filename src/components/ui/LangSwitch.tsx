@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 import { LOCALES, LOCALE_COOKIE, type Locale } from "@/lib/i18n";
 import { SCROLL_KEY, useUI } from "../Providers";
 
@@ -13,9 +14,11 @@ function remember(l: Locale) {
   } catch {}
 }
 
-/** EN / RU pill. Remembers the choice and keeps the visitor's place on the page. */
+/** EN / RU pill. Remembers the choice and keeps the visitor on the same page, at the same place. */
 export default function LangSwitch({ className, tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
   const { lang, t } = useUI();
+  // The same page in the other language: /en/menu <-> /ru/menu.
+  const rest = (usePathname() ?? "").replace(/^\/(en|ru)(?=\/|$)/, "");
 
   return (
     <nav aria-label={t.a11y.language} className={clsx("flex rounded-full p-1 text-[12px] font-bold tracking-[0.12em]", tone === "light" ? "bg-cream/15" : "bg-charcoal/10", className)}>
@@ -24,7 +27,7 @@ export default function LangSwitch({ className, tone = "light" }: { className?: 
         return (
           <a
             key={l}
-            href={`/${l}`}
+            href={`/${l}${rest}`}
             hrefLang={l}
             lang={l}
             aria-current={active ? "true" : undefined}

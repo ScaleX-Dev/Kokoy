@@ -10,7 +10,7 @@ import { useUI } from "../Providers";
 import Marquee from "../ui/Marquee";
 import Rich from "../ui/Rich";
 import SpinBadge from "../ui/SpinBadge";
-import { WhatsAppButton } from "../ui/Buttons";
+import { LinkButton } from "../ui/Buttons";
 import { Burst } from "../ui/Icons";
 
 type Tab = "food" | "drinks";
@@ -27,7 +27,7 @@ const PROPS: Partial<Record<number, "sun" | "badge" | "burst">> = { 0: "sun", 2:
  * the Brunch and Drinks sections, so they are not repeated here.
  */
 export default function Menu() {
-  const { t } = useUI();
+  const { t, lang } = useUI();
   const root = useRef<HTMLElement>(null);
   const [tab, setTab] = useState<Tab>("food");
 
@@ -77,7 +77,7 @@ export default function Menu() {
           </p>
         </div>
 
-        {/* The switch picks what the row shows; the button asks for that menu on WhatsApp. */}
+        {/* The switch picks what the row shows; the button opens the full menu page. */}
         <div data-menu-in className="flex flex-wrap items-center gap-3">
           <div role="tablist" aria-label={t.eats.label} onKeyDown={onKey} className="inline-flex rounded-full border-2 border-charcoal p-1">
             {tabs.map((k) => (
@@ -99,9 +99,9 @@ export default function Menu() {
               </button>
             ))}
           </div>
-          <WhatsAppButton message={tab === "food" ? t.wa.brunch : t.wa.drinks} tone="coral">
+          <LinkButton href={`/${lang}/menu`} tone="coral">
             {t.eats.cta}
-          </WhatsAppButton>
+          </LinkButton>
         </div>
       </div>
 

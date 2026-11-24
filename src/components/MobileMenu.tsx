@@ -6,13 +6,13 @@ import { SITE } from "@/lib/content";
 import { useUI } from "./Providers";
 import Wordmark from "./ui/Wordmark";
 import LangSwitch from "./ui/LangSwitch";
-import { WhatsAppButton, useAnchor } from "./ui/Buttons";
+import { WhatsAppButton, sectionHref, useAnchor } from "./ui/Buttons";
 
 const snap = [0.7, 0, 0.2, 1] as const;
 const soft = [0.2, 0.7, 0.1, 1] as const;
 
 export default function MobileMenu() {
-  const { t, menuOpen, setMenuOpen } = useUI();
+  const { t, lang, menuOpen, setMenuOpen } = useUI();
   const anchor = useAnchor();
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -61,7 +61,7 @@ export default function MobileMenu() {
               {t.nav.map((l, i) => (
                 <li key={l.id} className="overflow-hidden">
                   <motion.a
-                    href={`#${l.id}`}
+                    href={sectionHref(lang, l.id)}
                     onClick={anchor(l.id)}
                     className="group flex items-center gap-4 py-1.5"
                     initial={{ y: "110%" }}

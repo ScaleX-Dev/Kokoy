@@ -9,7 +9,7 @@ import { DRINK_STYLE, IMG } from "@/lib/content";
 import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import SpinBadge from "../ui/SpinBadge";
-import { WhatsAppButton } from "../ui/Buttons";
+import { LinkButton } from "../ui/Buttons";
 
 const soft = [0.2, 0.7, 0.1, 1] as const;
 
@@ -28,7 +28,7 @@ function DrinkCopy({ index, n, name, spec, note }: { index: number; n: number; n
 
 /** Pick a drink and the whole section takes on its colour. */
 export default function Drinks() {
-  const { t } = useUI();
+  const { t, lang } = useUI();
   const root = useRef<HTMLElement>(null);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(0);
@@ -141,9 +141,9 @@ export default function Drinks() {
           </div>
 
           <div data-drinks-in className="mt-4 md:order-5 md:mt-0 lg:mt-4">
-            <WhatsAppButton message={t.wa.drinks} tone="charcoal">
+            <LinkButton href={`/${lang}/menu`} tone="charcoal">
               {t.drinks.cta}
-            </WhatsAppButton>
+            </LinkButton>
           </div>
         </div>
 

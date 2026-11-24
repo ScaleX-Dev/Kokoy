@@ -83,11 +83,20 @@ export function MapButtons({ tone, className }: { tone?: Tone; className?: strin
 }
 
 /** In-page anchor that hands the scroll to Lenis. */
+/**
+ * Click handler for links to a homepage section. On the page that has the section it scrolls
+ * smoothly; on any other page (the menu) it lets the link take the visitor home to it.
+ * Pair it with `sectionHref(lang, id)`.
+ */
 export function useAnchor() {
   const { scrollTo, setMenuOpen } = useUI();
   return (id: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
     setMenuOpen(false);
+    if (!document.getElementById(id)) return;
+    e.preventDefault();
     scrollTo(`#${id}`);
   };
 }
+
+/** Where a homepage section lives, from any page. */
+export const sectionHref = (lang: string, id: string) => `/${lang}#${id}`;

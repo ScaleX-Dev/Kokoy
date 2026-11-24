@@ -4,7 +4,8 @@ import { waLink } from "@/lib/content";
 import { useUI } from "./Providers";
 import Wordmark from "./ui/Wordmark";
 import { WhatsAppIcon } from "./ui/Icons";
-import { useAnchor } from "./ui/Buttons";
+import clsx from "clsx";
+import { sectionHref, useAnchor } from "./ui/Buttons";
 
 /**
  * A floating pill nav. It rests at the foot of the hero, rides up with it, then sticks
@@ -13,13 +14,21 @@ import { useAnchor } from "./ui/Buttons";
  * The header is an invisible track running from the pill's resting place to the end of
  * the page, and the pill is `sticky` inside it. That keeps the hand-off entirely in CSS,
  * so it moves on the compositor and never lags behind the scroll.
+ *
+ * `docked` (pages without the hero, like the menu): the track starts at the top, so the pill
+ * is stuck there from the first frame.
  */
-export default function Header() {
-  const { t, setMenuOpen, scrollTo } = useUI();
+export default function Header({ docked = false }: { docked?: boolean }) {
+  const { t, lang, setMenuOpen, scrollTo } = useUI();
   const anchor = useAnchor();
 
   return (
-    <header className="pointer-events-none absolute inset-x-0 top-[calc(max(100svh,var(--hero-min))_-_var(--pill-h)_-_var(--pill-gap))] bottom-0 z-50">
+    <header
+      className={clsx(
+        "pointer-events-none absolute inset-x-0 bottom-0 z-50",
+        docked ? "top-0" : "top-[calc(max(100svh,var(--hero-min))_-_var(--pill-h)_-_var(--pill-gap))]",
+      )}
+    >
       <a
         href="#main"
         className="pointer-events-auto sr-only rounded-full bg-cream px-4 py-2 font-semibold text-charcoal focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]"
@@ -32,8 +41,10 @@ export default function Header() {
         className="pointer-events-auto sticky top-3 mx-[var(--pad)] flex h-[var(--pill-h)] items-stretch justify-between gap-4 overflow-hidden rounded-full bg-cream pl-5 text-charcoal shadow-[0_12px_32px_-14px_rgb(37_35_43/0.45)] ring-1 ring-charcoal/5 motion-safe:animate-[kk-rise_1s_var(--ease-soft)_1.1s_both] md:top-4 lg:mx-auto lg:w-fit lg:max-w-[var(--pill-w)] lg:gap-6"
       >
         <a
-          href="#top"
+          href={`/${lang}`}
           onClick={(e) => {
+            // Home from the homepage is the top of it; from another page, follow the link.
+            if (!document.getElementById("top")) return;
             e.preventDefault();
             scrollTo(0);
           }}
@@ -47,7 +58,7 @@ export default function Header() {
           {t.nav.map((l) => (
             <li key={l.id}>
               <a
-                href={`#${l.id}`}
+                href={sectionHref(lang, l.id)}
                 onClick={anchor(l.id)}
                 className="inline-flex min-h-9 items-center rounded-full px-2.5 text-[12px] font-semibold tracking-[0.04em] whitespace-nowrap uppercase transition-colors duration-300 hover:bg-charcoal/[0.07]"
               >

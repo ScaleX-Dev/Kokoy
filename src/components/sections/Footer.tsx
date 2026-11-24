@@ -6,13 +6,13 @@ import { SITE } from "@/lib/content";
 import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import LangSwitch from "../ui/LangSwitch";
-import { useAnchor } from "../ui/Buttons";
+import { sectionHref, useAnchor } from "../ui/Buttons";
 import { ArrowIcon } from "../ui/Icons";
 import { LogoMark, LogoWord } from "../ui/Wordmark";
 
 /** Everything centred on one axis: sign-off, links, address, socials, then the logo at sunset. */
 export default function Footer() {
-  const { t, scrollTo } = useUI();
+  const { t, lang, scrollTo } = useUI();
   const anchor = useAnchor();
   const root = useRef<HTMLElement>(null);
 
@@ -41,7 +41,7 @@ export default function Footer() {
             {t.nav.map((l) => (
               <li key={l.id}>
                 <a
-                  href={`#${l.id}`}
+                  href={sectionHref(lang, l.id)}
                   onClick={anchor(l.id)}
                   className="inline-flex min-h-11 items-center rounded-full px-4 text-[14px] font-bold tracking-[0.12em] uppercase transition-colors duration-300 hover:bg-cream/10 hover:text-coral"
                 >
