@@ -5,6 +5,10 @@ import Footer from "@/components/sections/Footer";
 import MenuPage from "@/components/menu/MenuPage";
 import { getDictionary, hasLocale } from "@/lib/i18n";
 
+// Pages are validated on their own, so the layout's `instant = false` does not cover this one;
+// see the note in ../layout.tsx.
+export const instant = false;
+
 export async function generateMetadata({ params }: PageProps<"/[lang]/menu">): Promise<Metadata> {
   const { lang } = await params;
   if (!hasLocale(lang)) return {};

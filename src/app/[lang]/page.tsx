@@ -17,6 +17,10 @@ import Footer from "@/components/sections/Footer";
 // otherwise still reserve several screens of empty scrolling. Set to true to bring it back.
 const SHOW_DAY = false;
 
+// Pages are validated on their own, so the layout's `instant = false` does not cover this one;
+// see the note in ./layout.tsx.
+export const instant = false;
+
 // Homepage flow from the brand foundation, §07.
 export default function Home() {
   return (
