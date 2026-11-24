@@ -183,7 +183,7 @@ export default function Brunch() {
             <li key={d.name} data-dish className="w-[78vw] shrink-0 snap-start scroll-ml-[var(--pad)] sm:w-[46vw] lg:w-[30vw] xl:w-[25vw]">
               <div
                 className={clsx(
-                  "group transition-[rotate] duration-700 ease-soft md:rounded-[28px] md:bg-white md:p-3 md:pb-6 md:shadow-[0_24px_50px_-28px_rgb(37_35_43/0.55)] md:hover:rotate-0",
+                  "group md:h-full transition-[rotate] duration-700 ease-soft md:rounded-[28px] md:bg-white md:p-3 md:pb-6 md:shadow-[0_24px_50px_-28px_rgb(37_35_43/0.55)] md:hover:rotate-0",
                   FRAME_TILT[i % FRAME_TILT.length],
                 )}
               >
