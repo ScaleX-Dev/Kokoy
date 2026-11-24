@@ -207,6 +207,7 @@ const en = {
     poolInfinity: "The pool lit up at night",
     underwater: "A guest relaxing at the pool edge with a drink",
     sandLegs: "Two friends sitting on the edge of the pool",
+    poolWater: "Sunlit pool water seen from above",
     brunchSpread: "A table of plates and drinks to share",
     pancakes: "A burger and fries on a wooden board",
     eggsToast: "Baked eggs with toasted bread",

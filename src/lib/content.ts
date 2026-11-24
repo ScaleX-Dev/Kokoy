@@ -18,6 +18,9 @@ export const IMG = {
   poolInfinity: p(4727),
   underwater: p(4487),
   sandLegs: p(4489),
+  // Sunlit pool water from straight above. Generated (procedural caustics in the KOKOY turquoise),
+  // not shot: the shoot has no clean water-surface frame.
+  poolWater: "/photos/kokoy-pool-water.webp",
   // Food
   brunchSpread: p(4618),
   pancakes: p(4653),

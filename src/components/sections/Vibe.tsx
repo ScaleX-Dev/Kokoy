@@ -62,11 +62,13 @@ export default function Vibe() {
   return (
     <section ref={root} id="vibe" className="relative overflow-hidden bg-charcoal text-cream">
       <div data-vibe-img className="absolute inset-0 will-change-transform">
-        <Image src={IMG.poolLounger} alt="" fill sizes="100vw" quality={80} className="object-cover" />
+        {/* After the reference: nothing but sunlit pool water seen from above. */}
+        <Image src={IMG.poolWater} alt="" fill sizes="100vw" quality={80} className="object-cover" />
       </div>
-      {/* Darkened where the copy sits: the top on phones, the left and foot from md up. */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(37_35_43/0.85)_0%,rgb(37_35_43/0.35)_45%,rgb(37_35_43/0.55)_100%)] md:bg-[linear-gradient(90deg,rgb(37_35_43/0.78)_0%,rgb(37_35_43/0.45)_50%,rgb(37_35_43/0.2)_100%)]" />
-      <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,rgb(37_35_43/0)_55%,rgb(37_35_43/0.65)_100%)] md:block" />
+      {/* Lightly shaded where the copy sits (the top on phones, the left and foot from md up),
+          so the water stays bright. */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(37_35_43/0.55)_0%,rgb(37_35_43/0.12)_45%,rgb(37_35_43/0.3)_100%)] md:bg-[linear-gradient(90deg,rgb(37_35_43/0.5)_0%,rgb(37_35_43/0.16)_50%,rgb(37_35_43/0)_100%)]" />
+      <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,rgb(37_35_43/0)_60%,rgb(37_35_43/0.35)_100%)] md:block" />
 
       {/* A polaroid with a sun for a tab, pinned to the top-left corner (desktop only). */}
       <div
