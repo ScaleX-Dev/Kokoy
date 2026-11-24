@@ -139,11 +139,7 @@ export default function Hero() {
       <div className="relative flex-1 overflow-hidden">
         <div data-hero-media className="absolute inset-0 will-change-transform">
           <div data-hero-zoom className="absolute inset-0">
-            {/* The reel is vertical (9:16). Landscape: it fills the stage edge to edge, cropped to a
-                horizontal band. Portrait: it fills the stage down to the text zone (hours, headline,
-                nav pill) so its burned-in captions never sit under them, then fades into a tiny
-                blurred copy of itself. */}
-            <Film className="hero-backdrop" src={SITE.heroVideo.blur} />
+            {/* Which file plays depends on the screen shape (see content.ts). */}
             {film && <Film key={film} className="hero-film" src={film} poster={SITE.heroVideo.poster} />}
           </div>
         </div>

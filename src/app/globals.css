@@ -285,36 +285,11 @@ details.faq[open]::details-content {
   white-space: nowrap;
 }
 
-/* Hero reel (9:16). Portrait: fills the stage down to the text zone, then fades out, cropped
-   so its burned-in captions stay above that fade. Landscape: full-bleed, cropped to the band
-   of the frame where the faces and dishes sit. */
-.hero-backdrop {
+/* Hero film: full-bleed on every screen. */
+.hero-film {
   position: absolute;
   inset: 0;
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
-  scale: 1.25;
-  opacity: 0.7;
-  filter: blur(40px);
-}
-.hero-film {
-  position: absolute;
-  inset: 0 0 calc(var(--pill-h) + var(--pill-gap) * 2 + 4.5rem) 0;
-  inline-size: 100%;
-  block-size: calc(100% - (var(--pill-h) + var(--pill-gap) * 2 + 4.5rem));
-  object-fit: cover;
-  object-position: 50% 60%;
-  mask-image: linear-gradient(180deg, #000 88%, transparent);
-}
-@media (min-aspect-ratio: 1/1) {
-  .hero-backdrop {
-    display: none;
-  }
-  .hero-film {
-    inset: 0;
-    block-size: 100%;
-    object-position: 50% 40%;
-    mask-image: none;
-  }
 }
