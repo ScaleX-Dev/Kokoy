@@ -73,8 +73,9 @@ export const SITE = {
   // speed: its 12s of quick cuts become a 24s loop of smooth slow motion, each real 60fps frame shown
   // once at 30fps. "wide" (1920x1080) plays on landscape screens, `src` on portrait ones: a 608x1080
   // window of the master (no upscaling) reframed shot by shot onto each subject, the way a vertical
-  // edit is cut. It jumps on hard cuts and glides through dissolves. The master lives outside the
-  // repo (~/Documents/KOKOY-media). Each comes as HEVC, near the master's quality at under
+  // edit is cut, and following subjects that drift or zoom within a shot. It jumps on hard cuts and
+  // glides through dissolves. The master and the framing keyframes (hero-portrait-keys.py) live
+  // outside the repo, in ~/Documents/KOKOY-media. Each comes as HEVC, near the master's quality at under
   // half the size, for browsers that play it, and as H.264 (same quality, larger) for the rest.
   // The poster is the master's first frame.
   heroVideo: {
