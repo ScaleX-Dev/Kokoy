@@ -6,9 +6,8 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { EVENT_IMG, IMG } from "@/lib/content";
 import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
-import { WhatsAppButton } from "../ui/Buttons";
 
-/** The weekly line-up as a row of cards; one "What's on this week?" action covers them all. */
+/** The weekly line-up as a row of cards. */
 export default function Events() {
   const { t } = useUI();
   const root = useRef<HTMLElement>(null);
@@ -41,8 +40,7 @@ export default function Events() {
 
   return (
     <section ref={root} id="events" className="section-y relative overflow-hidden bg-charcoal text-cream">
-      {/* Heading on the left, the general action on the right. */}
-      <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+      <div className="pad">
         <div className="max-w-4xl">
           <h2 data-ev-in className="title">
             <Rich text={t.events.title} className="font-black text-coral" />
@@ -50,11 +48,6 @@ export default function Events() {
           <p data-ev-in className="mt-5 max-w-[52ch] text-lg leading-relaxed text-cream/75">
             {t.events.body}
           </p>
-        </div>
-        <div data-ev-in className="shrink-0">
-          <WhatsAppButton message={t.wa.events} tone="outline-cream">
-            {t.events.cta}
-          </WhatsAppButton>
         </div>
       </div>
 

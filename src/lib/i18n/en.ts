@@ -40,7 +40,6 @@ const en = {
     pool: "Hi KOKOY! I'd like to spend a day at the pool. What are the options?",
     brunch: "Hi KOKOY! Could you send me today's brunch menu?",
     drinks: "Hi KOKOY! Could you send me the drinks list?",
-    events: "Hi KOKOY! What's on this week?",
     question: "Hi KOKOY! I have a question: ",
   },
   announcement: {
@@ -142,7 +141,6 @@ const en = {
       { day: "SUN", name: "Brunch Club", detail: "Long tables and live acoustic from 11 am", tag: "Weekly" },
       { day: "1×", name: "Guest DJ Night", detail: "A special guest behind the decks", tag: "Monthly" },
     ],
-    cta: "What's on this week?",
   },
   gallery: {
     label: "Life at KOKOY",
@@ -161,28 +159,27 @@ const en = {
     hours: [["Mon – Sun", "10AM - 9PM"]],
     contactLabel: "Say hello",
     mapHelp: { desktop: "Use {key} + scroll to zoom the map", mobile: "Use two fingers to move the map" },
-    faqTitle: "Good to know",
-    // TODO(confirm): every answer below with the KOKOY team.
+    faqTitle: "FAQ",
     faq: [
       {
-        q: "Do I need to book?",
-        a: "There's no booking engine. Just message us on WhatsApp, especially for weekends and groups. Walk-ins are welcome when there's space.",
+        q: "Do I need a reservation to visit KOKOY?",
+        a: "No reservation is needed! KOKOY Pool Club in Unawatuna welcomes walk-in guests. Just drop by, find your spot and enjoy the day by the pool.",
       },
       {
-        q: "How does pool access work?",
-        a: "Options change with the season and the day's events. Send us a message and we'll tell you what's on.",
+        q: "Is pool access free at KOKOY?",
+        a: "Yes! Pool access at KOKOY is complimentary, with no minimum spend required. You can enjoy our pool without having to meet a minimum food or beverage purchase.",
       },
       {
-        q: "Is there food for everyone?",
-        a: "Yes. The brunch menu has plenty of vegetarian and plant-based dishes, and the kitchen is happy to adapt.",
+        q: "What food and drinks does KOKOY serve?",
+        a: "KOKOY serves all-day brunch, cocktails, mocktails and fresh seafood. Whether you're stopping by for brunch, a refreshing drink or something from our seafood corner, there's something to enjoy throughout the day.",
       },
       {
-        q: "Can we host a private event?",
-        a: "Definitely. Birthdays, team days, celebrations of any kind. Tell us the date and group size and we'll plan it with you.",
+        q: "Can I visit KOKOY without using the swimming pool?",
+        a: "Absolutely! KOKOY is more than just a pool club. You're welcome to visit us in Unawatuna for all-day brunch, food, cocktails, mocktails and a relaxed poolside atmosphere, even if you don't plan on swimming.",
       },
       {
-        q: "What should I bring?",
-        a: "Swimwear, sunscreen and good company. We'll handle the rest.",
+        q: "Can I celebrate a special occasion at KOKOY?",
+        a: "Absolutely! Whether you're planning a birthday, a special celebration or a get-together with friends, we'd love to hear from you. Contact our team on WhatsApp to discuss your plans and confirm the arrangements.",
       },
     ],
   },
