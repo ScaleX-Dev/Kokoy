@@ -76,12 +76,10 @@ export const SITE = {
   // 4:5 loop from the same shoot, its end crossfaded into its start so it never jumps. It plays from
   // its first frame (also the poster) once scrolled into view.
   vibeVideo: { src: "/video/pool-girl.mp4", poster: "/video/pool-girl.jpg" },
-  // TODO(confirm): social handles and links.
-  instagram: { handle: "@kokoy.poolclub", url: "https://www.instagram.com/" },
+  instagram: { handle: "@kokoy.unawatuna", url: "https://www.instagram.com/kokoy.unawatuna" },
   social: [
-    { label: "Instagram", url: "https://www.instagram.com/" },
-    { label: "TikTok", url: "https://www.tiktok.com/" },
-    { label: "TripAdvisor", url: "https://www.tripadvisor.com/" },
+    { label: "Instagram", url: "https://www.instagram.com/kokoy.unawatuna" },
+    { label: "Facebook", url: "https://www.facebook.com/profile.php?id=61596286547699" },
   ],
 } as const;
 
