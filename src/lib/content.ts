@@ -71,8 +71,10 @@ export const SITE = {
   // The hero film: the KOKOY reel (pool, bar, cocktails, kitchen, the menu, the logo wall, guests),
   // full-bleed on every screen. Every file is cut from the 1080p/60fps master KOKOY_WEB_VID1 at half
   // speed: its 12s of quick cuts become a 24s loop of smooth slow motion, each real 60fps frame shown
-  // once at 30fps. "wide" (1920x1080) plays on landscape screens, `src` (the centre 608x1080 of the
-  // frame, no upscaling) on portrait ones. Each comes as HEVC, near the master's quality at under
+  // once at 30fps. "wide" (1920x1080) plays on landscape screens, `src` on portrait ones: a 608x1080
+  // window of the master (no upscaling) reframed shot by shot onto each subject, the way a vertical
+  // edit is cut. It jumps on hard cuts and glides through dissolves. The master lives outside the
+  // repo (~/Documents/KOKOY-media). Each comes as HEVC, near the master's quality at under
   // half the size, for browsers that play it, and as H.264 (same quality, larger) for the rest.
   // The poster is the master's first frame.
   heroVideo: {
