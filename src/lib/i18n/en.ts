@@ -111,13 +111,14 @@ const en = {
     badge: "ALL-DAY BRUNCH · ALL-DAY BRUNCH · ",
     note: "The menu changes with the season.",
     cta: "Ask for today's menu",
+    // TODO(confirm): dish names and descriptions with the kitchen (written to match the shoot photos).
     items: [
-      { name: "Kithul pancakes", desc: "Buttermilk stack, kithul treacle, burnt banana", tag: "Fan favourite" },
-      { name: "Hopper benedict", desc: "Crisp hopper, poached eggs, curry-leaf hollandaise", tag: "Island twist" },
+      { name: "The KOKOY burger", desc: "Stacked burger, house sauce, fries on the side", tag: "Fan favourite" },
+      { name: "Baked eggs", desc: "Eggs baked in spiced tomato, with toasted bread", tag: "Brunch classic" },
       { name: "The big share", desc: "A table-filling spread for the whole crew", tag: "For groups" },
-      { name: "Sunrise bowl", desc: "Mango, papaya, coconut yoghurt, toasted granola", tag: "Plant-based" },
-      { name: "Island French toast", desc: "Brioche, coconut custard, fresh berries", tag: "Sweet tooth" },
-      { name: "Smash & sambol", desc: "Smashed avocado, pol sambol, sourdough, soft egg", tag: "Classic" },
+      { name: "Small plates", desc: "A few bites and dips to pass around", tag: "For the table" },
+      { name: "Grilled skewers", desc: "Straight off the grill, with herbs and a dipping sauce", tag: "Island twist" },
+      { name: "Chef's plate", desc: "Ask us what's on today", tag: "Seasonal" },
     ],
   },
   drinks: {
