@@ -35,7 +35,10 @@ export default function Hero() {
 
   useEffect(() => {
     const aspect = window.matchMedia("(min-aspect-ratio: 1/1)");
-    const pick = () => setFilm(aspect.matches ? SITE.heroVideo.wide : SITE.heroVideo.src);
+    // HEVC where the browser can play it (Safari, iOS, most Macs, recent Chrome/Edge), else H.264.
+    const hevc = document.createElement("video").canPlayType('video/mp4; codecs="hvc1"') !== "";
+    const v = SITE.heroVideo;
+    const pick = () => setFilm(aspect.matches ? (hevc ? v.wideHevc : v.wide) : hevc ? v.srcHevc : v.src);
     pick();
     aspect.addEventListener("change", pick);
     return () => aspect.removeEventListener("change", pick);

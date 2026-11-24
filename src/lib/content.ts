@@ -68,10 +68,20 @@ export const SITE = {
     google: "https://www.google.com/maps/search/?api=1&query=Unawatuna%2C%20Sri%20Lanka",
     yandex: "https://yandex.com/maps/?text=Unawatuna%2C%20Sri%20Lanka",
   },
-  // The hero film: a 32s graded loop cut from the shoot (pool, bar, kitchen, food, guests, drone),
-  // full-bleed on every screen. It is cut twice from the same edit: a 16:9 version for landscape
-  // screens ("wide", 1080p) and a 9:16 one for portrait screens (720x1280), each framed per shot.
-  heroVideo: { src: "/video/hero.mp4", wide: "/video/hero-wide.mp4", poster: "/video/hero-poster.jpg" },
+  // The hero film: the KOKOY reel (pool, bar, cocktails, kitchen, the menu, the logo wall, guests),
+  // full-bleed on every screen. Every file is cut from the 1080p/60fps master KOKOY_WEB_VID1 at half
+  // speed: its 12s of quick cuts become a 24s loop of smooth slow motion, each real 60fps frame shown
+  // once at 30fps. "wide" (1920x1080) plays on landscape screens, `src` (the centre 608x1080 of the
+  // frame, no upscaling) on portrait ones. Each comes as HEVC, near the master's quality at under
+  // half the size, for browsers that play it, and as H.264 (same quality, larger) for the rest.
+  // The poster is the master's first frame.
+  heroVideo: {
+    src: "/video/kokoy-hero.mp4",
+    srcHevc: "/video/kokoy-hero-hevc.mp4",
+    wide: "/video/kokoy-hero-wide.mp4",
+    wideHevc: "/video/kokoy-hero-wide-hevc.mp4",
+    poster: "/video/kokoy-hero-poster.jpg",
+  },
   // The polaroid in "Pool side paradise": a guest at the pool edge, snacking and laughing. A 5.8s
   // 4:5 loop from the same shoot, its end crossfaded into its start so it never jumps. It plays from
   // its first frame (also the poster) once scrolled into view.
