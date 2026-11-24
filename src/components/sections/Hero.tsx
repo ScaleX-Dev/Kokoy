@@ -117,7 +117,12 @@ export default function Hero() {
           </div>
 
           {/* Centre: the lockup */}
-          <div data-hero-lockup className="flex flex-1 flex-col items-center justify-center py-6 text-center">
+          <div data-hero-lockup className="relative flex flex-1 flex-col items-center justify-center py-6 text-center">
+            {/* A soft, see-through shade just behind the logo so it reads over any shot of the film. */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[min(60vh,30rem)] w-[min(92vw,62rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(37_35_43/0.42),rgb(37_35_43/0.18)_60%,transparent)]"
+            />
             <p
               role="img"
               aria-label="KOKOY"
