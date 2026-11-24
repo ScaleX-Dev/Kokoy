@@ -92,7 +92,7 @@ export default function Vibe() {
             <div data-vibe-porthole>
               <div className="rotate-[4deg] bg-white p-3 pb-12 shadow-[0_34px_60px_-24px_rgb(0_0_0/0.75)] md:p-4 md:pb-16">
                 <div role="img" aria-label={t.alt.underwater} className="relative aspect-[4/5] overflow-hidden bg-charcoal">
-                  <Film src={SITE.vibeVideo.src} poster={SITE.vibeVideo.poster} className="absolute inset-0 size-full object-cover" />
+                  <Film src={SITE.vibeVideo.src} poster={SITE.vibeVideo.poster} fromStartInView className="absolute inset-0 size-full object-cover" />
                 </div>
               </div>
             </div>

@@ -13,7 +13,19 @@ import { useEffect, useRef } from "react";
  * site set to "never autoplay"), on the visitor's first scroll, tap or key press. Safari's own
  * start button is hidden in globals.css (.film) so a film never shows a play overlay.
  */
-export default function Film({ src, className, poster }: { src: string; className?: string; poster?: string }) {
+export default function Film({
+  src,
+  className,
+  poster,
+  fromStartInView = false,
+}: {
+  src: string;
+  className?: string;
+  poster?: string;
+  /** Wait until the film scrolls into view, then play it from its first frame; pause it when it
+   *  leaves. For films further down the page, so visitors see them from the start. */
+  fromStartInView?: boolean;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -23,7 +35,7 @@ export default function Film({ src, className, poster }: { src: string; classNam
     v.defaultMuted = true;
     v.playsInline = true;
     v.loop = true;
-    v.autoplay = true;
+    v.autoplay = !fromStartInView;
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
     v.setAttribute("webkit-playsinline", "");
@@ -32,8 +44,10 @@ export default function Film({ src, className, poster }: { src: string; classNam
       v.load();
     }
 
+    // A film that waits for the viewport only plays while it is on screen.
+    let inView = !fromStartInView;
     const kick = () => {
-      if (v.paused && !document.hidden) v.play().catch(() => {});
+      if (inView && v.paused && !document.hidden) v.play().catch(() => {});
     };
     const gestures = ["pointerdown", "touchstart", "keydown", "scroll", "wheel"] as const;
     const retry = () => {
@@ -45,20 +59,37 @@ export default function Film({ src, className, poster }: { src: string; classNam
     v.addEventListener("canplay", kick);
     document.addEventListener("visibilitychange", kick);
     gestures.forEach((g) => window.addEventListener(g, retry, { passive: true }));
+    const io = fromStartInView
+      ? new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              if (!inView) v.currentTime = 0;
+              inView = true;
+              kick();
+            } else {
+              inView = false;
+              v.pause();
+            }
+          },
+          { threshold: 0.35 },
+        )
+      : null;
+    io?.observe(v);
     return () => {
+      io?.disconnect();
       v.removeEventListener("loadeddata", kick);
       v.removeEventListener("canplay", kick);
       document.removeEventListener("visibilitychange", kick);
       gestures.forEach((g) => window.removeEventListener(g, retry));
     };
-  }, [src]);
+  }, [src, fromStartInView]);
 
   return (
     <video
       ref={ref}
       className={clsx("film", className)}
       poster={poster}
-      autoPlay
+      autoPlay={!fromStartInView}
       muted
       loop
       playsInline

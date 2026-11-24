@@ -73,7 +73,8 @@ export const SITE = {
   // screens ("wide", 1080p) and a 9:16 one for portrait screens (720x1280), each framed per shot.
   heroVideo: { src: "/video/hero.mp4", wide: "/video/hero-wide.mp4", poster: "/video/hero-poster.jpg" },
   // The polaroid in "Pool side paradise": a guest at the pool edge, snacking and laughing. A 5.8s
-  // 4:5 loop from the same shoot and grade, its end crossfaded into its start so it never jumps.
+  // 4:5 loop from the same shoot, its end crossfaded into its start so it never jumps. It plays from
+  // its first frame (also the poster) once scrolled into view.
   vibeVideo: { src: "/video/pool-girl.mp4", poster: "/video/pool-girl.jpg" },
   // TODO(confirm): social handles and links.
   instagram: { handle: "@kokoy.poolclub", url: "https://www.instagram.com/" },
