@@ -57,7 +57,7 @@ export const IMG = {
   amberGlow: "/photos/kokoy-dsc-0667-amber-glow.webp",
   islandEspresso: "/photos/kokoy-dsc-0775-island-espresso.webp",
   pineappleHellfire: "/photos/kokoy-dsc-0791-pineapple-hellfire.webp",
-  monsoonMelon: "/photos/kokoy-dsc-0459-monsoon-melon.webp",
+  monsoonMelon: "/photos/kokoy-dsc-0424-monsoon-melon.webp",
 } as const;
 
 export type ImgKey = keyof typeof IMG;

@@ -186,7 +186,7 @@ const en = {
     amberGlow: "An amber arrack cocktail with a cinnamon stick over ice",
     islandEspresso: "An espresso cocktail with a thick crema and coffee beans",
     pineappleHellfire: "A pineapple cocktail garnished with red chilli and dried pineapple",
-    monsoonMelon: "A watermelon cocktail with a smoking sprig of rosemary",
+    monsoonMelon: "A watermelon cocktail with a sprig of rosemary on the pool edge",
     hero: "The KOKOY pool and lounge under the thatched roof",
     poolSunset: "The KOKOY pool beneath its thatched canopy",
     poolLounger: "Sofas and lounge chairs beside the KOKOY pool",
