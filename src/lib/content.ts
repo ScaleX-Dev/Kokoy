@@ -64,10 +64,11 @@ export const SITE = {
   // Opening hours in schema.org form, for search engines (the visible hours are in the dictionaries).
   opens: "10:00",
   closes: "21:00",
-  // TODO(confirm): official WhatsApp number, digits only with country code (e.g. "9477…").
-  // Left empty on purpose so no visitor messages a wrong number. While empty,
-  // WhatsApp opens its contact picker with the message pre-filled.
-  whatsapp: "",
+  // KOKOY's WhatsApp, +94 74 363 0607: digits only with the country code, as wa.me links need. Every
+  // WhatsApp button opens a chat with this number, and it is the phone number in the structured data.
+  whatsapp: "94743630607",
+  // The same number as shown to visitors (tap to call).
+  phone: "+94 74 363 0607",
   // TODO(confirm): official email. Empty hides it everywhere: the old placeholder (hello@kokoy.lk)
   // is on a domain that does not exist, so mail to it would bounce.
   email: "",

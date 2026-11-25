@@ -15,9 +15,9 @@ npm run lint
    host's environment *before building*. It feeds canonical links, hreflang, the sitemap, robots.txt,
    social previews and the structured data. On Vercel the production domain is used automatically if
    it is not set; anywhere else the site falls back to `localhost`.
-2. **Fill in the contact details** in `src/lib/content.ts`: `whatsapp` (digits with country code, e.g.
-   `9477…`; while empty, every WhatsApp button opens a contact picker), `email` (hidden while empty),
-   the Google/Yandex map links, and the map pin in `src/components/ui/KokoyMap.tsx`.
+2. **Fill in the contact details** in `src/lib/content.ts`. WhatsApp and phone are set
+   (+94 74 363 0607). Still to do: `email` (hidden while empty), the Google/Yandex map links, and
+   the map pin in `src/components/ui/KokoyMap.tsx`.
 3. **Search engines.** After launch, add the domain to Google Search Console and Yandex Webmaster,
    submit `/sitemap.xml`, and create or claim the Google Business Profile with the same name, hours
    and website.

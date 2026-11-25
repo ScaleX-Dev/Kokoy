@@ -59,15 +59,18 @@ export default function Footer() {
           </div>
           <div>
             <p className="eyebrow text-cream/60">{t.visit.contactLabel}</p>
-            {SITE.email ? (
-              <a href={`mailto:${SITE.email}`} className="mt-1 inline-flex min-h-11 items-center break-all hover:text-coral">
-                {SITE.email}
+            {/* A centred column of inline links. The 44px tap target centres the text, so 3px on top puts the
+                first line level with the address beside it (12px down, as mt-3 there). */}
+            <div className="mt-[3px] flex flex-col items-center">
+              <a href={`tel:+${SITE.whatsapp}`} className="inline-flex min-h-11 items-center whitespace-nowrap hover:text-coral">
+                {SITE.phone}
               </a>
-            ) : (
-              <a href={SITE.instagram.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-11 items-center hover:text-coral">
-                {SITE.instagram.handle}
-              </a>
-            )}
+              {SITE.email && (
+                <a href={`mailto:${SITE.email}`} className="inline-flex min-h-11 items-center break-all hover:text-coral">
+                  {SITE.email}
+                </a>
+              )}
+            </div>
           </div>
         </address>
 
