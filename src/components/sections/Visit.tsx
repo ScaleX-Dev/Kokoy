@@ -122,9 +122,11 @@ export default function Visit() {
               <div className="py-5">
                 <dt className="eyebrow text-charcoal/70">{t.visit.contactLabel}</dt>
                 <dd className="mt-1 flex flex-wrap gap-x-5 text-[15px] font-semibold">
-                  <a href={`mailto:${SITE.email}`} className="inline-flex min-h-11 items-center break-all underline-offset-4 hover:underline">
-                    {SITE.email}
-                  </a>
+                  {SITE.email && (
+                    <a href={`mailto:${SITE.email}`} className="inline-flex min-h-11 items-center break-all underline-offset-4 hover:underline">
+                      {SITE.email}
+                    </a>
+                  )}
                   <a href={SITE.instagram.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline-offset-4 hover:underline">
                     {SITE.instagram.handle}
                   </a>

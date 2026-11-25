@@ -87,7 +87,8 @@ export default function MobileMenu() {
             </WhatsAppButton>
             <div className="flex items-center justify-between gap-4 text-sm font-medium">
               <span>
-                {t.visit.address[0]} · {SITE.email}
+                {t.visit.address[0]}
+                {SITE.email && ` · ${SITE.email}`}
               </span>
               <LangSwitch tone="dark" />
             </div>

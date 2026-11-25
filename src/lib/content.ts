@@ -53,14 +53,24 @@ export type ImgKey = keyof typeof IMG;
 
 export const SITE = {
   name: "KOKOY",
-  // TODO(confirm): production domain.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // The live address, used for canonical links, hreflang, the sitemap, social previews and the
+  // structured data, so it must be the real domain. Set NEXT_PUBLIC_SITE_URL (e.g.
+  // "https://kokoy.lk") in the host's environment; on Vercel the production domain is picked up on
+  // its own. Localhost is only a fallback for local development.
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
+  ).replace(/\/$/, ""),
+  // Opening hours in schema.org form, for search engines (the visible hours are in the dictionaries).
+  opens: "10:00",
+  closes: "21:00",
   // TODO(confirm): official WhatsApp number, digits only with country code (e.g. "9477…").
   // Left empty on purpose so no visitor messages a wrong number. While empty,
   // WhatsApp opens its contact picker with the message pre-filled.
   whatsapp: "",
-  // TODO(confirm): official email.
-  email: "hello@kokoy.lk",
+  // TODO(confirm): official email. Empty hides it everywhere: the old placeholder (hello@kokoy.lk)
+  // is on a domain that does not exist, so mail to it would bounce.
+  email: "",
   // TODO(confirm): exact Google Maps place link.
   // TODO(confirm): exact place links once KOKOY is listed on Google Maps and Yandex Maps.
   // Russian visitors mostly use Yandex, so they are offered it first (see mapApps).

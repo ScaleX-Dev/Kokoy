@@ -59,9 +59,15 @@ export default function Footer() {
           </div>
           <div>
             <p className="eyebrow text-cream/60">{t.visit.contactLabel}</p>
-            <a href={`mailto:${SITE.email}`} className="mt-1 inline-flex min-h-11 items-center break-all hover:text-coral">
-              {SITE.email}
-            </a>
+            {SITE.email ? (
+              <a href={`mailto:${SITE.email}`} className="mt-1 inline-flex min-h-11 items-center break-all hover:text-coral">
+                {SITE.email}
+              </a>
+            ) : (
+              <a href={SITE.instagram.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-11 items-center hover:text-coral">
+                {SITE.instagram.handle}
+              </a>
+            )}
           </div>
         </address>
 
