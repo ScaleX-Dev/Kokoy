@@ -3,9 +3,10 @@
 
 const en = {
   meta: {
-    title: "KOKOY Pool Club · Unawatuna, Sri Lanka",
+    // Search results: the title is ~60 characters and the description ~155, so both show in full.
+    title: "KOKOY Pool Club Unawatuna | Free Pool, Brunch & Cocktails",
     description:
-      "Pool, all-day brunch, signature drinks and music in Unawatuna, Sri Lanka. Message us on WhatsApp and make a day of it.",
+      "Pool club in Unawatuna, Sri Lanka: free pool access with no minimum spend, all-day brunch, fresh seafood, cocktails and DJs. Walk-ins welcome, open daily.",
   },
   a11y: {
     skip: "Skip to content",
@@ -44,6 +45,8 @@ const en = {
   },
   hero: {
     kicker: "Pool club · Unawatuna, Sri Lanka",
+    // Read by search engines and screen readers ahead of the visible headline (the page's <h1>).
+    h1Lead: "KOKOY Pool Club in Unawatuna, Sri Lanka.",
     title: "Making Una *fun again*",
     sub: "Pool, all-day brunch, signature drinks and music. One sunny spot, and a reason to stay a little longer.",
     badge: "SUNSET CLUB · UNAWATUNA · SRI LANKA · ",
@@ -60,8 +63,8 @@ const en = {
   },
   menuPage: {
     meta: {
-      title: "Menu · KOKOY Pool Club, Unawatuna",
-      description: "All-day brunch, burgers, seafood, pizza, signature cocktails, mocktails, smoothies and coffee at KOKOY Pool Club in Unawatuna, Sri Lanka.",
+      title: "Menu | KOKOY Pool Club Unawatuna: Brunch, Seafood & Cocktails",
+      description: "The KOKOY menu with prices: all-day brunch, burgers, fresh seafood, pizza, signature cocktails, mocktails, smoothies and coffee by the pool in Unawatuna.",
     },
     label: "The menu",
     title: "The KOKOY *menu*",

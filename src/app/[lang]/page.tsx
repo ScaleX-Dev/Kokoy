@@ -11,6 +11,8 @@ import Events from "@/components/sections/Events";
 import Gallery from "@/components/sections/Gallery";
 import Visit from "@/components/sections/Visit";
 import Footer from "@/components/sections/Footer";
+import { getDictionary, hasLocale } from "@/lib/i18n";
+import { JsonLd, homeJsonLd } from "@/lib/seo";
 
 // "Make a day of it" (one day, four moods) is hidden for now, not removed.
 // It is left out of the render rather than hidden with CSS: its pinned scroll would
@@ -22,9 +24,13 @@ const SHOW_DAY = false;
 export const instant = false;
 
 // Homepage flow from the brand foundation, §07.
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return null;
+
   return (
     <>
+      <JsonLd data={homeJsonLd(getDictionary(lang), lang)} />
       <Header />
       <main id="main">
         <Hero />
