@@ -45,7 +45,7 @@ export const FOOD: MenuSection[] = [
     title: n("Brunch menu", "Меню бранча"),
     style: "feature",
     tone: "light",
-    img: "eggsToast",
+    img: "benedict",
     items: [
       {
         name: n("Classic Royale Benedict", "Классический бенедикт Рояль"),
@@ -102,7 +102,7 @@ export const FOOD: MenuSection[] = [
     title: n("Stacked & stuffed", "Сэндвичи и бургеры"),
     style: "feature",
     tone: "dark",
-    img: "pancakes",
+    img: "chickenDeluxe",
     items: [
       {
         name: n("KOKOY Club Sandwich", "Клубный сэндвич KOKOY"),
@@ -187,7 +187,7 @@ export const FOOD: MenuSection[] = [
     title: n("The grub", "Основные блюда"),
     style: "feature",
     tone: "light",
-    img: "frenchToast",
+    img: "fishChips",
     items: [
       {
         name: n("Hot Butter Cuttlefish", "Каракатица в горячем масле"),
@@ -301,7 +301,7 @@ export const DRINKS: MenuSection[] = [
     title: n("Signature cocktails", "Фирменные коктейли"),
     style: "feature",
     tone: "dark",
-    img: "spritz",
+    img: "amberGlow",
     items: [
       {
         name: n("The Amber Glow", "Янтарное сияние"),

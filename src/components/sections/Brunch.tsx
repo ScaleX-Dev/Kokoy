@@ -4,7 +4,8 @@ import Image from "next/image";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { BRUNCH_IMG, IMG } from "@/lib/content";
+import { IMG } from "@/lib/content";
+import { featuredFood } from "@/lib/featured";
 import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import SpinBadge from "../ui/SpinBadge";
@@ -17,7 +18,9 @@ const TILT = ["-rotate-6", "rotate-3", "-rotate-2", "rotate-6"];
 const FRAME_TILT = ["md:-rotate-2", "md:rotate-[1.5deg]", "md:-rotate-1", "md:rotate-2"];
 
 export default function Brunch() {
-  const { t } = useUI();
+  const { t, lang } = useUI();
+  // Dishes straight from the menu: names and descriptions are never rewritten here.
+  const dishes = featuredFood(lang);
   const root = useRef<HTMLElement>(null);
   const rail = useRef<HTMLUListElement>(null);
   const thumb = useRef<HTMLDivElement>(null);
@@ -187,7 +190,7 @@ export default function Brunch() {
           data-lenis-prevent-horizontal
           aria-label={t.brunch.label}
         >
-          {t.brunch.items.map((d, i) => (
+          {dishes.map((d, i) => (
             <li key={d.name} data-dish className="w-[78vw] shrink-0 snap-start scroll-ml-[var(--pad)] sm:w-[46vw] lg:w-[30vw] xl:w-[25vw]">
               <div
                 className={clsx(
@@ -197,8 +200,8 @@ export default function Brunch() {
               >
                 <div className="relative aspect-[4/5] transform-gpu overflow-hidden rounded-[32px] bg-sand md:rounded-[20px]">
                   <Image
-                    src={IMG[BRUNCH_IMG[i]]}
-                    alt={t.alt[BRUNCH_IMG[i]]}
+                    src={IMG[d.img]}
+                    alt={t.alt[d.img]}
                     fill
                     draggable={false}
                     decoding="async"
@@ -212,12 +215,12 @@ export default function Brunch() {
                       TILT[i % TILT.length],
                     )}
                   >
-                    {d.tag}
+                    {d.section}
                   </span>
                 </div>
                 <div className="md:px-2">
                   <h3 className="display mt-5 text-[1.6rem] leading-tight md:text-[1.5rem]">{d.name}</h3>
-                  <p className="mt-2 leading-relaxed text-charcoal/75">{d.desc}</p>
+                  {d.desc && <p className="mt-2 leading-relaxed text-charcoal/75">{d.desc}</p>}
                 </div>
               </div>
             </li>

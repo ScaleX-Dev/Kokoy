@@ -47,6 +47,17 @@ export const IMG = {
   friendsSunset: p(4555),
   friends: p(4589),
   beachSunset: p(5173),
+  // Daytime dish and drink shoot (Drive "New folder", DSC_ frames, 5 and 7 Nov 2026), cropped to the dish.
+  benedict: "/photos/kokoy-dsc-0181-benedict.webp",
+  blissBowl: "/photos/kokoy-dsc-0211-bliss-bowl.webp",
+  chickenDeluxe: "/photos/kokoy-dsc-0352-chicken-deluxe.webp",
+  fishChips: "/photos/kokoy-dsc-0377-fish-chips.webp",
+  flameChicken: "/photos/kokoy-dsc-0390-flame-chicken.webp",
+  croquettes: "/photos/kokoy-dsc-0296-croquettes.webp",
+  amberGlow: "/photos/kokoy-dsc-0667-amber-glow.webp",
+  islandEspresso: "/photos/kokoy-dsc-0775-island-espresso.webp",
+  pineappleHellfire: "/photos/kokoy-dsc-0791-pineapple-hellfire.webp",
+  monsoonMelon: "/photos/kokoy-dsc-0459-monsoon-melon.webp",
 } as const;
 
 export type ImgKey = keyof typeof IMG;
@@ -119,15 +130,26 @@ export function waLink(message: string) {
   return SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}?text=${text}` : `https://wa.me/?text=${text}`;
 }
 
-// The four signature drinks drive the colour of their section.
-export const DRINK_STYLE: { color: string; img: ImgKey }[] = [
-  { color: "#FF4F91", img: "pinkDrink" },
-  { color: "#FF9D38", img: "spritz" },
-  { color: "#FF654F", img: "amber" },
-  { color: "#FFF1D9", img: "lemonade" },
+// The dishes and drinks the home page features, named exactly as on the menu (src/lib/menu.ts).
+// Their names, descriptions and ingredients are read from the menu, never written here, so the
+// home page can't drift from it (see src/lib/featured.ts). Each is paired with its own photo.
+export const FEATURED_FOOD: { name: string; img: ImgKey }[] = [
+  { name: "Classic Royale Benedict", img: "benedict" },
+  { name: "Tropical Bliss Bowl", img: "blissBowl" },
+  { name: "Crispy Chicken Deluxe", img: "chickenDeluxe" },
+  { name: "Beer-Battered Fish & Chips", img: "fishChips" },
+  { name: "Coastal Flame Chicken", img: "flameChicken" },
+  { name: "Cheese & potato croquettes, sriracha mayo", img: "croquettes" },
 ];
 
-export const BRUNCH_IMG: ImgKey[] = ["pancakes", "eggsToast", "brunchSpread", "fruitBowl", "frenchToast", "brunchPlate"];
+// The four signature cocktails; each drives the colour of the section while it is picked.
+// TODO(confirm): the Monsoon Melon photo (watermelon, rosemary) could also be the Watermelon Heatwave mocktail.
+export const FEATURED_DRINKS: { name: string; img: ImgKey; color: string }[] = [
+  { name: "Monsoon Melon", img: "monsoonMelon", color: "#FF4F91" },
+  { name: "Pineapple Hellfire", img: "pineappleHellfire", color: "#FF9D38" },
+  { name: "The Amber Glow", img: "amberGlow", color: "#FF654F" },
+  { name: "Island Espresso", img: "islandEspresso", color: "#FFF1D9" },
+];
 export const DAY_IMG: ImgKey[] = ["poolLounger", "brunchSpread", "poolSunset", "lights"];
 export const DAY_SKY = [
   { bg: "#FFF1D9", fg: "#25232B" },

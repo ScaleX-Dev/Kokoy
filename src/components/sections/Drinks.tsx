@@ -5,7 +5,8 @@ import clsx from "clsx";
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { DRINK_STYLE, IMG } from "@/lib/content";
+import { IMG } from "@/lib/content";
+import { featuredDrinks } from "@/lib/featured";
 import { useUI } from "../Providers";
 import Rich from "../ui/Rich";
 import SpinBadge from "../ui/SpinBadge";
@@ -32,9 +33,11 @@ export default function Drinks() {
   const root = useRef<HTMLElement>(null);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const [active, setActive] = useState(0);
-  const drink = t.drinks.items[active];
-  const style = DRINK_STYLE[active];
-  const n = t.drinks.items.length;
+  // Signature cocktails straight from the menu: names, ingredients and descriptions unchanged.
+  const drinks = featuredDrinks(lang);
+  const drink = drinks[active];
+  const style = drink;
+  const n = drinks.length;
 
   useGSAP(
     () => {
@@ -93,7 +96,7 @@ export default function Drinks() {
           </div>
 
           <div data-drinks-in className="mt-10 flex flex-wrap gap-2 md:order-3 md:mt-0 lg:mt-10" role="tablist" aria-label={t.drinks.label} onKeyDown={onKey}>
-            {t.drinks.items.map((d, i) => (
+            {drinks.map((d, i) => (
               <button
                 key={d.name}
                 ref={(el) => {
@@ -111,7 +114,7 @@ export default function Drinks() {
                   active === i ? "bg-charcoal text-cream" : "hover:bg-charcoal/10",
                 )}
               >
-                <span className="size-3 rounded-full border-2 border-current" style={{ backgroundColor: DRINK_STYLE[i].color }} aria-hidden="true" />
+                <span className="size-3 rounded-full border-2 border-current" style={{ backgroundColor: d.color }} aria-hidden="true" />
                 {d.name}
               </button>
             ))}
@@ -120,9 +123,9 @@ export default function Drinks() {
           {/* Every drink is laid out invisibly in the same cell, so the panel is always as tall as
               the longest one. Switching drinks never moves the page below it. */}
           <div id="drink-panel" role="tabpanel" aria-labelledby={`drink-tab-${active}`} className="mt-10 grid md:order-4 md:mt-0 lg:mt-10">
-            {t.drinks.items.map((d, i) => (
+            {drinks.map((d, i) => (
               <div key={d.name} className="invisible [grid-area:1/1]" aria-hidden="true">
-                <DrinkCopy index={i} n={n} name={d.name} spec={d.spec} note={d.note} />
+                <DrinkCopy index={i} n={n} name={d.name} spec={d.spec} note={d.desc} />
               </div>
             ))}
             <div className="[grid-area:1/1]">
@@ -134,7 +137,7 @@ export default function Drinks() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.45, ease: soft }}
                 >
-                  <DrinkCopy index={active} n={n} name={drink.name} spec={drink.spec} note={drink.note} />
+                  <DrinkCopy index={active} n={n} name={drink.name} spec={drink.spec} note={drink.desc} />
                 </motion.div>
               </AnimatePresence>
             </div>
